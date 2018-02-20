@@ -1,0 +1,5 @@
+rabbit: rabbitmq-server
+redis: redis-server
+mailhog: mailhog
+web: grunt serve
+worker: celery worker --app=political_sisterhood.taskapp --loglevel=info

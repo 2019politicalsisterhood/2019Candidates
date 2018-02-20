@@ -1,0 +1,132 @@
+{% extends "base.html" %} {% load static %}
+{% block fullwidth %}
+<div class="clearfix row align-items-center">
+<div class="col-lg-5 col-md-5 col-12 col-sm-12 col-xs-12 leftpadding-lg nomargin d-sm-padding">
+        <div class="heading-block">
+            <h1>Time to <strong>Represent</strong></h1>
+            <span>Because 20% is not enough</span>
+        </div>
+        <a href="#" class="button button-3d button-large">Join Us</a>
+</div>
+<div class="col-lg-7 col-md-7 col-xs-12 nomargin d-none d-sm-none d-md-block">
+    <div id="portfolio" class="portfolio grid-container portfolio-3 portfolio-full portfolio-nomargin portfolio-notitle clearfix">
+    {% for can in candidate %}
+      <article class="portfolio-item pf-media pf-icons">
+        <div class="portfolio-image">
+            <a href="portfolio-single.html">
+                <img src="{{can.image.url}}" alt="{{can.name}} Headshot">
+            </a>
+          <div class="portfolio-overlay">
+            <a href="portfolio-single.html" class="center-icon"><i class="icon-line-link"></i></a>
+          </div>
+        </div>
+        <div class="portfolio-desc">
+          <h3><a href="portfolio-single.html">{{can.first_name}} {{can.last_name}}</a></h3>
+          <a href="#">{{can.state}}</a>{% if can.office and can.state %}<span class="middot">·</span>{% endif %}<a href="#">{{can.office}}</a>
+        </div>
+      </article>
+    {% endfor %}
+</div>
+</div>
+</div>
+<div class="section nobottommargin notopmargin">
+    <div class="container clearfix">
+
+        <div class="heading-block center">
+            <h3>Get <span>Involved</span></h3>
+        </div>
+
+        <div class="subscribe-widget">
+            <div class="widget-subscribe-form-result"></div>
+            <form id="widget-subscribe-form2" action="include/subscribe.php" role="form" method="post" class="nobottommargin" novalidate="novalidate">
+                <div class="input-group input-group-lg divcenter" style="max-width:600px;">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="icon-user2"></i></div>
+                    </div>
+                    <input type="email" name="widget-subscribe-form-email" class="form-control required email" placeholder="First Name">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="icon-user2"></i></div>
+                    </div>
+                    <input type="email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Last Name">
+                </div>
+                <div class="input-group input-group-lg divcenter" style="max-width:600px; margin-top:15px">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="icon-email2"></i></div>
+                    </div>
+                    <input type="email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Email">
+                    <div class="input-group-append">
+                        <button type="submit" class="button nomargin button-reveal button-large button-blue tright"><i class="icon-angle-right"></i><span>Join Us</span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<div class="container clearfix topmargin-lg bottommargin-lg">
+  <div class="col_one_fourth nobottommargin">
+    <div class="feature-box fbox-center fbox-light fbox-effect nobottomborder">
+      <div class="fbox-icon">
+        <a href="#"><i class="i-alt noborder icon-shop"></i></a>
+      </div>
+      <h3>e-Commerce Solutions<span class="subtitle">Start your Own Shop today</span></h3>
+    </div>
+  </div>
+  <div class="col_one_fourth nobottommargin">
+    <div class="feature-box fbox-center fbox-light fbox-effect nobottomborder">
+      <div class="fbox-icon">
+        <a href="#"><i class="i-alt noborder icon-wallet"></i></a>
+      </div>
+      <h3>Easy Payment Options<span class="subtitle">Credit Cards &amp; PayPal Support</span></h3>
+    </div>
+  </div>
+  <div class="col_one_fourth nobottommargin">
+    <div class="feature-box fbox-center fbox-light fbox-effect nobottomborder">
+      <div class="fbox-icon">
+        <a href="#"><i class="i-alt noborder icon-megaphone"></i></a>
+      </div>
+      <h3>Instant Notifications<span class="subtitle">Realtime Email &amp; SMS Support</span></h3>
+    </div>
+  </div>
+  <div class="col_one_fourth nobottommargin col_last">
+    <div class="feature-box fbox-center fbox-light fbox-effect nobottomborder">
+      <div class="fbox-icon">
+        <a href="#"><i class="i-alt noborder icon-fire"></i></a>
+      </div>
+      <h3>Hot Offers Daily<span class="subtitle">Upto 50% Discounts</span></h3>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="line bottommargin-lg"></div>
+  <div class="col_two_fifth nobottommargin">
+    <a href="http://vimeo.com/101373765" data-lightbox="iframe">
+                            <img src="images/others/1.jpg" alt="Image">
+                            <span class="i-overlay"><img src="images/icons/play.png" alt="Play"></span>
+                        </a>
+  </div>
+  <div class="col_three_fifth nobottommargin col_last">
+    <div class="heading-block">
+      <h2>Globally Preferred Ecommerce Platform</h2>
+    </div>
+    <p>Worldwide John Lennon, mobilize humanitarian; emergency response donors; cause human experience effect. Volunteer Action Against Hunger Aga Khan safeguards women's.</p>
+    <div class="col_half nobottommargin">
+      <ul class="iconlist iconlist-color nobottommargin">
+        <li><i class="icon-caret-right"></i> Responsive Ready Layout</li>
+        <li><i class="icon-caret-right"></i> Retina Display Supported</li>
+        <li><i class="icon-caret-right"></i> Powerful &amp; Optimized Code</li>
+        <li><i class="icon-caret-right"></i> 380+ Templates Included</li>
+      </ul>
+    </div>
+    <div class="col_half nobottommargin col_last">
+      <ul class="iconlist iconlist-color nobottommargin">
+        <li><i class="icon-caret-right"></i> 12+ Headers &amp; Menu Designs</li>
+        <li><i class="icon-caret-right"></i> Premium Sliders Included</li>
+        <li><i class="icon-caret-right"></i> Light &amp; Dark Colors</li>
+        <li><i class="icon-caret-right"></i> e-Commerce Design Included</li>
+      </ul>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+
+{% endblock %}

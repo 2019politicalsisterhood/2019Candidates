@@ -1,0 +1,261 @@
+{% load static i18n compress%}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Political Sisterhood{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+
+    {% block css %}
+
+    <!-- Latest compiled and minified Bootstrap 4 beta CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+
+    <!-- Your stuff: Third-party CSS libraries go here -->
+    {% compress css %}
+    <!-- This file stores project-specific CSS -->
+
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/swiper.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/font-icons.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css" />
+
+  <link rel="stylesheet" href="{% static 'css/responsive.css' %}" type="text/css" />
+
+    {% endcompress %}
+    {% endblock %}
+
+  </head>
+
+<body class="stretched">
+
+  <!-- Document Wrapper
+  ============================================= -->
+  <div id="wrapper" class="clearfix">
+
+    <!-- Header
+    ============================================= -->
+    <header id="header" class="full-header">
+
+      <div id="header-wrap">
+
+        <div class="container clearfix">
+
+          <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+          <!-- Logo
+          ============================================= -->
+          <div id="logo">
+            <a href="{% url 'home' %}" class="standard-logo" data-dark-logo="{% static 'images/logo.png' %}"><img src="{% static 'images/logo.png' %}" alt="Politcical Sisterhood Logo"></a>
+            <a href="{% url 'home' %}" class="retina-logo" data-dark-logo="{% static 'images/logo.png' %}"><img src="{% static 'images/logo.png' %}" alt="Politcical Sisterhood Logo"></a>
+          </div><!-- #logo end -->
+
+          <!-- Primary Navigation ============================================= -->
+          <nav id="primary-menu">
+            <ul>
+              <li><a href="#"><div>About</div></a></li>
+              <li><a href="#"><div>Run</div></a>
+                <ul>
+                  <li><a href="#"><div>I want to run</div></a></li>
+                  <li><a href="#"><div>Help my campaign</div></a></li>
+                  <li><a href="#"><div>Nominate</div></a></li>
+                </ul>
+
+              </li>
+
+              <li><a href="#"><div>Candidate Reports</div></a></li>
+              <li><a href="#"><div>News</div></a></li>
+              <li><a href="#"><div>Contact Us</div></a></li>
+            </ul>
+            <!-- Top Search ============================================= -->
+            <div id="top-search">
+              <a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
+              <form action="search.html" method="get">
+                <input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter..">
+              </form>
+            </div><!-- #top-search end -->
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <section id="content">
+          {% if messages %}
+              {% for message in messages %}
+                  <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+              {% endfor %}
+          {% endif %}
+
+          {% block content %}
+          <div class="container clearfix">
+          </div> <!-- /container -->
+          {% endblock content %}
+        {% block fullwidth %}
+        {% endblock %}
+            <div class="content-wrap notoppadding">
+          <a href="#" class="button button-full center tright footer-stick">
+          <div class="container clearfix">
+            Political Sisterhood needs your help! <strong>Find Out How</strong> <i class="icon-caret-right" style="top:4px;"></i>
+          </div>
+        </a>
+    </div>
+    </section>
+
+          <!-- Footer
+    ============================================= -->
+    <footer id="footer" class="dark">
+
+      <div class="container">
+
+              <!-- Footer Widgets
+        ============================================= -->
+        <div class="footer-widgets-wrap clearfix">
+
+          <div class="col_two_third">
+
+            <div class="widget clearfix">
+
+              <img src="{% static 'images/logo_footer.png' %}" alt="" class="alignleft" style="height: 50px; margin-top: 8px; padding-right: 18px; border-right: 1px solid #4A4A4A;">
+
+              <p>Supporting <strong>ALL</strong> women candidates of every political party for upcoming U.S. Senate, House and Presidential  elections</p>
+
+              <div class="line" style="margin: 30px 0;"></div>
+
+              <div class="col_half">
+                <div class="widget clearfix">
+
+                  <div class="d-none d-lg-block"><div class="clear" style="padding-top: 10px;"></div></div>
+
+                  <div class="row">
+                    <div class="col-lg-6 bottommargin-sm center">
+                      <div class="counter counter-small" style="color: #35BBAA;"><span data-from="50" data-to="67433" data-refresh-interval="80" data-speed="3000" data-comma="true"></span></div>
+                      <h5 class="nobottommargin">Total Downloads</h5>
+                    </div>
+
+                    <div class="col-lg-6 bottommargin-sm center col_last">
+                      <div class="counter counter-small" style="color: #2CAACA;"><span data-from="100" data-to="123" data-refresh-interval="50" data-speed="2000" data-comma="true"></span></div>
+                      <h5 class="nobottommargin">Candidates Represented</h5>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col_half col_last">
+                <div class="widget subscribe-widget clearfix">
+                  <h5><strong>Subscribe</strong> to Our Newsletter to get Important News, Amazing Offers &amp; Inside Scoops:</h5>
+                  <div class="widget-subscribe-form-result"></div>
+                  <form id="widget-subscribe-form" action="#" role="form" method="post" class="nobottommargin">
+                    <div class="input-group divcenter">
+                      <input type="email" id="widget-subscribe-form-email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
+                      <div class="input-group-append">
+                        <button class="button button-3d button-large button-brand nomargin" type="submit">Subscribe</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col_one_third col_last">
+
+              <div class="widget widget-twitter-feed clearfix">
+
+                <h4>Twitter Feed</h4>
+                <ul class="iconlist twitter-feed" data-username="politicalsister" data-count="2">
+                  <li></li>
+                </ul>
+
+                <a href="#" class="btn btn-secondary btn-sm fright">Follow Us on Twitter</a>
+
+              </div>
+
+          </div>
+
+        </div><!-- .footer-widgets-wrap end -->
+
+      </div>
+
+            <!-- Copyrights
+      ============================================= -->
+      <div id="copyrights">
+
+        <div class="container clearfix">
+
+          <div class="col_half">
+            <div class="copyrights-menu copyright-links clearfix">
+              <a href="#">About</a>/
+              <a href="#">Run</a>/
+              <a href="#">Candidate Reports</a>/
+              <a href="#">News</a>/
+              <a href="#">Contact Us</a>
+            </div>
+            Copyrights &copy; {% now 'Y' %} All Rights Reserved by Political Sisterhood Inc.
+          </div>
+
+          <div class="col_half col_last tright">
+            <div class="fright clearfix">
+              <a href="#" class="social-icon si-small si-borderless nobottommargin si-facebook">
+                <i class="icon-facebook"></i>
+                <i class="icon-facebook"></i>
+              </a>
+
+              <a href="#" class="social-icon si-small si-borderless nobottommargin si-twitter">
+                <i class="icon-twitter"></i>
+                <i class="icon-twitter"></i>
+              </a>
+              <a href="#" class="social-icon si-small si-borderless nobottommargin si-linkedin">
+                <i class="icon-linkedin"></i>
+                <i class="icon-linkedin"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div><!-- #copyrights end -->
+
+    </footer><!-- #footer end -->
+    <div id="gotoTop" class="icon-angle-up"></div>
+
+    {% block modal %}{% endblock modal %}
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block javascript %}
+
+      <!-- Required by Bootstrap v4 beta -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+      <!-- Your stuff: Third-party javascript libraries go here -->
+
+
+      <!-- place project specific Javascript in this file -->
+      {% compress js %}
+      <script src="{% static 'js/jquery.js' %}"></script>
+      <script src="{% static 'js/project.js' %}"></script>
+      <script src="{% static 'js/plugins.js' %}"></script>
+      <!-- Footer Scripts
+      ============================================= -->
+      <script src="{% static 'js/functions.js' %}"></script>
+      {% endcompress %}
+
+    {% endblock javascript %}
+  </body>
+</html>
+
