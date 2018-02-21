@@ -286,7 +286,7 @@ body:not(.side-header) .slider-parallax .slider-parallax-inner { left: 0; }
 		width:100%;
 		height:100%;
 		margin: 0;
-		background: url('images/pattern2.png') repeat;
+		background: url('../images/pattern2.png') repeat;
 	}
 
 	.swiper-slide {
@@ -413,7 +413,7 @@ body:not(.side-header) .slider-parallax .slider-parallax-inner { left: 0; }
 		top: 0;
 		left: 0;
 		z-index: 5;
-		background: transparent url('images/grid.png') repeat;
+		background: transparent url('../images/grid.png') repeat;
 		-webkit-backface-visibility: hidden;
 	}
 

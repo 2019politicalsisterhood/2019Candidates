@@ -79,7 +79,7 @@ body {
 }
 
 .i-alt {
-	background-image: url('images/icons/iconalt.svg');
+	background-image: url('../images/icons/iconalt.svg');
 	background-position: center center;
 	background-size: 100% 100%;
 }
@@ -238,7 +238,7 @@ body {
 	top: 0;
 	left: 0;
 	text-align: center;
-	background: rgba(0,0,0,0.2) url('images/grid.png') repeat;
+	background: rgba(0,0,0,0.2) url('../images/grid.png') repeat;
 }
 
 .i-overlay {

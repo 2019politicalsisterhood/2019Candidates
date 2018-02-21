@@ -2458,7 +2458,7 @@ body.side-panel-open .body-overlay {
   pointer-events: auto; }
 
 body.side-panel-open:not(.device-xs):not(.device-sm):not(.device-md) .body-overlay:hover {
-  cursor: url("images/icons/close.png") 15 15, default; }
+  cursor: url("../images/icons/close.png") 15 15, default; }
 
 /* ----------------------------------------------------------------
 
@@ -2697,7 +2697,7 @@ body:not(.side-header) .slider-parallax .slider-parallax-inner {
   width: 100%;
   height: 100%;
   margin: 0;
-  background: url("images/pattern2.png") repeat; }
+  background: url("../images/pattern2.png") repeat; }
 
 .swiper_wrapper .swiper-slide {
   position: relative;
@@ -2800,7 +2800,7 @@ body:not(.side-header) .slider-parallax .slider-parallax-inner {
     top: 0;
     left: 0;
     z-index: 5;
-    background: transparent url("images/grid.png") repeat;
+    background: transparent url("../images/grid.png") repeat;
     -webkit-backface-visibility: hidden; }
   .video-wrap .video-placeholder {
     z-index: 4;
@@ -3141,7 +3141,7 @@ body.stretched .container-fullwidth .breadcrumb {
       margin: 20px 0 0 !important;
       justify-content: center; }
   #page-title.page-title-pattern {
-    background-image: url("images/pattern.png");
+    background-image: url("../images/pattern.png");
     background-repeat: repeat;
     background-attachment: fixed; }
   #page-title.page-title-parallax {
@@ -3149,7 +3149,7 @@ body.stretched .container-fullwidth .breadcrumb {
     text-shadow: none;
     border-bottom: none;
     background-color: transparent;
-    background-image: url("images/parallax/parallax-bg.jpg");
+    background-image: url("../images/parallax/parallax-bg.jpg");
     background-attachment: fixed;
     background-position: 50% 0;
     background-repeat: no-repeat; }
@@ -6480,7 +6480,7 @@ body:not(.device-touch) .button.button-full strong {
   padding: 2px;
   z-index: -1;
   box-shadow: none;
-  background-image: url("images/icons/iconalt.svg");
+  background-image: url("../images/icons/iconalt.svg");
   background-position: center center;
   background-size: 100% 100%;
   -webkit-transition: -webkit-transform 0.5s, opacity 0.5s, background-color 0.5s;
@@ -6823,7 +6823,7 @@ body:not(.device-touch) .social-icon {
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2); }
 
 .i-alt {
-  background-image: url("images/icons/iconalt.svg");
+  background-image: url("../images/icons/iconalt.svg");
   background-position: center center;
   background-size: 100% 100%; }
 
@@ -6931,7 +6931,7 @@ body:not(.device-touch) .social-icon {
   top: 0;
   left: 0;
   text-align: center;
-  background: rgba(0, 0, 0, 0.2) url("images/grid.png") repeat; }
+  background: rgba(0, 0, 0, 0.2) url("../images/grid.png") repeat; }
 
 .i-overlay a {
   background: transparent; }
@@ -9461,7 +9461,7 @@ body:not(.device-touch) .text-overlay {
 /* Fancy Title - Bottom Short Border
 -----------------------------------------------------------------*/
 .fancy-title.title-dotted-border {
-  background: url("images/icons/dotted.png") repeat-x center; }
+  background: url("../images/icons/dotted.png") repeat-x center; }
 
 /* Sub Heading
 -----------------------------------------------------------------*/

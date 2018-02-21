@@ -1774,4 +1774,4 @@ body.side-panel-open .body-overlay {
 	pointer-events: auto;
 }
 
-body.side-panel-open:not(.device-xs):not(.device-sm):not(.device-md) .body-overlay:hover { cursor: url('images/icons/close.png') 15 15, default; }
+body.side-panel-open:not(.device-xs):not(.device-sm):not(.device-md) .body-overlay:hover { cursor: url('../images/icons/close.png') 15 15, default; }
