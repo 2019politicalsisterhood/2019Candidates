@@ -62,7 +62,10 @@ THIRD_PARTY_APPS = [
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+    'ckeditor', #ckeditor
+    'ckeditor_uploader', #ckeditor upload
 ]
+
 
 # Apps specific for this project go here.
 LOCAL_APPS = [
@@ -70,6 +73,9 @@ LOCAL_APPS = [
     'political_sisterhood.users.apps.UsersConfig',
     # Your stuff: custom apps go here
     'political_sisterhood.candidate',
+    'political_sisterhood.issue',
+    'political_sisterhood.news',
+    'political_sisterhood.races',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -390,3 +396,12 @@ LOGGING = {
     }
 }
 # END LOGGING CONFIGURATION
+
+# CKEDITOR CONFIGURATION
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Basic',
+    },
+}

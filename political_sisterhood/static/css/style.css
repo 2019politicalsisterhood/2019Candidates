@@ -53,7 +53,7 @@ dl, dt, dd, ol, ul, li {
 body {
   line-height: 1.5;
   color: #555;
-  font-size: 14px;
+  font-size: 16px;
   font-family: "Lato", sans-serif; }
 
 a {
@@ -102,7 +102,7 @@ h4 {
   font-size: 18px; }
 
 h5 {
-  font-size: 14px; }
+  font-size: 16px; }
 
 h6 {
   font-size: 12px; }
@@ -329,6 +329,15 @@ span.middot {
 
 .toppadding-sm {
   padding-top: 30px !important; }
+
+.bottompadding-sm {
+  padding-bottom: 30px !important; }
+
+.toppadding-lg {
+  padding-top: 80px !important; }
+
+.bottompadding-lg {
+  padding-bottom: 80px !important; }
 
 .noabsolute {
   position: relative !important; }
@@ -3161,6 +3170,8 @@ body.stretched .container-fullwidth .breadcrumb {
       font-size: 22px; }
     #page-title.page-title-parallax .breadcrumb {
       font-size: 13px; }
+  #page-title.page-title-sm {
+    padding: 30px 0; }
   #page-title.page-title-mini {
     padding: 20px 0; }
     #page-title.page-title-mini h1 {
@@ -6366,7 +6377,7 @@ body:not(.device-touch) .button.button-full strong {
   display: block;
   margin: 20px auto;
   width: 30px;
-  border-top: 2px solid #555;
+  border-top: 2px solid #CC3399;
   -webkit-transition: width 0.3s ease;
   -o-transition: width 0.3s ease;
   transition: width 0.3s ease; }
@@ -6437,7 +6448,7 @@ body:not(.device-touch) .button.button-full strong {
   top: -3px;
   left: -3px;
   padding: 3px;
-  box-shadow: 0 0 0 2px #333;
+  box-shadow: 0 0 0 2px #CC3399;
   -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
   -o-transition: -webkit-transform 0.3s, opacity 0.3s;
   transition: -webkit-transform 0.3s, opacity 0.3s;
@@ -6449,7 +6460,7 @@ body:not(.device-touch) .button.button-full strong {
 
 .fbox-effect .fbox-icon i:hover,
 .fbox-effect:hover .fbox-icon i {
-  background-color: #333;
+  background-color: #CC3399;
   color: #FFF; }
 
 .fbox-effect.fbox-dark .fbox-icon i:after {
@@ -6493,7 +6504,7 @@ body:not(.device-touch) .button.button-full strong {
 .fbox-border.fbox-effect .fbox-icon i:hover,
 .fbox-border.fbox-effect:hover .fbox-icon i {
   color: #FFF;
-  box-shadow: 0 0 0 1px #333; }
+  box-shadow: 0 0 0 1px #CC3399; }
 
 .fbox-border.fbox-effect .fbox-icon i:after {
   -webkit-transform: scale(1.3);
@@ -6501,7 +6512,7 @@ body:not(.device-touch) .button.button-full strong {
   -ms-transform: scale(1.3);
   transform: scale(1.3);
   opacity: 0;
-  background-color: #333; }
+  background-color: #CC3399; }
 
 .fbox-border.fbox-effect.fbox-dark .fbox-icon i:hover,
 .fbox-border.fbox-effect.fbox-dark:hover .fbox-icon i {
@@ -9308,7 +9319,7 @@ body:not(.device-touch) .text-overlay {
   font-size: 46px; }
 
 .heading-block h2 {
-  font-size: 30px; }
+  font-size: 40px; }
 
 .heading-block h3 {
   font-size: 26px; }
@@ -9351,7 +9362,7 @@ body:not(.device-touch) .text-overlay {
   display: block;
   margin-top: 30px;
   width: 40px;
-  border-top: 2px solid #444; }
+  border-top: 2px solid #CC3399; }
 
 .center .heading-block:after,
 .heading-block.center:after,
@@ -9473,6 +9484,9 @@ body:not(.device-touch) .text-overlay {
   font-style: italic;
   font-weight: 400;
   color: #999; }
+
+.normal-case {
+  text-transform: none !important; }
 
 /*-----------------------------------------------------------------------------------
 
@@ -10352,12 +10366,12 @@ button.toast-close-button {
 #copyrights {
   padding: 40px 0;
   background-color: #DDD;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.8; }
   #copyrights i.footer-icon {
     position: relative;
     top: 1px;
-    font-size: 14px;
+    font-size: 16px;
     width: 14px;
     text-align: center;
     margin-right: 3px; }
@@ -10380,7 +10394,7 @@ button.toast-close-button {
 .copyrights-menu {
   margin-bottom: 10px; }
   .copyrights-menu a {
-    font-size: 14px;
+    font-size: 16px;
     margin: 0 10px;
     border-bottom: 0 !important; }
 
@@ -10819,6 +10833,10 @@ blockquote {
 
 .img-circle {
   border-radius: 50% !important; }
+
+.img-border {
+  padding: 5px;
+  border: 2px solid #CC3399; }
 
 .pagination > .active > a,
 .pagination > .active > span,
@@ -13620,3 +13638,12 @@ body #side-panel.dark #side-panel-trigger-close a {
 @media (max-width: 768px) {
   .d-sm-padding {
     padding: 32px; } }
+
+#map {
+  position: initial !important; }
+
+.themebg {
+  background-color: #CC3399 !important; }
+
+.theme-color {
+  color: #CC3399; }

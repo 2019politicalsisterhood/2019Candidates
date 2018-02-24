@@ -48,8 +48,10 @@ celery==3.1.25 # pyup: <4.0
 
 
 
-rcssmin==1.0.6 
+rcssmin==1.0.6
 django-compressor==2.2
 
 
 # Your custom requirements go here
+django-ckeditor==5.4.0
+googlemaps==2.5.1

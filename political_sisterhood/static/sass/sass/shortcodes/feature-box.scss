@@ -498,7 +498,7 @@
 	display: block;
 	margin: 20px auto;
 	width: 30px;
-	border-top: 2px solid #555;
+	border-top: 2px solid $theme-color;
 	@include transition(width .3s ease);
 }
 
@@ -578,7 +578,7 @@
 	top: -3px;
 	left: -3px;
 	padding: 3px;
-	box-shadow: 0 0 0 2px #333;
+	box-shadow: 0 0 0 2px $theme-color;
 	@include transition(-webkit-transform 0.3s, opacity 0.3s);
 	@include scale(.8);
 	opacity: 0;
@@ -586,7 +586,7 @@
 
 .fbox-effect .fbox-icon i:hover,
 .fbox-effect:hover .fbox-icon i {
-	background-color: #333;
+	background-color: $theme-color;
 	color: #FFF;
 }
 
@@ -625,13 +625,13 @@
 .fbox-border.fbox-effect .fbox-icon i:hover,
 .fbox-border.fbox-effect:hover .fbox-icon i {
 	color: #FFF;
-	box-shadow: 0 0 0 1px #333;
+	box-shadow: 0 0 0 1px $theme-color;
 }
 
 .fbox-border.fbox-effect .fbox-icon i:after {
 	@include scale(1.3);
 	opacity: 0;
-	background-color: #333;
+	background-color: $theme-color;
 }
 
 .fbox-border.fbox-effect.fbox-dark .fbox-icon i:hover,

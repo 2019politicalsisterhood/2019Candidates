@@ -16,6 +16,8 @@ urlpatterns = [
     # User management
     url(r'^users/', include('political_sisterhood.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^candidate/', include('political_sisterhood.candidate.urls', namespace='candidate')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 
     # Your stuff: custom urls includes go here
 

@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% block seo_title %}
+{{object.name}} - Political Sisterhood
+{% endblock %}
+{% block content %}
+<section id="page-title" class="page-title-mini page-title-nobg">
+  <div class="container clearfix">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'candidate:state' object.state.lower %}">{{object.get_state_display}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{object.name}}</li>
+    </ol>
+  </div>
+</section>
+<section id="page-title" class="page-title-sm themebg">
+</section>
+<section id="content" style="margin-bottom: 0px;">
+  <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-sm">
+    <div class="heading-block center">
+      <h2 class="normal-case">{{object.name}}</h2>
+      <span>{{object.current_office}}, {{object.get_state_display}}</span>
+      <h4>{{object.identifier}}</h4>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12 center bottommargin">
+        <img data-animate="fadeInLeftBig" src="{{object.image_url}}" alt="{{object.name}} Headshot" class="center-block fadeInLeftBig animated img-circle img-border">
+        {% if not self.image %}
+        {% endif %}
+        {% if object.follow %}
+        <div class="row topmargin-sm center">
+          {% if object.facebook %}
+          <div class="col-4">
+          <a href="{{object.facebook}}" class="social-icon si-rounded si-facebook">
+              <i class="icon-facebook"></i>
+              <i class="icon-facebook"></i>
+          </a>
+          </div>
+          {% endif %}
+          {% if object.twitter %}
+          <div class="col-4">
+          <a href="{{object.twitter}}" class="social-icon si-rounded si-twitter">
+              <i class="icon-twitter"></i>
+              <i class="icon-twitter"></i>
+          </a>
+          </div>
+          {% endif %}
+          {% if object.linkedin %}
+          <div class="col-4">
+          <a href="{{object.linkedin}}" class="social-icon si-rounded si-linkedin">
+              <i class="icon-linkedin"></i>
+              <i class="icon-linkedin"></i>
+          </a>
+        </div>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-12 bottommargin">
+        {{object.bio|safe}}
+        <div>
+          <div class="heading-block topmargin-sm bottommargin-sm">
+            <h4>Candidate's <span>Info</span></h4>
+          </div>
+          {% if object.facebook %}
+            <strong>Facebook</strong> <span class="theme-color">&mdash;</span> <a href="{{object.facebook}}" target="_blank">{{object.facebook}}</a><br>
+          {% endif %}
+          {% if object.facebook_follower %}
+            <strong>Facebook Followers</strong> <span class="theme-color">&mdash;</span> {{object.facebook_follower}}<br>
+          {% endif %}
+          {% if object.twitter %}
+            <strong>Twitter</strong> <span class="theme-color">&mdash;</span> <a href="{{object.twitter}}" target="_blank">{{object.twitter}}</a><br>
+          {% endif %}
+          {% if object.twitter_follower %}
+            <strong>Twitter Followers</strong> <span class="theme-color">&mdash;</span> {{object.twitter_follower}}<br>
+          {% endif %}
+          {% if object.website %}
+            <strong>Website</strong> <span class="theme-color">&mdash;</span> <a href="{{object.website}}" target="_blank">{{object.website}}</a><br>
+          {% endif %}
+          {% if object.college %}
+            <strong>College</strong> <span class="theme-color">&mdash;</span> {{object.college}}<br>
+          {% endif %}
+          {% if object.phone %}
+            <strong>Phone Number</strong> <span class="theme-color">&mdash;</span> <a href="tel:{{object.phone}}">{{object.phone}}</a><br>
+          {% endif %}
+          {% if object.ethnicity %}
+            <strong>Ethnicity</strong> <span class="theme-color">&mdash;</span> {% for eth in object.ethnicity.all %}{{eth.name}}<br>{% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="section notopborder nomargin">
+    <div class="container clearfix">
+      <div class="col_two_fifth topmargin-sm nobottommargin" style="min-height: 350px; overflow: hidden">
+        <div id="map"></div>
+      </div>
+      <div class="col_three_fifth nobottommargin col_last">
+        <div class="heading-block topmargin-sm bottommargin-sm">
+          <h2>Campaign Headquarters</h2>
+        </div>
+        <p>
+          {% if object.campaign_street %}
+          {{object.campaign_street}}
+          <br>
+          {% endif %}
+          {% if object.campaign_street2 %}
+          {{object.campaign_street2}}
+          <br>
+          {% endif %}
+          {% if object.campaign_city %}
+          {{object.campaign_city}},
+          {% endif %}
+          {{object.get_state_display}}
+          {{object.campaign_zip}}
+        </p>
+        <a href="https://www.google.com/maps/dir/''/{{object.address}},+{{object.campaign_city}},+{{object.state}}+{{object.campaign_zip}}/" class="button button-3d button-large">Get Directions</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="content">
+  <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-sm">
+    <div class="heading-block center">
+      <h2>Issues</h2>
+    </div>
+    <div class="row">
+      {% for issue in object.issues.all %}
+      <div class="col_one_third">
+        <div class="feature-box fbox-center fbox-border fbox-light fbox-effect">
+          <div class="fbox-icon">
+            <a href="#"><i class="icon-book i-alt"></i></a>
+          </div>
+          <h3>{{issue.name}}</h3>
+          <p>{{issue.desc|safe}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% if object.news.published %}
+<section>
+  <div class="section notopborder nomargin">
+    <div class="container clearfix">
+      <div class="heading-block center">
+        <h2>News Stories</h2>
+      </div>
+      <div id="oc-posts" class="owl-carousel posts-carousel carousel-widget" data-margin="20" data-nav="true" data-pagi="false" data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-lg="4">
+        {% for news in object.news.published %}
+        <div class="oc-item">
+          <div class="ipost clearfix">
+            <div class="entry-image">
+              <a href="{{news.link}}">
+                <img class="image_fade" src="{{news.image_url}}" alt="{{news.title}}">
+              </a>
+            </div>
+            <div class="entry-title">
+              <h3><a href="{{news.link}}">{{news.title}}</a></h3>
+            </div>
+            {% if news.meta %}
+            <ul class="entry-meta clearfix">
+              <li><i class="icon-calendar3"></i>{{news.date}}</li>
+            </ul>
+            {% endif %}
+            <div class="entry-content">
+              <p>{{news.teaser|safe}}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
+{% block extra_js %}
+<script async defer>
+function initMap() {
+  var uluru = {lat: {{object.campaign_lat}}, lng: {{object.campaign_long}}};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 17,
+    center: uluru,
+    scrollwheel: false,
+    draggable: false,
+  });
+  var marker = new google.maps.Marker({
+    position: uluru,
+    map: map
+  });
+}
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9Zc2wxmbSZBpZBFumvWofafJIbQRScQw&callback=initMap">
+</script>
+{% endblock %}

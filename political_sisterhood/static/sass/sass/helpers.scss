@@ -135,6 +135,12 @@ span.middot {
 
 .toppadding-sm { padding-top: $margin-small !important; }
 
+.bottompadding-sm { padding-bottom: $margin-small !important; }
+
+.toppadding-lg { padding-top: $margin-big !important; }
+
+.bottompadding-lg { padding-bottom: $margin-big !important; }
+
 .noabsolute { position: relative !important; }
 
 .noshadow { @include box-shadow(none !important) }

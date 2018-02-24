@@ -165,7 +165,9 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 
 	/* Page Title - Mini
 	-----------------------------------------------------------------*/
-
+	&.page-title-sm{
+		padding: 30px 0;
+	}
 	&.page-title-mini {
 		padding: $page-title-mini-padding 0;
 

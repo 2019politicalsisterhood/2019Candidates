@@ -75,6 +75,11 @@
 	@include border-radius(50% !important);
 }
 
+.img-border {
+	padding: 5px;
+	border: 2px solid $theme-color;
+}
+
 .pagination {
 	> .active {
 		> a,

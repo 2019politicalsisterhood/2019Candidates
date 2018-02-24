@@ -13,16 +13,16 @@
     {% for can in candidate %}
       <article class="portfolio-item pf-media pf-icons">
         <div class="portfolio-image">
-            <a href="portfolio-single.html">
+            <a href="{{can.get_absolute_url}}">
                 <img src="{{can.image.url}}" alt="{{can.name}} Headshot">
             </a>
           <div class="portfolio-overlay">
-            <a href="portfolio-single.html" class="center-icon"><i class="icon-line-link"></i></a>
+            <a href="{{can.get_absolute_url}}" class="center-icon"><i class="icon-line-link"></i></a>
           </div>
         </div>
         <div class="portfolio-desc">
-          <h3><a href="portfolio-single.html">{{can.first_name}} {{can.last_name}}</a></h3>
-          <a href="#">{{can.state}}</a>{% if can.office and can.state %}<span class="middot">·</span>{% endif %}<a href="#">{{can.office}}</a>
+          <h3><a href="{{can.get_absolute_url}}">{{can.first_name}} {{can.last_name}}</a></h3>
+          <a href="{% url 'candidate:state' can.state|lower %}">{{can.state}}</a>{% if can.office and can.state %}<span class="middot">·</span>{% endif %}<a href="#">{{can.office}}</a>
         </div>
       </article>
     {% endfor %}

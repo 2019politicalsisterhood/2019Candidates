@@ -57,3 +57,15 @@
     padding: 32px
     }
 }
+
+#map{
+    position: initial !important;
+}
+
+.themebg{
+    background-color: $theme-color !important;
+}
+
+.theme-color{
+    color: $theme-color
+}
