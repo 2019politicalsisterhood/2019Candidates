@@ -13,6 +13,7 @@
 /*-----------------------------------------------------------------------------------
 	typography.scss
 -----------------------------------------------------------------------------------*/
+@import url("https://fonts.googleapis.com/css?family=Poppins:900");
 dl, dt, dd, ol, ul, li {
   margin: 0;
   padding: 0; }
@@ -13647,3 +13648,27 @@ body #side-panel.dark #side-panel-trigger-close a {
 
 .theme-color {
   color: #CC3399; }
+
+.front-page h1 {
+  font-family: "Poppins", sans-serif !important;
+  text-transform: uppercase;
+  font-size: 5.3rem;
+  line-height: 6.77778rem;
+  font-weight: 900;
+  display: inline-block; }
+  .front-page h1span {
+    color: #CC3399; }
+
+@media only screen and (max-width: 991px) {
+  .front-page h1 {
+    font-size: 5.3em; } }
+
+@media only screen and (max-width: 767px) {
+  .front-page h1 {
+    font-size: 3em;
+    line-height: 1.3em; } }
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .front-page h1 {
+    font-size: 3em;
+    line-height: 1.3em; } }
