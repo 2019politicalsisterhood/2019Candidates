@@ -52,7 +52,7 @@ class Candidate(models.Model):
     college = models.ForeignKey('College', on_delete=models.CASCADE, null=True, blank=True)
     phone = models.CharField(max_length=255, blank=True)
     identifier = models.CharField(max_length=1064, blank=True)
-    ethnicity = models.ManyToManyField('Ethnicity')
+    ethnicity = models.ManyToManyField('Ethnicity', blank=True)
     slug = models.SlugField()
 
     def __str__(self):
