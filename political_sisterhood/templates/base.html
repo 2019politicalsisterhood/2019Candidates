@@ -20,7 +20,6 @@
 
 
     <!-- Your stuff: Third-party CSS libraries go here -->
-    {% compress css %}
     <!-- This file stores project-specific CSS -->
 
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
@@ -31,7 +30,6 @@
 
   <link rel="stylesheet" href="{% static 'css/responsive.css' %}" type="text/css" />
 
-    {% endcompress %}
     {% endblock %}
 
   </head>
@@ -246,14 +244,12 @@
 
 
       <!-- place project specific Javascript in this file -->
-      {% compress js %}
       <script src="{% static 'js/jquery.js' %}"></script>
       <script src="{% static 'js/project.js' %}"></script>
       <script src="{% static 'js/plugins.js' %}"></script>
       <!-- Footer Scripts
       ============================================= -->
       <script src="{% static 'js/functions.js' %}"></script>
-      {% endcompress %}
 
     {% endblock javascript %}
     {% block extra_js %}
