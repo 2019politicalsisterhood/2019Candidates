@@ -64,6 +64,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount',  # registration
     'ckeditor', #ckeditor
     'ckeditor_uploader', #ckeditor upload
+    'mptt',
 ]
 
 

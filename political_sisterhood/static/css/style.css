@@ -9296,7 +9296,7 @@ body:not(.device-touch) .text-overlay {
 /* Heading Block - with Subtitle
 -----------------------------------------------------------------*/
 .heading-block {
-  margin-bottom: 50px; }
+  margin-bottom: 35px; }
 
 .heading-block h1,
 .heading-block h2,
@@ -10425,7 +10425,7 @@ button.toast-close-button {
   .widget p {
     line-height: 1.7; }
     .widget p:not(.lead) {
-      font-size: 14px; }
+      font-size: 12px; }
 
 .sidebar-widgets-wrap .widget {
   padding-top: 50px;
@@ -13644,7 +13644,8 @@ body #side-panel.dark #side-panel-trigger-close a {
   position: initial !important; }
 
 .themebg {
-  background-color: #CC3399 !important; }
+  padding: 15px 0;
+  background: linear-gradient(-90deg, #CC3399, #ececec); }
 
 .theme-color {
   color: #CC3399; }

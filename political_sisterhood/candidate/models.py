@@ -11,6 +11,7 @@ class Candidate(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     image = models.FileField(blank=True, null=True)
+    image_attribution = models.CharField(max_length=1024, blank=True, null=True)
     STATES = Choices(('AL', 'Alabama'), ('AZ', 'Arizona'), ('AR', 'Arkansas'), ('CA', 'California'),
                      ('CO', 'Colorado'), ('CT', 'Connecticut'),
                      ('DE', 'Delaware'), ('DC', 'District of Columbia'), ('FL', 'Florida'), ('GA', 'Georgia'),
@@ -77,6 +78,11 @@ class Candidate(models.Model):
             return self.image.url
         return "/static/images/icons/avatar.jpg"
 
+    def hq(self):
+        if self.campaign_street or self.campaign_city or self.campaign_zip:
+            return True
+        return False
+
     def get_absolute_url(self):
         return reverse('candidate:detail', kwargs={
             'state': self.state.lower(),
@@ -96,3 +102,5 @@ class Ethnicity(models.Model):
 
     def __str__(self):
         return self.name
+
+

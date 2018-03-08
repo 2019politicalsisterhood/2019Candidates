@@ -12,8 +12,7 @@
     </ol>
   </div>
 </section>
-<section id="page-title" class="page-title-sm themebg">
-</section>
+<section class="themebg"></section>
 <section id="content" style="margin-bottom: 0px;">
   <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-sm">
     <div class="heading-block center">
@@ -23,14 +22,19 @@
     </div>
     <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-12 center bottommargin">
-        <img data-animate="fadeInLeftBig" src="{{object.image_url}}" alt="{{object.name}} Headshot" class="center-block fadeInLeftBig animated img-circle img-border">
-        {% if not self.image %}
+        {% if object.image_url %}
+        <img data-animate="fadeInLeftBig" src="{{object.image_url}}" alt="{{object.name}} Headshot" class="center-block fadeInLeftBig animated img-border">
+        {% if object.image_attribution %}
+        <div>
+        <small>{{object.image_attribution|safe}}</small>
+      </div>
+        {% endif %}
         {% endif %}
         {% if object.follow %}
         <div class="row topmargin-sm center">
           {% if object.facebook %}
           <div class="col-4">
-          <a href="{{object.facebook}}" class="social-icon si-rounded si-facebook">
+          <a href="{{object.facebook}}" class="social-icon si-rounded si-facebook divcenter">
               <i class="icon-facebook"></i>
               <i class="icon-facebook"></i>
           </a>
@@ -38,7 +42,7 @@
           {% endif %}
           {% if object.twitter %}
           <div class="col-4">
-          <a href="{{object.twitter}}" class="social-icon si-rounded si-twitter">
+          <a href="{{object.twitter}}" class="social-icon si-rounded si-twitter divcenter">
               <i class="icon-twitter"></i>
               <i class="icon-twitter"></i>
           </a>
@@ -46,7 +50,7 @@
           {% endif %}
           {% if object.linkedin %}
           <div class="col-4">
-          <a href="{{object.linkedin}}" class="social-icon si-rounded si-linkedin">
+          <a href="{{object.linkedin}}" class="social-icon si-rounded si-linkedin divcenter">
               <i class="icon-linkedin"></i>
               <i class="icon-linkedin"></i>
           </a>
@@ -82,7 +86,7 @@
           {% if object.phone %}
             <strong>Phone Number</strong> <span class="theme-color">&mdash;</span> <a href="tel:{{object.phone}}">{{object.phone}}</a><br>
           {% endif %}
-          {% if object.ethnicity %}
+          {% if object.ethnicity.all %}
             <strong>Ethnicity</strong> <span class="theme-color">&mdash;</span> {% for eth in object.ethnicity.all %}{{eth.name}}<br>{% endfor %}
           {% endif %}
         </div>
@@ -90,59 +94,31 @@
     </div>
   </div>
 </section>
-<section>
-  <div class="section notopborder nomargin">
-    <div class="container clearfix">
-      <div class="col_two_fifth topmargin-sm nobottommargin" style="min-height: 350px; overflow: hidden">
-        <div id="map"></div>
-      </div>
-      <div class="col_three_fifth nobottommargin col_last">
-        <div class="heading-block topmargin-sm bottommargin-sm">
-          <h2>Campaign Headquarters</h2>
-        </div>
-        <p>
-          {% if object.campaign_street %}
-          {{object.campaign_street}}
-          <br>
-          {% endif %}
-          {% if object.campaign_street2 %}
-          {{object.campaign_street2}}
-          <br>
-          {% endif %}
-          {% if object.campaign_city %}
-          {{object.campaign_city}},
-          {% endif %}
-          {{object.get_state_display}}
-          {{object.campaign_zip}}
-        </p>
-        <a href="https://www.google.com/maps/dir/''/{{object.address}},+{{object.campaign_city}},+{{object.state}}+{{object.campaign_zip}}/" class="button button-3d button-large">Get Directions</a>
-      </div>
-    </div>
-  </div>
-</section>
 <section id="content">
-  <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-sm">
-    <div class="heading-block center">
-      <h2>Issues</h2>
-    </div>
-    <div class="row">
-      {% for issue in object.issues.all %}
-      <div class="col_one_third">
-        <div class="feature-box fbox-center fbox-border fbox-light fbox-effect">
-          <div class="fbox-icon">
-            <a href="#"><i class="icon-book i-alt"></i></a>
-          </div>
-          <h3>{{issue.name}}</h3>
-          <p>{{issue.desc|safe}}</p>
-        </div>
+  <div class="section clear-bottommargin clearfix toppadding-sm bottompadding-sm">
+    <div class="container clearfix">
+      <div class="heading-block center">
+        <h2>Issues</h2>
       </div>
-      {% endfor %}
+      <div class="row">
+        {% for issue in object.issues.all %}
+        <div class="col_one_third">
+          <div class="feature-box fbox-center fbox-border fbox-light fbox-effect">
+            <div class="fbox-icon">
+              <a href="#"><i class="icon-book i-alt"></i></a>
+            </div>
+            <h3>{{issue.issue.get_root}}</h3>
+            <p>{{issue.desc|safe}}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>
 {% if object.news.published %}
 <section>
-  <div class="section notopborder nomargin">
+  <div class="toppadding-sm bottompadding-sm">
     <div class="container clearfix">
       <div class="heading-block center">
         <h2>News Stories</h2>
@@ -170,6 +146,38 @@
           </div>
         </div>
         {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% if object.hq %}
+<section>
+  <div class="section notopborder nomargin">
+    <div class="container clearfix">
+      <div class="col_two_fifth topmargin-sm nobottommargin" style="min-height: 350px; overflow: hidden">
+        <div id="map"></div>
+      </div>
+      <div class="col_three_fifth nobottommargin col_last">
+        <div class="heading-block topmargin-sm bottommargin-sm">
+          <h2>Campaign Headquarters</h2>
+        </div>
+        <p>
+          {% if object.campaign_street %}
+          {{object.campaign_street}}
+          <br>
+          {% endif %}
+          {% if object.campaign_street2 %}
+          {{object.campaign_street2}}
+          <br>
+          {% endif %}
+          {% if object.campaign_city %}
+          {{object.campaign_city}},
+          {% endif %}
+          {{object.get_state_display}}
+          {{object.campaign_zip}}
+        </p>
+        <a href="https://www.google.com/maps/dir/''/{{object.address}},+{{object.campaign_city}},+{{object.state}}+{{object.campaign_zip}}/" class="button button-3d button-large">Get Directions</a>
       </div>
     </div>
   </div>
