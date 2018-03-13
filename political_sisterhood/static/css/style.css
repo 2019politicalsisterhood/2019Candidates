@@ -10303,6 +10303,8 @@ button.toast-close-button {
   #footer .footer-widgets-wrap {
     position: relative;
     padding: 40px 0; }
+  #footer .widget p {
+    padding-top: 10px; }
 
 .device-xl.sticky-footer #top-bar,
 .device-lg.sticky-footer #top-bar {
@@ -13677,3 +13679,6 @@ body #side-panel.dark #side-panel-trigger-close a {
 
 .btn.white-font {
   color: #fff !important; }
+
+b, strong {
+  font-weight: 600; }
