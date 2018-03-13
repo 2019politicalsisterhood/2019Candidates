@@ -15,7 +15,7 @@
 	border-top: 5px solid rgba(0,0,0,0.2);
 	.footer-widgets-wrap {
 		position: relative;
-		padding: 80px 0;
+		padding: 40px 0;
 	}
 }
 
@@ -70,9 +70,10 @@
 	}
 }
 
+
 #copyrights {
-	padding: 40px 0;
-	background-color: #DDD;
+	padding: 10px 0;
+	background-color: $theme-color;
 	font-size: $font-size-base;
 	line-height: $line-height-content;
 	i {

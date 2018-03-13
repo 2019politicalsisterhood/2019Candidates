@@ -60,7 +60,7 @@
           <!-- Primary Navigation ============================================= -->
           <nav id="primary-menu">
             <ul>
-              <li><a href="#"><div>About</div></a></li>
+              <li><a href="{% url 'about' %}"><div>About</div></a></li>
               <li><a href="#"><div>Run</div></a>
                 <ul>
                   <li><a href="#"><div>I want to run</div></a></li>
@@ -122,22 +122,18 @@
 
             <div class="widget clearfix">
 
-              <img src="{% static 'images/logo_footer.png' %}" alt="" class="alignleft" style="height: 50px; margin-top: 8px; padding-right: 18px; border-right: 1px solid #4A4A4A;">
+              <img src="{% static 'images/logo.png' %}" alt="" class="alignleft" style="height: 50px; margin-top: 8px; padding-right: 18px; border-right: 1px solid #4A4A4A;">
 
               <p>Political Sisterhood is a data collection and analysis firm for women in politics.  Providing  single-access portal for information in support of women candidates regardless of political affiliation. The site includes external links to the individual candidates websites and to websites that provide support for those running for office.   </p>
 
               <div class="line" style="margin: 30px 0;"></div>
 
-              <div class="col_half">
+              <div class="col_one_third">
                 <div class="widget clearfix">
 
                   <div class="d-none d-lg-block"><div class="clear" style="padding-top: 10px;"></div></div>
 
                   <div class="row">
-                    <div class="col-lg-6 bottommargin-sm center">
-                      <div class="counter counter-small" style="color: #eaadd6;"><span data-from="50" data-to="67433" data-refresh-interval="80" data-speed="3000" data-comma="true"></span></div>
-                      <h5 class="nobottommargin">Total Downloads</h5>
-                    </div>
 
                     <div class="col-lg-6 bottommargin-sm center col_last">
                       <div class="counter counter-small" style="color: #c39;"><span data-from="100" data-to="123" data-refresh-interval="50" data-speed="2000" data-comma="true"></span></div>
@@ -148,7 +144,7 @@
                 </div>
               </div>
 
-              <div class="col_half col_last">
+              <div class="col_two_third col_last">
                 <div class="widget subscribe-widget clearfix">
                   <h5><strong>Subscribe</strong> to Our Newsletter to get Important News, Candidate Information &amp; New Ways to Get Involved:</h5>
                   <div class="widget-subscribe-form-result"></div>
@@ -171,15 +167,21 @@
 
               <div class="widget widget-twitter-feed clearfix">
 
-                <h4>Twitter Feed</h4>
+                <h4 class="theme-color">Twitter Feed</h4>
                 <ul class="iconlist twitter-feed" data-username="politicalsister" data-count="2">
                   <li></li>
                 </ul>
 
-                <a href="#" class="btn btn-secondary btn-sm fright">Follow Us on Twitter</a>
+                <a href="#" class="btn btn-secondary btn-sm fright white-font">Follow Us on Twitter</a>
 
               </div>
-
+            <div class="copyrights-menu copyright-links clearfix topmargin-lg">
+              <a href="#">About</a>/
+              <a href="#">Run</a>/
+              <a href="#">Candidate Reports</a>/
+              <a href="#">News</a>/
+              <a href="#">Contact Us</a>
+            </div>
           </div>
 
         </div><!-- .footer-widgets-wrap end -->
@@ -193,13 +195,6 @@
         <div class="container clearfix">
 
           <div class="col_half">
-            <div class="copyrights-menu copyright-links clearfix">
-              <a href="#">About</a>/
-              <a href="#">Run</a>/
-              <a href="#">Candidate Reports</a>/
-              <a href="#">News</a>/
-              <a href="#">Contact Us</a>
-            </div>
             Copyrights &copy; {% now 'Y' %} All Rights Reserved by Political Sisterhood Inc.
           </div>
 

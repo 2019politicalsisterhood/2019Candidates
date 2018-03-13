@@ -104,3 +104,11 @@
         line-height: 1.3em;
     }
 }
+
+.theme-color {
+    color: $theme-color !important;
+}
+
+.btn.white-font {
+    color: #fff !important;
+}

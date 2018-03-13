@@ -10303,7 +10303,7 @@ button.toast-close-button {
   border-top: 5px solid rgba(0, 0, 0, 0.2); }
   #footer .footer-widgets-wrap {
     position: relative;
-    padding: 80px 0; }
+    padding: 40px 0; }
 
 .device-xl.sticky-footer #top-bar,
 .device-lg.sticky-footer #top-bar {
@@ -10365,8 +10365,8 @@ button.toast-close-button {
   margin-bottom: 0; }
 
 #copyrights {
-  padding: 40px 0;
-  background-color: #DDD;
+  padding: 10px 0;
+  background-color: #CC3399;
   font-size: 16px;
   line-height: 1.8; }
   #copyrights i.footer-icon {
@@ -11749,7 +11749,7 @@ body:not(.no-transition) #wrapper,
 .dark h4,
 .dark h5,
 .dark h6 {
-  color: #EEE; }
+  color: #444; }
 
 .dark a:hover {
   color: #EEE; }
@@ -12559,7 +12559,7 @@ body.top-search-open .dark #header-wrap:not(.not-dark) #top-search a,
 
 .dark #footer .social-icon.si-borderless,
 #footer.dark .social-icon.si-borderless {
-  color: #555 !important; }
+  color: #fff !important; }
 
 .dark .si-dark {
   background-color: rgba(0, 0, 0, 0.2);
@@ -12896,17 +12896,16 @@ body.top-search-open .dark #header-wrap:not(.not-dark) #top-search a,
 
 #footer.dark,
 .dark #footer {
-  background-color: #333;
-  color: #CCC;
+  background-color: #ececec;
+  color: #444;
   border-top-color: rgba(0, 0, 0, 0.2); }
 
 .dark #copyrights {
-  background-color: rgba(0, 0, 0, 0.2);
-  color: rgba(255, 255, 255, 0.25);
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1); }
+  background-color: #565d64;
+  color: #fff; }
 
 .dark #copyrights i.footer-icon {
-  color: rgba(255, 255, 255, 0.3); }
+  color: #fff; }
 
 .dark .copyright-links a {
   color: rgba(255, 255, 255, 0.25);
@@ -12917,7 +12916,7 @@ body.top-search-open .dark #header-wrap:not(.not-dark) #top-search a,
   border-bottom-color: rgba(255, 255, 255, 0.35); }
 
 .dark .footer-widgets-wrap a {
-  color: #CCC; }
+  color: #CC3399; }
 
 .dark .footer-widgets-wrap a:hover {
   color: #999; }
@@ -13673,3 +13672,9 @@ body #side-panel.dark #side-panel-trigger-close a {
   .front-page h1 {
     font-size: 3em;
     line-height: 1.3em; } }
+
+.theme-color {
+  color: #CC3399 !important; }
+
+.btn.white-font {
+  color: #fff !important; }
