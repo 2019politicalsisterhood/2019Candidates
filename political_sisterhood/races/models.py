@@ -2,10 +2,10 @@ from django.db import models
 from model_utils import Choices
 from model_utils.fields import StatusField
 from political_sisterhood.candidate.models import Candidate
+from ckeditor.fields import RichTextField
 # Create your models here.
 
-
-class Race(models.Model):
+class State(models.Model):
     STATES = Choices(('AL', 'Alabama'), ('AZ', 'Arizona'), ('AR', 'Arkansas'), ('CA', 'California'),
                      ('CO', 'Colorado'), ('CT', 'Connecticut'),
                      ('DE', 'Delaware'), ('DC', 'District of Columbia'), ('FL', 'Florida'), ('GA', 'Georgia'),
@@ -23,9 +23,40 @@ class Race(models.Model):
                      ('VT', 'Vermont'), ('VA', 'Virginia'), ('WA', 'Washington'),
                      ('WV', 'West Virginia'), ('WI', 'Wisconsin'), ('WY', 'Wyoming'))
     state = StatusField(choices_name='STATES')
+    seal = models.FileField(blank=True, null=True)
+    bio = RichTextField(blank=True)
+
+    @property
+    def seal_url(self):
+        if self.seal:
+            return self.seal.url
+        return None
+
+    @property
+    def available(self):
+        return Race.objects.filter(state=self).count()
+
+    @property
+    def women(self):
+        return RaceEntry.objects.filter(race_id=self.id).count()
+
+    @property
+    def men(self):
+        return self.available - RaceEntry.objects.filter(race_id=self.id).distinct('race').count()
+
+    def __str__(self):
+        return self.get_state_display()
+
+
+class Race(models.Model):
+    state = models.ForeignKey(State, on_delete=models.CASCADE, related_name="states")
     district = models.CharField(max_length=255, blank=True)
     RACE = Choices('Senate', 'House')
     race_type = StatusField(choices_name='RACE')
+    open_race = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "{} - {}".format(self.district, self.state)
 
 
 class RaceEntry(models.Model):

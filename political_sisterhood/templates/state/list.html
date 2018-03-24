@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block seo_title %}
+{{object.get_state_display}} - Political Sisterhood
+{% endblock %}
+{% block content %}
+<section id="page-title" class="page-title-mini page-title-nobg">
+  <div class="container clearfix">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{object.state}}</li>
+    </ol>
+  </div>
+</section>
+<section class="themebg"></section>
+<section id="content" style="margin-bottom: 0px;">
+  <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-sm">
+    <div class="heading-block center">
+      <h2 class="normal-case">{{object.get_state_display}}</h2>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-12 col-sm-12 center bottommargin">
+        {% if object.seal_url %}
+        <img data-animate="fadeInLeftBig" src="{{object.seal_url}}" alt="{{object.get_state_display}} Seal" class="center-block fadeInLeftBig animated img-border">
+        {% endif %}
+      </div>
+      <div class="col-lg-8 col-md-12 col-sm-12 center bottommargin">
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
+            <div class="feature-box fbox-center fbox-bg  fbox-border fbox-light">
+              <div class="fbox-icon">
+                <i class="i-alt">{{object.available}}</i>
+              </div>
+              <h3># of Seats available</h3>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <div class="feature-box fbox-center fbox-bg fbox-light fbox-effect">
+              <div class="fbox-icon">
+                <i class="i-alt">{{object.women}}</i>
+              </div>
+              <h3># of Women candidates</h3>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col_last">
+            <div class="feature-box fbox-center fbox-bg fbox-dark">
+              <div class="fbox-icon">
+                <a href="#"><i class="i-alt">{{object.men}}</i></a>
+              </div>
+              <h3># of races with ONLY men</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

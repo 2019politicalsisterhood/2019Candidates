@@ -224,7 +224,7 @@
 		&.fbox-light {
 			.fbox-icon { border-color: #E5E5E5; }
 			i,
-			img { color: #888; }
+			img { color: $dark-color; }
 		}
 	}
 }

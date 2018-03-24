@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block seo_title %}
+{{object.state}} - Political Sisterhood
+{% endblock %}
+{% block content %}
+<section id="page-title" class="page-title-mini page-title-nobg">
+  <div class="container clearfix">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{object.get_state_display}}</li>
+    </ol>
+  </div>
+</section>
+<section class="themebg"></section>
+<section id="content" style="margin-bottom: 0px;">
+  <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-sm">
+    <div class="heading-block center">
+      <h2 class="normal-case">{{object.state}}</h2>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12 center bottommargin">
+        {% if object.seal_url %}
+        <img data-animate="fadeInLeftBig" src="{{object.seal_url}}" alt="{{object.state}}" class="center-block fadeInLeftBig animated img-border">
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

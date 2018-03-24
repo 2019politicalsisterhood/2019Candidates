@@ -1,5 +1,6 @@
 from django.db import models
 from model_utils.fields import StatusField
+from model_utils import FieldTracker
 from django.urls import reverse
 from django.utils.functional import cached_property
 from ckeditor.fields import RichTextField
@@ -56,6 +57,8 @@ class Candidate(models.Model):
     ethnicity = models.ManyToManyField('Ethnicity', blank=True)
     slug = models.SlugField()
 
+    tracker = FieldTracker()
+
     def __str__(self):
         return "{}".format(self.name)
 
@@ -103,4 +106,5 @@ class Ethnicity(models.Model):
     def __str__(self):
         return self.name
 
-
+    class Meta:
+        verbose_name_plural = "Ethnicities"

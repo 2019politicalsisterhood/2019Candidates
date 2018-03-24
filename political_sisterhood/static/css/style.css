@@ -6190,7 +6190,7 @@ body:not(.device-touch) .button.button-full strong {
 
 .feature-box.fbox-border.fbox-light i,
 .feature-box.fbox-border.fbox-light img {
-  color: #888; }
+  color: #333; }
 
 /* Feature Box - Border - Dark
 -----------------------------------------------------------------*/
