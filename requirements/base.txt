@@ -71,3 +71,4 @@ django_templated_email==2.2.0
 
 wikipedia==1.4.0
 pandas==0.22.0
+django-extensions==1.7.5
