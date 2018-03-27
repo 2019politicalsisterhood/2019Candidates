@@ -64,7 +64,7 @@ django-haystack==2.8.0
 elasticsearch==2.4.1
 
 # BetterForms
-django-betterforms=1.1.4
+django-betterforms==1.1.4
 
 # Templated EMail
 django_templated_email==2.2.0
