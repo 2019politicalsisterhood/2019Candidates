@@ -22,7 +22,7 @@ class Candidate(models.Model):
     email = models.EmailField(max_length=255, blank=True)
     image = models.FileField(blank=True, null=True)
     image_attribution = models.CharField(max_length=1024, blank=True, null=True)
-    STATES = Choices(('AL', 'Alabama'), ('AZ', 'Arizona'), ('AR', 'Arkansas'), ('CA', 'California'),
+    STATES = Choices(('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'), ('AR', 'Arkansas'), ('CA', 'California'),
                      ('CO', 'Colorado'), ('CT', 'Connecticut'),
                      ('DE', 'Delaware'), ('DC', 'District of Columbia'), ('FL', 'Florida'), ('GA', 'Georgia'),
                      ('ID', 'Idaho'), ('IL', 'Illinois'),
