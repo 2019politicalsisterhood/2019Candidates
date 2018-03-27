@@ -14,7 +14,7 @@ Production settings for Political Sisterhood project.
 
 
 from .base import *  # noqa
-
+import os
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
