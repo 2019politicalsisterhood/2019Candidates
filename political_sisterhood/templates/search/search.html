@@ -23,9 +23,9 @@
                     <input type="search" name="q" value="{{query}}" class="form-control theme"  placeholder="Search" id="id_q">
                 </div>
             </div>
-            <div>
+            <div class="row">
                 {% for result in page_obj.object_list %}
-                         <article class="portfolio-item pf-media pf-icons">
+                         <article class="col-sm-6 col-md-4 col-lg-3 pf-media pf-icons">
                             <div class="portfolio-image">
                                 <a href="{{result.object.get_absolute_url}}">
                                     <img src="{{result.object.image_url}}" alt="{{result.object.name}} Headshot">
