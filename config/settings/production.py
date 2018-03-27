@@ -200,3 +200,15 @@ ADMIN_URL = env('DJANGO_ADMIN_URL')
 
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
+        'URL': os.environ["ELASTIC_SEARCH_URL"],
+        'INDEX_NAME': os.environ["ELASTIC_SEARCH_INDEX"],
+        'KWARGS': {
+              'use_ssl': True,
+              'verify_certs': True,
+            }
+    },
+}
