@@ -4,33 +4,211 @@
 {% block title %}User: {{ object.username }}{% endblock %}
 
 {% block content %}
-<div class="container">
+<section id="content" style="margin-bottom: 0px;">
 
-  <div class="row">
-    <div class="col-sm-12">
+      <div class="content-wrap">
 
-      <h2>{{ object.username }}</h2>
-      {% if object.name %}
-        <p>{{ object.name }}</p>
-      {% endif %}
-    </div>
-  </div>
+        <div class="container clearfix">
 
-{% if object == request.user %}
-<!-- Action buttons -->
-<div class="row">
+          <div class="row clearfix">
 
-  <div class="col-sm-12">
-    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
-    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
-    <!-- Your Stuff: Custom user template urls -->
-  </div>
+            <div class="col-sm-9">
 
-</div>
-<!-- End Action buttons -->
-{% endif %}
+              <img {% if object.avater %} {% else %}src="{% static '/images/icons/avatar.jpg' %}"{% endif %} class="alignleft img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar" style="max-width: 84px;">
+
+              <div class="heading-block noborder">
+                <h3>{{ object.name|default_if_none:"" }}</h3>
+                <span>Your Political Sisterhood Profile</span>
+              </div>
+
+              <div class="clear"></div>
+
+              <div class="row clearfix">
+
+                <div class="col-md-12">
+
+                  <div class="tabs tabs-alt clearfix ui-tabs ui-widget ui-widget-content ui-corner-all" id="tabs-profile">
+
+                    <ul class="tab-nav clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+                      <li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="tab-payments" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true"><a href="#tab-payments" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1"><i class="icon-dollar"></i>Payments</a></li>
+                      <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tab-candidates" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab-candidates" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2"><i class="icon-user2"></i>Candidates</a></li>
+                      <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tab-reports" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab-reports" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3"><i class="icon-filter"></i>Reports</a></li>
+                    </ul>
+
+                    <div class="tab-container">
+
+                      <div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tab-payments" aria-labelledby="ui-id-1" role="tabpanel" aria-hidden="false" style="display: block;">
+
+                        <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium harum ea quo! Nulla fugiat earum, sed corporis amet iste non, id facilis dolorum, suscipit, deleniti ea. Nobis, temporibus magnam doloribus. Reprehenderit necessitatibus esse dolor tempora ea unde, itaque odit. Quos.</p>
+
+                        <div class="table-responsive">
+                          <table class="table table-bordered table-striped">
+                            <colgroup>
+                            <col class="col-xs-1">
+                            <col class="col-xs-5">
+                            <col class="col-xs-2">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                              <th>Time</th>
+                              <th>Activity</th>
+                              <th>Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                              <td>
+                              <code>3/23/2018</code>
+                              </td>
+                              <td>Purchased Credits</td>
+                              <td>$41.23</td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                      </div>
+                      <div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tab-candidates" aria-labelledby="ui-id-2" role="tabpanel" aria-hidden="true" style="display: none;">
+
+                    <div class="row topmargin-sm">
+                          <div class="col-md-3 col-sm-6 bottommargin">
+
+                            <div class="team">
+                              <div class="team-image">
+                                <img src="http://canvashtml-cdn.semicolonweb.com/images/team/3.jpg" alt="John Doe">
+                              </div>
+                              <div class="team-desc">
+                                <div class="team-title"><h4>John Doe</h4><span>CEO</span></div>
+                                <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
+                                  <i class="icon-facebook"></i>
+                                  <i class="icon-facebook"></i>
+                                </a>
+                                <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
+                                  <i class="icon-twitter"></i>
+                                  <i class="icon-twitter"></i>
+                                </a>
+                                <a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
+                                  <i class="icon-gplus"></i>
+                                  <i class="icon-gplus"></i>
+                                </a>
+                              </div>
+                            </div>
+
+                          </div>
+
+                          <div class="col-md-3 col-sm-6 bottommargin">
+
+                            <div class="team">
+                              <div class="team-image">
+                                <img src="http://canvashtml-cdn.semicolonweb.com/images/team/2.jpg" alt="Josh Clark">
+                              </div>
+                              <div class="team-desc">
+                                <div class="team-title"><h4>Josh Clark</h4><span>Co-Founder</span></div>
+                                <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
+                                  <i class="icon-facebook"></i>
+                                  <i class="icon-facebook"></i>
+                                </a>
+                                <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
+                                  <i class="icon-twitter"></i>
+                                  <i class="icon-twitter"></i>
+                                </a>
+                                <a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
+                                  <i class="icon-gplus"></i>
+                                  <i class="icon-gplus"></i>
+                                </a>
+                              </div>
+                            </div>
+
+                          </div>
+
+                          <div class="col-md-3 col-sm-6 bottommargin">
+
+                            <div class="team">
+                              <div class="team-image">
+                                <img src="http://canvashtml-cdn.semicolonweb.com/images/team/8.jpg" alt="Mary Jane">
+                              </div>
+                              <div class="team-desc">
+                                <div class="team-title"><h4>Mary Jane</h4><span>Sales</span></div>
+                                <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
+                                  <i class="icon-facebook"></i>
+                                  <i class="icon-facebook"></i>
+                                </a>
+                                <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
+                                  <i class="icon-twitter"></i>
+                                  <i class="icon-twitter"></i>
+                                </a>
+                                <a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
+                                  <i class="icon-gplus"></i>
+                                  <i class="icon-gplus"></i>
+                                </a>
+                              </div>
+                            </div>
+
+                          </div>
+
+                          <div class="col-md-3 col-sm-6">
+
+                            <div class="team">
+                              <div class="team-image">
+                                <img src="http://canvashtml-cdn.semicolonweb.com/images/team/4.jpg" alt="Nix Maxwell">
+                              </div>
+                              <div class="team-desc">
+                                <div class="team-title"><h4>Nix Maxwell</h4><span>Support</span></div>
+                                <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
+                                  <i class="icon-facebook"></i>
+                                  <i class="icon-facebook"></i>
+                                </a>
+                                <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
+                                  <i class="icon-twitter"></i>
+                                  <i class="icon-twitter"></i>
+                                </a>
+                                <a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
+                                  <i class="icon-gplus"></i>
+                                  <i class="icon-gplus"></i>
+                                </a>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tab-reports" aria-labelledby="ui-id-4" role="tabpanel" aria-hidden="true" style="display: none;">
 
 
-</div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+            <div class="col-sm-3 clearfix">
+
+              <div class="list-group">
+                <a href="{% url 'users:detail' %}" class="list-group-item clearfix">Profile <i class="icon-user pull-right"></i></a>
+                <a href="#" class="list-group-item clearfix">Messages <i class="icon-envelope2 pull-right"></i></a>
+                <a href="#" class="list-group-item clearfix">Billing <i class="icon-credit-cards pull-right"></i></a>
+                <a href="#" class="list-group-item clearfix">Settings <i class="icon-cog pull-right"></i></a>
+                <a href="{% url 'account_logout' %}" class="list-group-item clearfix">Logout <i class="icon-line2-logout pull-right"></i></a>
+              </div>
+
+              <div class="fancy-title topmargin title-border">
+                <h4>About Me</h4>
+              </div>
+
+              <p>{{user.bio|default:"We don't have a bio about you. Go to your settings to update your bio when you get a chance!"}}</p>
+
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
 {% endblock content %}
 

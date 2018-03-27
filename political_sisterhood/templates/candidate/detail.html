@@ -17,7 +17,7 @@
   <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-sm">
     <div class="heading-block center">
       <h2 class="normal-case">{{object.name}}</h2>
-      <span>{{object.current_office}}, {{object.get_state_display}}</span>
+      <span>{% if object.current_office %}{{object.current_office}}, {% endif %}{{object.get_state_display}}</span>
       <h4>{{object.identifier}}</h4>
     </div>
     <div class="row">
@@ -27,9 +27,12 @@
         {% if object.image_attribution %}
         <div>
         <small>{{object.image_attribution|safe}}</small>
-      </div>
+        </div>
         {% endif %}
         {% endif %}
+        <div>
+            <span class="updated">Last Updated: {{object.updated|date:"m/d/y"}}</span>
+        </div>
         {% if object.follow %}
         <div class="row topmargin-sm center">
           {% if object.facebook %}

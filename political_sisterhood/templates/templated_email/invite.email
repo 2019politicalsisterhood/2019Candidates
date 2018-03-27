@@ -1,0 +1,8 @@
+{% block subject %}Request from Political Sisterhood to Update Candidate Information{% endblock %}
+{% block html %}
+{% if name %}{{name}}{% else %}Hello{% endif %},<br><br>
+www.politicalsisterhood.com/candidates/create/{{hash}}<br><br>
+Susan Wood<br>
+Founder, Political Sisterhood<br>
+<a href="https://www.politicalsisterhood.com">www.politicalsisterhood.com</a>
+{% endblock %}

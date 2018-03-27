@@ -109,9 +109,33 @@
     color: $theme-color !important;
 }
 
-.btn.white-font {
+.white-font {
     color: #fff !important;
 }
 b, strong {
     font-weight: 600;
+}
+
+.updated {
+    font-size: 10px;
+    color: $light-grey;
+}
+::-webkit-scrollbar
+{
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgb(204, 51, 153);
+}
+
+.theme .fancy-title.title-border:before {
+    border-color: $theme-color;
 }

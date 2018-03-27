@@ -70,14 +70,14 @@
 
               </li>
 
-              <li><a href="#"><div>Candidate Reports</div></a></li>
+              <li><a href="{% url 'candidate:all' %}"><div>Candidate Reports</div></a></li>
               <li><a href="#"><div>News</div></a></li>
               <li><a href="#"><div>Contact Us</div></a></li>
             </ul>
             <!-- Top Search ============================================= -->
             <div id="top-search">
               <a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
-              <form action="search.html" method="get">
+              <form action="/search" method="get">
                 <input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter..">
               </form>
             </div><!-- #top-search end -->
@@ -165,8 +165,7 @@
                   <li></li>
                 </ul>
 
-                <a href="#" class="btn btn-secondary btn-sm fright white-font">Follow Us on Twitter</a>
-
+                <a href="https://twitter.com/@politicalsister" class="button button-3d button-large button-brand nomargin white-font">Follow Us on Twitter</a>
               </div>
             <div class="copyrights-menu copyright-links clearfix topmargin-lg">
               <a href="#">About</a>/
@@ -198,7 +197,7 @@
                 <i class="icon-facebook"></i>
               </a>
 
-              <a href="#" class="social-icon si-small si-borderless nobottommargin si-twitter">
+              <a href="https://twitter.com/@politicalsister" class="social-icon si-small si-borderless nobottommargin si-twitter">
                 <i class="icon-twitter"></i>
                 <i class="icon-twitter"></i>
               </a>

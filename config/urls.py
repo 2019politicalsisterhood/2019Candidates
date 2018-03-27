@@ -4,6 +4,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+from django.views.generic.base import RedirectView
+from allauth.account import views
+from political_sisterhood.search.views import MySearchView
 from .views import HomePage
 
 urlpatterns = [
@@ -14,10 +17,12 @@ urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
 
     # User management
-    url(r'^users/', include('political_sisterhood.users.urls', namespace='users')),
+    url(r'^profile/', include('political_sisterhood.users.urls', namespace='users')),
+    url(r'^accounts/social/connections/$', RedirectView.as_view(pattern_name='users:redirect', permanent=True)),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^candidate/', include('political_sisterhood.candidate.urls', namespace='candidate')),
+    url(r'^candidates/', include('political_sisterhood.candidate.urls', namespace='candidate')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+     url(r'^search/?$', MySearchView.as_view(), name='search'),
 
     # Your stuff: custom urls includes go here
 

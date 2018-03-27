@@ -6,8 +6,8 @@ app_name = 'users'
 urlpatterns = [
     url(
         regex=r'^$',
-        view=views.UserListView.as_view(),
-        name='list'
+        view=views.UserDetailView.as_view(),
+        name='detail'
     ),
     url(
         regex=r'^~redirect/$',
@@ -15,12 +15,7 @@ urlpatterns = [
         name='redirect'
     ),
     url(
-        regex=r'^(?P<username>[\w.@+-]+)/$',
-        view=views.UserDetailView.as_view(),
-        name='detail'
-    ),
-    url(
-        regex=r'^~update/$',
+        regex=r'^settings/$',
         view=views.UserUpdateView.as_view(),
         name='update'
     ),

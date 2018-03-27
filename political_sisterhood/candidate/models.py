@@ -5,12 +5,18 @@ from django.urls import reverse
 from django.utils.functional import cached_property
 from ckeditor.fields import RichTextField
 from model_utils import Choices
+import hashlib
+from templated_email import send_templated_mail
+from datetime import datetime
+from django.template.defaultfilters import slugify
+import itertools
 # Create your models here.
 
 
 class Candidate(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255, blank=True)
     image = models.FileField(blank=True, null=True)
     image_attribution = models.CharField(max_length=1024, blank=True, null=True)
     STATES = Choices(('AL', 'Alabama'), ('AZ', 'Arizona'), ('AR', 'Arkansas'), ('CA', 'California'),
@@ -55,6 +61,8 @@ class Candidate(models.Model):
     phone = models.CharField(max_length=255, blank=True)
     identifier = models.CharField(max_length=1064, blank=True)
     ethnicity = models.ManyToManyField('Ethnicity', blank=True)
+    homepage = models.BooleanField(default=False)
+    updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField()
 
     tracker = FieldTracker()
@@ -92,6 +100,13 @@ class Candidate(models.Model):
             'slug': self.slug
         })
 
+    def save(self, *args, **kwargs):
+        self.slug = orig = slugify(self.name)
+        for x in itertools.count(1):
+            if not Candidate.objects.filter(slug=self.slug).exists():
+                break
+            self.slug = '%s-%d' % (orig, x)
+        super(Candidate, self).save(*args, **kwargs)
 
 class College(models.Model):
     name = models.CharField(max_length=1064, blank=True)
@@ -108,3 +123,33 @@ class Ethnicity(models.Model):
 
     class Meta:
         verbose_name_plural = "Ethnicities"
+
+class CandidateInvite(models.Model):
+    email = models.CharField(max_length=1025)
+    name = models.CharField(max_length=1025, blank=True)
+    md5_email = models.CharField(max_length=32, editable=False)
+    used = models.BooleanField(default=False)
+    emailed = models.DateTimeField(null=True, blank=True)
+    candidate = models.ForeignKey('Candidate', on_delete=models.SET_NULL, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.md5_email = hashlib.md5(self.email.encode()).hexdigest()
+        if not self.emailed:
+                send_templated_mail(
+                    template_name='invite',
+                    from_email="Susan at Political Sisterhood <susan@politicalsisterhood.com>",
+                    recipient_list=[self.email],
+                    context={
+                        'name': self.name,
+                        'hash': self.md5_email,
+                    }
+                )
+                self.emailed = datetime.now()
+        super(CandidateInvite, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return "Invite for: {}".format(self.email)
+
+    class Meta:
+        verbose_name_plural = "Candidate Invites"
+

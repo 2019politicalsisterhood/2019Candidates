@@ -8727,7 +8727,7 @@ body:not(.device-touch) .team-overlay {
     margin: 20px auto 25px auto;
     content: '';
     width: 15%;
-    border-top: 2px solid #444;
+    border-top: 2px solid #CC3399;
     opacity: 0.9; }
   .counter.counter-small + h5 {
     font-size: 13px; }
@@ -13677,8 +13677,27 @@ body #side-panel.dark #side-panel-trigger-close a {
 .theme-color {
   color: #CC3399 !important; }
 
-.btn.white-font {
+.white-font {
   color: #fff !important; }
 
 b, strong {
   font-weight: 600; }
+
+.updated {
+  font-size: 10px;
+  color: #7e7e7e; }
+
+::-webkit-scrollbar {
+  width: 12px;
+  /* for vertical scrollbars */
+  height: 12px;
+  /* for horizontal scrollbars */ }
+
+::-webkit-scrollbar-track {
+  background: #fff; }
+
+::-webkit-scrollbar-thumb {
+  background: #cc3399; }
+
+.theme .fancy-title.title-border:before {
+  border-color: #CC3399; }

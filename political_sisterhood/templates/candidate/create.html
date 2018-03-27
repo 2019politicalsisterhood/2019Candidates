@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Create New Candidate{% endblock %}
+
+{% block content %}
+<style>
+.django-ckeditor-widget {
+    display: block !important;
+}
+.cke {width: 100% !important}
+</style>
+<section id="page-title" class="page-title-mini page-title-nobg">
+  <div class="container clearfix">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'candidate:all' %}">Candidate Reports</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Create a New Candidate</li>
+    </ol>
+  </div>
+</section>
+<section class="themebg"></section>
+<section id="content" style="margin-bottom: 0px;">
+  <div class="container clear-bottommargin clearfix topmargin-sm bottommargin-sm">
+      <p>
+        <strong>{{contact.name}},</strong><br>
+        Data from this form will be included in the complete list of women candidates for the 2018 U.S. federal congressional elections.  The website is live and will continue to be updated.  Please use the unique identifier question as a way to bring people to you - this will be on the site, and we will target groups that are related to the identifier - ie dog lover - could go to rescue groups, animal rights, etc.</p>
+      <form class="form-horizontal" method="post" action="">
+        {% csrf_token %}
+        {% crispy form %}
+        {{form.media}}
+        <div class="control-group">
+          <div class="controls">
+            <button type="submit" class="button button-3d button-large button-brand nomargin" >Save!</button>
+          </div>
+        </div>
+      </form>
+    </div>
+</section>
+{% endblock %}
