@@ -53,6 +53,7 @@ class Race(models.Model):
     district = models.CharField(max_length=255, blank=True)
     RACE = Choices('Senate', 'House')
     race_type = StatusField(choices_name='RACE')
+    filing_date = models.DateField(blank=True, null=True)
     open_race = models.BooleanField(default=False)
 
     def __str__(self):

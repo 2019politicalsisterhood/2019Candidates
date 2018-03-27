@@ -14,8 +14,11 @@ import itertools
 
 
 class Candidate(models.Model):
+    unique_identifier = models.CharField(max_length=255, blank=True, null=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
+    full = models.CharField(max_length=1024, blank=True, null=True, help_text="Only use if different than\
+                                                                                    first and last combined.")
     email = models.EmailField(max_length=255, blank=True)
     image = models.FileField(blank=True, null=True)
     image_attribution = models.CharField(max_length=1024, blank=True, null=True)
@@ -73,6 +76,12 @@ class Candidate(models.Model):
     @property
     def name(self):
         return "{} {}".format(self.first_name, self.last_name)
+
+    @property
+    def full_name(self):
+        if self.full:
+            return self.full
+        return self.name
 
     @property
     def address(self):
