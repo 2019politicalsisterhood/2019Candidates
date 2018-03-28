@@ -71,6 +71,7 @@ THIRD_PARTY_APPS = [
     'mptt',
     'haystack',
     'betterforms',
+    'django_extensions',
 ]
 
 
