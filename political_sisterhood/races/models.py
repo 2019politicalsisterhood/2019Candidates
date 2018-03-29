@@ -63,7 +63,7 @@ class Race(models.Model):
         elif self.other:
             return "{} - {}".format(self.other, self.state)
         else:
-            return self.state
+            return "{}".format(self.state)
 
 
 class RaceEntry(models.Model):
