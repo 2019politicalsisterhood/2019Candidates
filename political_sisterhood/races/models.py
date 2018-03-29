@@ -8,7 +8,9 @@ from ckeditor.fields import RichTextField
 class State(models.Model):
     STATES = Choices(('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'), ('AR', 'Arkansas'), ('CA', 'California'),
                      ('CO', 'Colorado'), ('CT', 'Connecticut'),
-                     ('DE', 'Delaware'), ('DC', 'District of Columbia'), ('FL', 'Florida'), ('GA', 'Georgia'),
+                     ('DE', 'Delaware'), ('DC', 'District of Columbia'),
+                     ('FL', 'Florida'), ('GA', 'Georgia'),
+                     ('HI', 'Hawaii'),
                      ('ID', 'Idaho'), ('IL', 'Illinois'),
                      ('IN', 'Indiana'), ('IA', 'Iowa'), ('KS', 'Kansas'), ('KY', 'Kentucky'),
                      ('LA', 'Louisiana'), ('ME', 'Maine'), ('MD', 'Maryland'),
@@ -22,6 +24,7 @@ class State(models.Model):
                      ('TN', 'Tennessee'), ('TX', 'Texas'), ('UT', 'Utah'),
                      ('VT', 'Vermont'), ('VA', 'Virginia'), ('WA', 'Washington'),
                      ('WV', 'West Virginia'), ('WI', 'Wisconsin'), ('WY', 'Wyoming'))
+
     state = StatusField(choices_name='STATES')
     seal = models.FileField(blank=True, null=True)
     bio = RichTextField(blank=True)
@@ -46,6 +49,7 @@ class State(models.Model):
 
     def __str__(self):
         return self.get_state_display()
+
 
 
 class Race(models.Model):

@@ -14,6 +14,12 @@ logger = logging.getLogger(__name__)
 class AllCandidates(TemplateView):
     template_name = "candidate/all.html"
 
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['states'] = State.objects.count()
+        return data
+
+
 class CandidateView(DetailView):
     model = Candidate
     template_name = "candidate/detail.html"
