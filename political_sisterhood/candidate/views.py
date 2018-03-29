@@ -17,6 +17,7 @@ class AllCandidates(TemplateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data['states'] = State.objects.count()
+        data['candidate'] = Candidate.objects.count()
         return data
 
 

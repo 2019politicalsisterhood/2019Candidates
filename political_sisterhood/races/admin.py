@@ -19,3 +19,4 @@ class RaceAdmin(admin.ModelAdmin):
 
 admin.site.register(State, StateAdmin)
 admin.site.register(Race, RaceAdmin)
+admin.site.register(RaceEntry)

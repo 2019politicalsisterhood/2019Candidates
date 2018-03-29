@@ -69,8 +69,13 @@ class Race(models.Model):
         else:
             return "{}".format(self.state)
 
+    @property
+    def open(self):
+        if self.racess.count():
+            return False
+        return True
 
 class RaceEntry(models.Model):
-    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name="races")
-    race = models.ForeignKey(Race, on_delete=models.CASCADE)
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name="candidatess")
+    race = models.ForeignKey(Race, on_delete=models.CASCADE, related_name="racess")
     current = models.BooleanField(default=False)
