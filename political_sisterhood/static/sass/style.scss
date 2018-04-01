@@ -139,3 +139,18 @@ b, strong {
 .theme .fancy-title.title-border:before {
     border-color: $theme-color;
 }
+
+.report-about {
+    background-color: $theme-color;
+    h3, h5, p {
+        color: #fff;
+    }
+    h3 {
+        width: 75%;
+        margin: auto;
+        font-size: 2.25em;
+    }
+    h5 {
+        font-size:1.5em;
+    }
+}

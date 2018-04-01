@@ -60,7 +60,7 @@ class Candidate(models.Model):
     website = models.CharField(max_length=1064, blank=True)
 
     # Candidate Info
-    PARTY = Choices('Democrat', 'Republican', 'Independent')
+    PARTY = Choices('Democrat', 'Republican', 'Independent', 'Green', 'Not Listed', 'Non-Partisian')
     party = StatusField(choices_name='PARTY', db_index=True)
     college = models.ForeignKey('College', on_delete=models.CASCADE, null=True, blank=True)
     phone = models.CharField(max_length=255, blank=True)
@@ -112,11 +112,6 @@ class Candidate(models.Model):
         })
 
     def save(self, *args, **kwargs):
-        self.slug = orig = slugify(self.name)
-        for x in itertools.count(1):
-            if not Candidate.objects.filter(slug=self.slug).exists():
-                break
-            self.slug = '%s-%d' % (orig, x)
         super(Candidate, self).save(*args, **kwargs)
 
 class College(models.Model):

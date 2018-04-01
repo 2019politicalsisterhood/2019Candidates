@@ -51,7 +51,6 @@ class State(models.Model):
         return self.get_state_display()
 
 
-
 class Race(models.Model):
     state = models.ForeignKey(State, on_delete=models.CASCADE, related_name="states")
     district = models.CharField(max_length=255, blank=True)
@@ -71,11 +70,11 @@ class Race(models.Model):
 
     @property
     def open(self):
-        if self.racess.count():
+        if self.racess:
             return False
         return True
 
 class RaceEntry(models.Model):
-    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name="candidatess")
-    race = models.ForeignKey(Race, on_delete=models.CASCADE, related_name="racess")
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
+    race = models.ForeignKey(Race, on_delete=models.CASCADE)
     current = models.BooleanField(default=False)

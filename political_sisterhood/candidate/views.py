@@ -3,7 +3,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic import DetailView, CreateView, TemplateView, UpdateView, ListView, RedirectView
 from .models import Candidate, CandidateInvite
 
-from political_sisterhood.races.models import State
+from political_sisterhood.races.models import State, Race
 import logging
 from django.shortcuts import render, get_object_or_404
 from .forms import CandidateForm
@@ -18,6 +18,7 @@ class AllCandidates(TemplateView):
         data = super().get_context_data(**kwargs)
         data['states'] = State.objects.count()
         data['candidate'] = Candidate.objects.count()
+        data['races'] = Race.objects.filter(racess__isnull=True).count()
         return data
 
 
@@ -25,13 +26,15 @@ class CandidateView(DetailView):
     model = Candidate
     template_name = "candidate/detail.html"
 
+
 class StateListView(ListView):
     model = Candidate
     template_name = "state/list.html"
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        data['object'] = State.objects.get(state=self.kwargs['state'].upper())
+        state =State.objects.get(state=self.kwargs['state'].upper())
+        data['object'] = state
         return data
 
     def get_queryset(self):

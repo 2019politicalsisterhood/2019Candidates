@@ -13701,3 +13701,14 @@ b, strong {
 
 .theme .fancy-title.title-border:before {
   border-color: #CC3399; }
+
+.report-about {
+  background-color: #CC3399; }
+  .report-about h3, .report-about h5, .report-about p {
+    color: #fff; }
+  .report-about h3 {
+    width: 75%;
+    margin: auto;
+    font-size: 2.25em; }
+  .report-about h5 {
+    font-size: 1.5em; }
