@@ -16,6 +16,7 @@ class MySearchView(BaseFacetedSearchView):
     paginate_by = 10
     paginate_orphans = 2
 
+    # All CHANGES NEED TO BE DONE IN SEARCH/VIEWS AND CANDIDATE/VIEWS
     def get_queryset(self):
         queryset = SearchQuerySet()
         # further filter queryset based on some set of criteria

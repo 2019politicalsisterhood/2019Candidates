@@ -9,7 +9,6 @@ import hashlib
 from templated_email import send_templated_mail
 from datetime import datetime
 from django.template.defaultfilters import slugify
-import itertools
 # Create your models here.
 
 
@@ -68,7 +67,7 @@ class Candidate(models.Model):
     ethnicity = models.ManyToManyField('Ethnicity', blank=True)
     homepage = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
-    slug = models.SlugField()
+    slug = models.SlugField(max_length=1024)
 
     tracker = FieldTracker()
 
