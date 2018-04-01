@@ -87,7 +87,12 @@ States.</span>
 $(function() {
 
   $('#usa-map').JSMaps({
-    map: 'usa'
+    map: 'usa',
+    onStateClick: function(data) {
+      $('#id_state').val(data.abbreviation); // Select the option with the abbr
+      $('#id_state').trigger('change'); // Notify any JS components that the value changed
+
+    }
   });
 
 });
@@ -109,16 +114,18 @@ $('#id_state').select2({
   width: '100%',
 });
 $('#id_issues').select2({
-  placeholder: 'Select a state',
+  placeholder: 'Select an issue',
   width: '100%',
+});
+$('#id_issues, #id_state, #id_college, #id_party, #id_q').change(function(){
+    $('#search_form').submit();
 });
 </script>
 <script>
     var hash = window.location.hash
-    console.log($("#search").offset().top)
     if (hash === "#search") {
       $('html,body').animate({
-        scrollTop: $("#search").position().top + 400
+        scrollTop: $("#search").position().top + 470
     }, 2000);
     }
 </script>

@@ -4,7 +4,7 @@
       <!-- Post Content
                     ============================================= -->
       <div class="postcontent nobottommargin col_last clearfix" >
-        <form method="get" action="#search">
+        <form method="get" action="#search" id="search_form">
             <div class="row">
                 {% for result in page_obj.object_list %}
                          <article class="col-sm-6 col-md-4 col-lg-3 pf-media pf-icons">
@@ -12,9 +12,6 @@
                                 <a href="{{result.object.get_absolute_url}}">
                                     <img src="{{result.object.image_url}}" alt="{{result.object.name}} Headshot">
                                 </a>
-                              <div class="portfolio-overlay">
-                                <a href="{{result.object.get_absolute_url}}" class="center-icon"><i class="icon-line-link"></i></a>
-                              </div>
                             </div>
                             <div class="portfolio-desc">
                               <h3><a href="{{result.object.get_absolute_url}}">{{result.object.first_name}} {{result.object.last_name}}</a></h3>

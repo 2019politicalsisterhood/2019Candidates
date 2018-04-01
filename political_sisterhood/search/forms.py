@@ -32,20 +32,27 @@ STATES = Choices(('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'), ('AR', 
                  ('VT', 'Vermont'), ('VA', 'Virginia'), ('WA', 'Washington'),
                  ('WV', 'West Virginia'), ('WI', 'Wisconsin'), ('WY', 'Wyoming'))
 
+
 def ISSUES():
     choices = [(issue.name, issue.name)
                for issue in Issue.objects.filter(parent__isnull=True)]
     return sorted(choices, key=lambda x: x[1])
+
 
 def COLLEGE():
     choices = [(college.name, college.name)
                for college in College.objects.all()]
     return sorted(choices, key=lambda x: x[1])
 
+
 class SearchForm(forms.Form):
     q = forms.CharField(required=False, label=_('Search'),
-                        widget=forms.TextInput(attrs={'type': 'search', 'placeholder':'Search'}))
-    party = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=Choices('Democrat', 'Republican', 'Independent'))
+                        widget=forms.TextInput(attrs={'type': 'search',
+                                                      'placeholder': 'Search'}))
+    party = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=Choices('Democrat', 'Republican',
+                                                                                   'Independent',
+                                                                                   'Green', 'Not Listed',
+                                                                                   'Non-Partisian'))
     college = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=COLLEGE)
     state = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=STATES)
     issues = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=ISSUES)
@@ -66,4 +73,3 @@ class SearchForm(forms.Form):
         self.fields['college'].required = False
         self.fields['state'].required = False
         self.fields['issues'].required = False
-
