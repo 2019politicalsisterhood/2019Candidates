@@ -13,7 +13,7 @@ class MySearchView(BaseFacetedSearchView):
     template_name = 'search/search.html'
     facet_fields= ['party']
     form_class = SearchForm
-    paginate_by = 10
+    paginate_by = 12
     paginate_orphans = 2
 
     # All CHANGES NEED TO BE DONE IN SEARCH/VIEWS AND CANDIDATE/VIEWS

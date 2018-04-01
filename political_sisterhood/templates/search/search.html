@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<section id="page-title">
+  <div class="container clearfix">
+    <h1>Search</h1>
+    <span>Use this search to find out more about our candidates!</span>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Search</li>
+    </ol>
+  </div>
+</section>
+
 {% include 'search/search_section.html' %}
 {% endblock %}
 {% block extra_js %}

@@ -1,25 +1,10 @@
-<section id="page-title">
-  <div class="container clearfix">
-    <h1>Search</h1>
-    <span>Use this search to find out more about our candidates!</span>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Search</li>
-    </ol>
-  </div>
-</section>
-<section id="content" style="margin-bottom: 0px;">
+<section id="content toppadding-sm">
   <div class="content-wrap">
     <div class="container clearfix">
       <!-- Post Content
                     ============================================= -->
-      <div class="postcontent nobottommargin col_last clearfix">
-        <form method="get" action="">
-            <div class="form-group">
-                <div class="col-sm-12 nopadding">
-                    <input type="search" name="q" value="{{query}}" class="form-control theme"  placeholder="Search" id="id_q">
-                </div>
-            </div>
+      <div class="postcontent nobottommargin col_last clearfix" >
+        <form method="get" action="#search">
             <div class="row">
                 {% for result in page_obj.object_list %}
                          <article class="col-sm-6 col-md-4 col-lg-3 pf-media pf-icons">
@@ -37,14 +22,16 @@
                             </div>
                           </article>
                 {% empty %}
+                  <div class="col-sm-12">
                     <p>No results found.</p>
+                  </div>
                 {% endfor %}
 
-                {% if page.has_previous or page.has_next %}
-                    <div>
-                        {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                {% if page_obj.has_previous or page_obj.has_next %}
+                    <div class="col-sm-12">
+                        {% if page_obj.has_previous %}<a href="?q={{ query }}&amp;page={{ page_obj.previous_page_number }}">{% endif %}&laquo; Previous{% if page_obj.has_previous %}</a>{% endif %}
                         |
-                        {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                        {% if page_obj.has_next %}<a href="?q={{ query }}&amp;page={{ page_obj.next_page_number }}">{% endif %}Next &raquo;{% if page_obj.has_next %}</a>{% endif %}
                     </div>
                 {% endif %}
             </div>
@@ -56,6 +43,12 @@
         <div class="sidebar-widgets-wrap">
           <div class="widget subscribe-widget clearfix">
             <div class="theme">
+                <div class="bottompadding-sm">
+                  <div class="fancy-title title-border">
+                        <h4>Search Candidates</h4>
+                      </div>
+                  <input type="search" name="q" value="{{query}}" class="form-control theme"  placeholder="Search" id="id_q">
+                </div>
                 <div class="bottompadding-sm">
                       <div class="fancy-title title-border">
                         <h4>Political Party</h4>

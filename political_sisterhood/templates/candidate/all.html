@@ -74,6 +74,7 @@ States.</span>
         <div class="jsmaps-wrappe center" id="usa-map"></div>
     </div>
 </section>
+<span id="search"></span>
 {% include 'search/search_section.html' %}
 {% endblock content %}
 {% block extra_js %}
@@ -83,14 +84,42 @@ States.</span>
 <script src="{% static 'maps/jsmaps.min.js' %}" type="text/javascript"></script>
 <script src="{% static 'maps/usa.js' %}" type="text/javascript"></script>
 <script type="text/javascript">
+$(function() {
 
-    $(function() {
+  $('#usa-map').JSMaps({
+    map: 'usa'
+  });
 
-      $('#usa-map').JSMaps({
-        map: 'usa'
-      });
+});
 
-    });
-
-  </script>
+</script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script type="text/javascript">
+$('#id_party').select2({
+  placeholder: 'Select a political party',
+  width: '100%',
+});
+$('#id_college').select2({
+  placeholder: 'Select an institution',
+  width: '100%',
+});
+$('#id_state').select2({
+  placeholder: 'Select a state',
+  width: '100%',
+});
+$('#id_issues').select2({
+  placeholder: 'Select a state',
+  width: '100%',
+});
+</script>
+<script>
+    var hash = window.location.hash
+    console.log($("#search").offset().top)
+    if (hash === "#search") {
+      $('html,body').animate({
+        scrollTop: $("#search").position().top + 400
+    }, 2000);
+    }
+</script>
 {% endblock %}
