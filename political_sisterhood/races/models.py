@@ -72,11 +72,11 @@ class Race(models.Model):
 
     @property
     def open(self):
-        if self.racess:
+        if self.races:
             return False
         return True
 
 class RaceEntry(models.Model):
-    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    race = models.ForeignKey(Race, on_delete=models.CASCADE)
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='candidates')
+    race = models.ForeignKey(Race, on_delete=models.CASCADE, related_name="races")
     current = models.BooleanField(default=False)

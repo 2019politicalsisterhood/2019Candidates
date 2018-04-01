@@ -18,7 +18,7 @@ class AllCandidates(TemplateView):
         data = super().get_context_data(**kwargs)
         data['states'] = State.objects.count()
         data['candidate'] = Candidate.objects.count()
-        data['races'] = Race.objects.filter(racess__isnull=True).count()
+        data['races'] = Race.objects.filter(races__isnull=True).count()
         return data
 
 
