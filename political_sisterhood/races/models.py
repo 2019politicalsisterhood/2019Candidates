@@ -50,6 +50,8 @@ class State(models.Model):
     def __str__(self):
         return self.get_state_display()
 
+    class Meta:
+        ordering = ['state']
 
 class Race(models.Model):
     state = models.ForeignKey(State, on_delete=models.CASCADE, related_name="states")
