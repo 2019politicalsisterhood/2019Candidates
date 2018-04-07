@@ -17,7 +17,7 @@ def run():
             state = row[2]
             candidate = Candidate.objects.filter(first_name=first, last_name=last)
             if not candidate:
-                logger.info(first + " " +last)
+                print(first + " " +last)
             candidate.update(state=state)
         except Exception as e:
             logger.warning(e, exc_info=True)
