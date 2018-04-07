@@ -76,7 +76,6 @@ class AllCandidates(BaseFacetedSearchView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data['states'] = State.objects.count()
-        data['candidate'] = Candidate.objects.count()
         data['query'] = self.request.GET.get('q','')
         data['races'] = Race.objects.filter(races__isnull=True).count()
         return data

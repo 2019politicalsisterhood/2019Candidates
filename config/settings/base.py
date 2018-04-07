@@ -198,6 +198,7 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
                 # Your stuff: custom template context processors go here
+                'political_sisterhood.candidate.context_processors.candidates',
             ],
         },
     },
