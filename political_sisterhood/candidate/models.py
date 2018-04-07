@@ -39,7 +39,7 @@ class Candidate(models.Model):
                      ('TN', 'Tennessee'), ('TX', 'Texas'), ('UT', 'Utah'),
                      ('VT', 'Vermont'), ('VA', 'Virginia'), ('WA', 'Washington'),
                      ('WV', 'West Virginia'), ('WI', 'Wisconsin'), ('WY', 'Wyoming'))
-    state = StatusField(choices_name='STATES')
+    state = StatusField(choices_name='STATES', db_index=True)
     bio = RichTextField(blank=True)
 
     # Campaign Office Info

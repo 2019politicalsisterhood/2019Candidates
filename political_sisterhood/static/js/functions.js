@@ -3205,15 +3205,6 @@ var SEMICOLON = SEMICOLON || {};
 
 						elementResult.hide();
 
-						if( elementLoader == 'button' ) {
-							var defButton = $(form).find('button'),
-								defButtonText = defButton.html();
-
-							defButton.html('<i class="icon-line-loader icon-spin nomargin"></i>');
-						} else {
-							$(form).find('.input-group-addon').find('.icon-email2').removeClass('icon-email2').addClass('icon-line-loader icon-spin');
-						}
-
 						$(form).ajaxSubmit({
 							target: elementResult,
 							dataType: 'json',

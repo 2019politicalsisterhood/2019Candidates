@@ -61,7 +61,7 @@
           <nav id="primary-menu">
             <ul>
               <li><a href="{% url 'about' %}"><div>About</div></a></li>
-              <li><a href="#"><div>Run</div></a>
+              <li><a style="cursor: unset;pointer-events: none;"><div>Run</div></a>
                 <ul>
                   <li><a href="#"><div>I want to run</div></a></li>
                   <li><a href="#"><div>Help my campaign</div></a></li>
@@ -71,8 +71,8 @@
               </li>
 
               <li><a href="{% url 'candidate:all' %}"><div>Candidate Reports</div></a></li>
-              <li><a href="#"><div>News</div></a></li>
-              <li><a href="#"><div>Contact Us</div></a></li>
+              <li><a href="{% url 'news' %}"><div>News</div></a></li>
+              <li><a href="{% url 'contact' %}"><div>Contact Us</div></a></li>
             </ul>
             <!-- Top Search ============================================= -->
             <div id="top-search">
@@ -168,11 +168,11 @@
                 <a href="https://twitter.com/@politicalsister" class="button button-3d button-large button-brand nomargin white-font">Follow Us on Twitter</a>
               </div>
             <div class="copyrights-menu copyright-links clearfix topmargin-lg">
-              <a href="#">About</a>/
+              <a href="{% url 'about' %}">About</a>/
               <a href="#">Run</a>/
-              <a href="#">Candidate Reports</a>/
-              <a href="#">News</a>/
-              <a href="#">Contact Us</a>
+              <a href="{% url 'candidate:all' %}">Candidate Reports</a>/
+              <a href="{% url 'news' %}">News</a>/
+              <a href="{% url 'contact' %}">Contact Us</a>
             </div>
           </div>
 
@@ -192,7 +192,7 @@
 
           <div class="col_half col_last tright">
             <div class="fright clearfix">
-              <a href="#" class="social-icon si-small si-borderless nobottommargin si-facebook">
+              <a href="https://www.facebook.com/politicalsisterhood/" class="social-icon si-small si-borderless nobottommargin si-facebook">
                 <i class="icon-facebook"></i>
                 <i class="icon-facebook"></i>
               </a>
@@ -201,7 +201,7 @@
                 <i class="icon-twitter"></i>
                 <i class="icon-twitter"></i>
               </a>
-              <a href="#" class="social-icon si-small si-borderless nobottommargin si-linkedin">
+              <a href="https://www.linkedin.com/company/politicalsisterhood/" class="social-icon si-small si-borderless nobottommargin si-linkedin">
                 <i class="icon-linkedin"></i>
                 <i class="icon-linkedin"></i>
               </a>

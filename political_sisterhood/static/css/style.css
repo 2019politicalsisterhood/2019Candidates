@@ -5530,8 +5530,8 @@ body:not(.device-touch) .button.button-reveal span {
   height: auto;
   line-height: 1.6;
   padding: 30px 0;
-  font-size: 30px;
-  font-weight: 300;
+  font-size: 20px;
+  font-weight: 500;
   text-transform: none;
   border-radius: 0;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1); }
@@ -5778,17 +5778,17 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #A8CABA; }
 
 .button-pink {
-  background-color: #F89FA1; }
+  background-color: #CC3399; }
 
 .button-3d.button-pink:hover,
 .button-reveal.button-pink:hover,
 .button-border.button-pink:hover,
 .button-border.button-pink.button-fill:before {
-  background-color: #F89FA1 !important; }
+  background-color: #CC3399 !important; }
 
 .button-border.button-pink {
-  color: #F89FA1;
-  border-color: #F89FA1; }
+  color: #CC3399;
+  border-color: #CC3399; }
 
 .button-dirtygreen {
   background-color: #1693A5; }

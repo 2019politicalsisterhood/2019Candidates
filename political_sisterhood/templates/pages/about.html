@@ -1,4 +1,5 @@
-{% extends "base.html" %} {% block seo_title %} About Us - Political Sisterhood {% endblock %} {% block content %}
+{% extends "base.html" %}
+{% load static %} {% block seo_title %} About Us - Political Sisterhood {% endblock %} {% block content %}
 <section id="page-title" class="page-title-mini page-title-nobg">
   <div class="container clearfix">
     <ol class="breadcrumb">
@@ -25,97 +26,136 @@
   </div>
 </section>
 <section id="content" style="margin-bottom: 0px;">
-  <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-lg">
+  <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-sm">
     <div class="heading-block">
       <h3>How did Political Sisterhood get started?</h3> The concept of Political Sisterhood was created by Susan Wood. With a degree in Economics and experience in both the finance industry and the higher education arenas her "outside of the box" concept has resulted in a unique opportunity for candidates to be seen and heard on a larger scale than ever before.
     </div>
   </div>
 </section>
-<div class="row common-height clearfix">
-  <div class="col-sm-5 col-padding" style="background: url(&quot;http://canvashtml-cdn.semicolonweb.com/images/team/3.jpg&quot;) center center / cover no-repeat; height: 399px;"></div>
-  <div class="col-sm-7 col-padding" style="height: 399px;">
-    <div>
-      <div class="heading-block">
-        <span class="before-heading color">CEO &amp; Founder</span>
-        <h3>Susan Wood</h3>
+<section id="content">
+  <div class="container clearfix toppadding-sm bottompadding-lg">
+    <div class="heading-block">
+      <h3>Our Team</h3>
+    </div>
+    <div class="col_one_third">
+      <a data-toggle="modal" data-target=".susanWood">
+        <div class="team">
+          <div class="team-image">
+            <img src="{% static 'images/susan.jpg' %}" alt="Susan Wood">
+          </div>
+          <div class="team-desc">
+            <div class="team-title">
+              <h4>Susan Wood</h4><span>Founder &amp; President</span></div>
+              <a href="https://www.linkedin.com/in/susansprofile/" class="social-icon inline-block si-small si-light si-rounded si-linkedin">
+                <i class="icon-linkedin"></i>
+                <i class="icon-linkedin"></i>
+              </a>
+              <a href="mailto:susan@politicalsisterhood.com" class="social-icon inline-block si-small si-light si-rounded si-email3">
+                  <i class="icon-email3"></i>
+                  <i class="icon-email3"></i>
+                </a>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col_one_third">
+        <a data-toggle="modal" data-target=".randyWood">
+          <div class="team">
+            <div class="team-image">
+              <img src="{% static 'images/randy.jpg' %}" alt="Randy Wood">
+            </div>
+            <div class="team-desc">
+              <div class="team-title">
+                <h4>Randy Wood</h4><span>Managing Director</span></div>
+                <a href="https://www.linkedin.com/in/wrandallwood/" class="social-icon inline-block si-small si-light si-rounded si-linkedin">
+                  <i class="icon-linkedin"></i>
+                  <i class="icon-linkedin"></i>
+                </a>
+                <a href="mailto:randy@politicalsisterhood.com" class="social-icon inline-block si-small si-light si-rounded si-email3">
+                  <i class="icon-email3"></i>
+                  <i class="icon-email3"></i>
+                </a>
+            </div>
+          </div>
+        </a>
       </div>
-      <div class="row clearfix">
-        <div class="col-md-12">
-          <p>Employment respond committed meaningful fight against oppression social challenges rural legal aid governance. Meaningful work, implementation, process cooperation, campaign inspire.</p>
-          <p>Advancement, promising development John Lennon, our ambitions involvement underprivileged billionaire philanthropy save the world transform. Carbon rights maintain healthcare emergent, implementation inspire social change solve clean water livelihoods.</p>
-          <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
-                                        <i class="icon-facebook"></i>
-                                        <i class="icon-facebook"></i>
-                                    </a>
-          <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
-                                        <i class="icon-twitter"></i>
-                                        <i class="icon-twitter"></i>
-                                    </a>
-          <a href="#" class="social-icon inline-block si-small si-light si-rounded si-linkedin">
-                                        <i class="icon-linkedin"></i>
-                                        <i class="icon-linkedin"></i>
-                                    </a>
+      <div class="col_one_third col_last">
+        <a data-toggle="modal" data-target=".christopherMallon">
+          <div class="team">
+            <div class="team-image">
+              <img src="{% static 'images/christopher.jpg' %}" alt="Christopher Mallon">
+            </div>
+            <div class="team-desc">
+              <div class="team-title">
+                <h4>Christopher Mallon</h4><span>CTO</span></div>
+                <a href="https://www.linkedin.com/in/christopher-mallon/" class="social-icon inline-block si-small si-light si-rounded si-linkedin">
+                  <i class="icon-linkedin"></i>
+                  <i class="icon-linkedin"></i>
+                </a>
+                <a href="mailto:chris@politicalsisterhood.com" class="social-icon inline-block si-small si-light si-rounded si-email3">
+                  <i class="icon-email3"></i>
+                  <i class="icon-email3"></i>
+                </a>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</section>
+<div class="modal fade bs-example-modal-lg susanWood" tabindex="-1" role="dialog" aria-labelledby="susanWood" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-body">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Susan Wood - <span>Founder &amp; President</span></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <div class="modal-body">
+            <p>Susan Wood is the Founder and President of Political Sisterhood.</p>
+
+            <p>It all started when a male friend commenting on the women's marches said to me "why don't women do something rather than just complaining about our government." I researched the percentage of women in government leadership positions and was shocked to determine it was only 20% yet women are 50% of the population.</p>
+
+            <p>Susan sat back and decided to do something about the 20% women leadership in the government. After much research, she found that there was a lack of cohesive information about women running for office. Political Sisterhood was formed, to increase the visibility and support of all women, regardless of political party.</p>
+
+            <p>With a degree in Economics and experience in both the finance industry and the higher education arenas Susans "outside of the box" concept has resulted in a unique opportunity for candidates to be seen and heard on a larger scale than ever before.</p>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="row common-height clearfix">
-  <div class="col-sm-7 col-padding" style="background-color: rgb(245, 245, 245); height: 599px;">
-    <div>
-      <div class="heading-block">
-        <span class="before-heading color">Developer &amp; Evangelist</span>
-        <h3>Mary Jane</h3>
-      </div>
-      <div class="row clearfix">
-        <div class="col-md-12">
-          <p>Employment respond committed meaningful fight against oppression social challenges rural legal aid governance. Meaningful work, implementation, process cooperation, campaign inspire.</p>
-          <p>Advancement, promising development John Lennon, our ambitions involvement underprivileged billionaire philanthropy save the world transform. Carbon rights maintain healthcare emergent, implementation inspire social change solve clean water livelihoods.</p>
-          <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
-                                        <i class="icon-facebook"></i>
-                                        <i class="icon-facebook"></i>
-                                    </a>
-          <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
-                                        <i class="icon-twitter"></i>
-                                        <i class="icon-twitter"></i>
-                                    </a>
-          <a href="#" class="social-icon inline-block si-small si-light si-rounded si-linkedin">
-                                        <i class="icon-linkedin"></i>
-                                        <i class="icon-linkedin"></i>
-                                    </a>
+<div class="modal fade bs-example-modal-lg randyWood" tabindex="-1" role="dialog" aria-labelledby="randyWood" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-body">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Randy Wood - <span>Managing Director</span></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-5 col-padding" style="background: url(&quot;http://canvashtml-cdn.semicolonweb.com/images/team/8.jpg&quot;) center center / cover no-repeat; height: 399px;"></div>
-</div>
-<div class="row common-height clearfix">
-  <div class="col-sm-5 col-padding" style="background: url(&quot;http://canvashtml-cdn.semicolonweb.com/images/team/3.jpg&quot;) center center / cover no-repeat; height: 399px;"></div>
-  <div class="col-sm-7 col-padding" style="height: 399px;">
-    <div>
-      <div class="heading-block">
-        <span class="before-heading color">CEO &amp; Founder</span>
-        <h3>Susan Wood</h3>
-      </div>
-      <div class="row clearfix">
-        <div class="col-md-12">
-          <p>Employment respond committed meaningful fight against oppression social challenges rural legal aid governance. Meaningful work, implementation, process cooperation, campaign inspire.</p>
-          <p>Advancement, promising development John Lennon, our ambitions involvement underprivileged billionaire philanthropy save the world transform. Carbon rights maintain healthcare emergent, implementation inspire social change solve clean water livelihoods.</p>
-          <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
-                                        <i class="icon-facebook"></i>
-                                        <i class="icon-facebook"></i>
-                                    </a>
-          <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
-                                        <i class="icon-twitter"></i>
-                                        <i class="icon-twitter"></i>
-                                    </a>
-          <a href="#" class="social-icon inline-block si-small si-light si-rounded si-linkedin">
-                                        <i class="icon-linkedin"></i>
-                                        <i class="icon-linkedin"></i>
-                                    </a>
+        <div class="modal-body">
+            <p>Randy Wood has over 30 years of experience providing data and business intelligence solutions.</p>
+            <p>As the Managing Director of iMoneyNet (formerly IBC Financial Data). Randy led his team in developing, marketing and selling industry leading products and delivering the most accurate and timely money market mutual fund data in financial services industry.</p>
+            <p>At Political Sisterhood™ Randy utilizes his data and business intelligence skills and his passion to support his wife’s mission in bringing gender equality to politics and government. He works closely with our clients and our data collection team to determine what additional data points should be collected to further increase the value of our uniquely focused database.</p>
         </div>
       </div>
     </div>
   </div>
 </div>
+<div class="modal fade bs-example-modal-lg christopherMallon" tabindex="-1" role="dialog" aria-labelledby="christopherMallon" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-body">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Christopher Mallon - <span>Chief Technology Officer</span></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <div class="modal-body">
+            <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
