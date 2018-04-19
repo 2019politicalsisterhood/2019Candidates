@@ -36,27 +36,26 @@
             <h3>Get <span>Involved</span></h3>
         </div>
 
-        <div class="subscribe-widget">
-            <div class="widget-subscribe-form-result"></div>
-            <form action="{% url 'mailchimp' %}" role="form" method="post" class="nobottommargin" novalidate="novalidate" data-redirect="/test">
+        <div class="">
+            <form action="{% url 'mailchimp' %}" role="form" method="post" class="nobottommargin">
               {% csrf_token %}
                 <div class="input-group input-group-lg divcenter" style="max-width:600px;">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="icon-user"></i></div>
                     </div>
-                    <input type="text" name="widget-subscribe-form-first" class="form-control required" placeholder="First Name">
+                    <input type="text" name="first" class="form-control required" placeholder="First Name">
                 </div>
                 <div class="input-group input-group-lg divcenter" style="max-width:600px;  margin-top:15px">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="icon-user2"></i></div>
                     </div>
-                    <input type="text" name="widget-subscribe-form-last" class="form-control required" placeholder="Last Name">
+                    <input type="text" name="last" class="form-control required" placeholder="Last Name">
                 </div>
                 <div class="input-group input-group-lg divcenter" style="max-width:600px; margin-top:15px">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="icon-email2"></i></div>
                     </div>
-                    <input type="email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Email">
+                    <input type="email" name="email" class="form-control required email" placeholder="Email" required>
                     <div class="input-group-append">
                         <button type="submit" class="button nomargin button-reveal button-large button-pink tright button-full"><i class="icon-angle-right"></i><span>Join Us</span></button>
                     </div>

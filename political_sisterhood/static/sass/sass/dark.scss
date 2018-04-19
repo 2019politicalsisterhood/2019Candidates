@@ -11,6 +11,10 @@
 .dark h5,
 .dark h6 { color: #444; }
 
+.dark h5 strong {
+	font-weight: 800;
+	color: $theme-color;
+}
 .dark a:hover { color: #EEE; }
 
 body.dark,
@@ -1203,7 +1207,7 @@ body #side-panel.dark #side-panel-trigger-close a {
 .dark .form-control:not(.not-dark),
 .dark .sm-form-control:not(.not-dark) {
 	color: #999;
-	background-color: rgba(0,0,0,0.2);
+	background-color: #fff;
 	border-color: rgba(0,0,0,0.25);
 }
 
@@ -1214,7 +1218,7 @@ body #side-panel.dark #side-panel-trigger-close a {
 .dark .form-control:not(.not-dark):focus,
 .dark .sm-form-control:not(.not-dark):active,
 .dark .sm-form-control:not(.not-dark):focus {
-	background-color: rgba(0,0,0,0.3);
+	background-color: #fff;
 	border-color: rgba(0,0,0,0.25) !important;
 }
 

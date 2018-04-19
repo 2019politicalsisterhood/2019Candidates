@@ -138,13 +138,12 @@
               </div>
 
               <div class="col_two_third col_last">
-                <div class="widget subscribe-widget clearfix">
+                <div class="widget clearfix">
                   <h5><strong>Subscribe</strong> to Our Newsletter to get Important News, Candidate Information &amp; New Ways to Get Involved:</h5>
-                  <div class="widget-subscribe-form-result"></div>
-                  <form id="widget-subscribe-form" action="{% url 'mailchimp' %}" role="form" method="post" class="nobottommargin">
+                  <form action="{% url 'mailchimp' %}" role="form" method="post" class="nobottommargin">
                     {% csrf_token %}
                     <div class="input-group divcenter">
-                      <input type="email" id="widget-subscribe-form-email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
+                      <input type="email" name="email" class="form-control required email" placeholder="Enter your Email" required>
                       <div class="input-group-append">
                         <button class="button button-3d button-large button-brand nomargin" type="submit">Subscribe</button>
                       </div>
@@ -172,7 +171,7 @@
               <a href="{% url 'about' %}">About</a>/
               <a href="#">Run</a>/
               <a href="{% url 'candidate:all' %}">Candidate Reports</a>/
-              <a href="{% url 'news' %}">News</a>/
+              <a href="{% url 'jobs:all' %}">Jobs</a>/
               <a href="{% url 'contact' %}">Contact Us</a>
             </div>
           </div>
