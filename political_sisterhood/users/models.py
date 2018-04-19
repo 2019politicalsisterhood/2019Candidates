@@ -26,7 +26,7 @@ class User(AbstractUser):
                      ('VT', 'Vermont'), ('VA', 'Virginia'), ('WA', 'Washington'),
                      ('WV', 'West Virginia'), ('WI', 'Wisconsin'), ('WY', 'Wyoming'))
     state = StatusField(choices_name='STATES', blank=True)
-    bio = RichTextField(blank=True)
+    bio = RichTextField(blank=True, null=True)
     opt_in = models.BooleanField(default=True)
 
     def __str__(self):

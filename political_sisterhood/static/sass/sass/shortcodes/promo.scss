@@ -144,6 +144,13 @@
 .promo {
 	&.promo-flat {
 		background-color: $theme-color;
+		h3 {
+			color: #FFF;
+		}
+		h4 {
+			color: rgba(255,255,255,0.6);
+			margin-bottom: 5px;
+		}
 		a {
 			&.button {
 				&:not(.button-border) {

@@ -28,7 +28,6 @@ STATES = Choices(('', '----'),
 class SignupForm(forms.Form):
     first_name = forms.CharField(max_length=40, label='First Name')
     last_name = forms.CharField(max_length=40, label='Last Name')
-    #bio = forms.CharField(widget=CKEditorWidget(), label='Bio', required=False,)
     state = forms.ChoiceField(choices=STATES)
     opt_in = forms.BooleanField(required=False, initial=True, label='I would like to receive updates from Political Sisterhood')
 
@@ -52,4 +51,8 @@ class SignupForm(forms.Form):
                 'password2',
                 'opt_in'
             ),
+            ButtonHolder(
+                Submit('submit', 'Sign Up', css_class='button button-3d button-large button-brand nomargin')
+            )
+
         )

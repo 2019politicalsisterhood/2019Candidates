@@ -13,9 +13,7 @@
 .cke {width: 100% !important}
 </style>
 <h1>{% trans "Sign Up" %}</h1>
-
 <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
   {{ form.media }}
@@ -23,7 +21,6 @@
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button class="button button-3d button-large button-brand nomargin" type="submit">{% trans "Sign Up" %} &raquo;</button>
 </form>
 
 {% endblock %}

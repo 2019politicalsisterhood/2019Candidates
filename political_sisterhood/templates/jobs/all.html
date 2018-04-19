@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block content %}
+<section id="page-title" class="page-title page-title-nobg">
+  <div class="container clearfix">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Jobs</li>
+    </ol>
+  </div>
+</section>
+<section class="themebg"></section>
+<section id="content">
+    <div class="content-wrap">
+        <div class="container clearfix">
+            <div class="postcontent nobottommargin clearfix">
+            </div>
+            <div class="sidebar nobottommargin col_last clearfix">
+                <div class="sidebar-widgets-wrap">
+                    <div class="widget clearfix">
+                            <div class="promo promo-flat promo-mini promo-center">
+                                    <h3>Post Your Job Today</h3>
+                                    <h4>Learn more about our job pacakages, and start finding the right candidates</h4>
+                                    <a href="{% url 'jobs:post' %}" class="button button-large button-rounded">Get Started</a>
+                            </div>
+                        <div class="topmargin-lg">
+                            <p class="lead">Political Sisterhood is the best place to search for jobs that support <span class="theme-color">women</span> in politics.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

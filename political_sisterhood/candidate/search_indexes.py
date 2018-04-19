@@ -1,7 +1,7 @@
 import datetime
 from haystack import indexes
 from .models import Candidate
-
+import random
 
 class CandidateIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
@@ -9,6 +9,7 @@ class CandidateIndex(indexes.SearchIndex, indexes.Indexable):
     college = indexes.FacetCharField(indexed=True)
     state = indexes.FacetCharField(indexed=True)
     issues = indexes.FacetMultiValueField(indexed=True)
+    random = indexes.CharField()
 
     def get_model(self):
         return Candidate
@@ -21,6 +22,9 @@ class CandidateIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare_state(self,obj):
         return obj.state
+
+    def prepare_random(self, obj):
+        return random.randint(0,99999999)
 
     def prepare_college(self,obj):
         if obj.college:

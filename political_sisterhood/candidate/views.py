@@ -23,7 +23,8 @@ class AllCandidates(BaseFacetedSearchView):
 
     # All CHANGES NEED TO BE DONE IN SEARCH/VIEWS AND CANDIDATE/VIEWS
     def get_queryset(self):
-        queryset = SearchQuerySet()
+        queryset = SearchQuerySet().order_by('random')
+        logger.info(queryset)
         # further filter queryset based on some set of criteria
         party = self.request.GET.getlist('party', '')
         party_or = ""
@@ -56,7 +57,6 @@ class AllCandidates(BaseFacetedSearchView):
             queryset = queryset.narrow(issues_or)
         if q:
             queryset = queryset.filter(SQ(text=AutoQuery(q))|SQ(title=AutoQuery(q)))
-
         return queryset
 
     def form_valid(self, form):
@@ -75,9 +75,11 @@ class AllCandidates(BaseFacetedSearchView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        data['states'] = State.objects.count()
         data['query'] = self.request.GET.get('q','')
-        data['races'] = Race.objects.filter(races__isnull=True).count()
+        data['party'] = self.request.GET.getlist('party', '')
+        data['college'] = self.request.GET.getlist('college', '')
+        data['state'] = self.request.GET.getlist('state', '')
+        data['issues'] = self.request.GET.getlist('issues', '')
         return data
 
 

@@ -552,12 +552,12 @@ span.middot {
 	Columns & Grids
 -----------------------------------------------------------------*/
 .postcontent {
-  width: 74%; }
+  width: 72%; }
   .postcontent.bothsidebar {
-    width: 48%; }
+    width: 44%; }
 
 .sidebar {
-  width: 22%; }
+  width: 24%; }
 
 .col_full {
   width: 100%; }
@@ -5953,6 +5953,11 @@ body:not(.device-touch) .button.button-full strong {
 -----------------------------------------------------------------*/
 .promo.promo-flat {
   background-color: #CC3399; }
+  .promo.promo-flat h3 {
+    color: #FFF; }
+  .promo.promo-flat h4 {
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 5px; }
   .promo.promo-flat a.button:not(.button-border) {
     background-color: rgba(0, 0, 0, 0.2);
     color: #FFF; }

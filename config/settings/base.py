@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
     'haystack',
     'betterforms',
     'django_extensions',
+    'djstripe',
 ]
 
 
@@ -84,6 +85,7 @@ LOCAL_APPS = [
     'political_sisterhood.issue',
     'political_sisterhood.news',
     'political_sisterhood.races',
+    'political_sisterhood.jobs',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -435,3 +437,10 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 SOCIALACCOUNT_AUTO_SIGNUP = False
 ACCOUNT_SIGNUP_FORM_CLASS = 'political_sisterhood.users.forms.SignupForm'
+
+DJSTRIPE_SUBSCRIBER_MODEL  = 'users.User'
+STRIPE_LIVE_PUBLIC_KEY = env("STRIPE_LIVE_PUBLIC_KEY")
+STRIPE_LIVE_SECRET_KEY = env("STRIPE_LIVE_SECRET_KEY")
+STRIPE_TEST_PUBLIC_KEY = env("STRIPE_TEST_PUBLIC_KEY")
+STRIPE_TEST_SECRET_KEY = env("STRIPE_TEST_SECRET_KEY")
+STRIPE_LIVE_MODE = env.bool('STRIPE_MODE', False)

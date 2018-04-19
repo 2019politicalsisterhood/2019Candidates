@@ -26,10 +26,12 @@ urlpatterns = [
     url(r'^accounts/social/connections/$', RedirectView.as_view(pattern_name='users:redirect', permanent=True)),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^candidates/', include('political_sisterhood.candidate.urls', namespace='candidate')),
+    url(r'^jobs/', include('political_sisterhood.jobs.urls', namespace='jobs')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
      url(r'^search/?$', MySearchView.as_view(), name='search'),
 
     # Your stuff: custom urls includes go here
+    url(r'^payments/', include('djstripe.urls', namespace="djstripe")),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
