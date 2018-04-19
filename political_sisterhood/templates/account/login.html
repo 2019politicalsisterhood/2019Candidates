@@ -7,7 +7,7 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block inner %}
-
+<div class="container">
 <h1>{% trans "Sign In" %}</h1>
 
 {% get_providers as socialaccount_providers %}
@@ -19,11 +19,9 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 <div class="socialaccount_ballot">
 
-  <ul class="socialaccount_providers">
+  <div class="row">
     {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
-
-  <div class="login-or">{% trans 'or' %}</div>
+  </div>
 
 </div>
 
@@ -44,6 +42,6 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   <a class="button button-white button-light button-3d" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
 
 </form>
-
+</div>
 {% endblock %}
 

@@ -35,7 +35,10 @@ def Mailchimp(request):
         try:
             response = requests.post('http://us12.api.mailchimp.com/3.0/lists/b02aa0d5d7/members',\
                 auth=('user', MAILCHIMP), json=chimp_payload)
-            messages.success(request, "You've been added to the Political Sisterhood list")
+            if response.status_code == requests.codes.ok:
+                messages.success(request, "You've been added to the Political Sisterhood list")
+            else:
+                messages.warning(request, 'There was an issue adding you to the system.')
         except Exception as e:
             messages.warning(request, 'There was an issue adding you to the system.')
             logger.warning(e)

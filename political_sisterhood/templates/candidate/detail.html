@@ -1,8 +1,96 @@
 {% extends 'base.html' %}
+{% load }
 {% block seo_title %}
 {{object.name}} - Political Sisterhood
 {% endblock %}
+{% block modal %}
+<style>
+.scw-switcher-wrap{
+  top: 120px;
+  left: 32px;
+  padding: 23px;
+  width: 0;
+  height: 0;
+  border: 1px solid #00000017;
+  border-radius: 3px;
+  box-shadow: 0 13px 42px 11px rgba(0,0,0,.05);
+  z-index: 9999;
+  overflow: hidden;
+  -webkit-transition: all .45s ease;
+  -o-transition: all .45s ease;
+  transition: all .45s ease;
+    position: fixed;
+  background-color: #fff;
+}
+.scw-trigger-icon {
+  width: 44px;
+  height: 44px;
+  top: 121px;
+  left: 34px;
+  border: 0;
+  padding: 0;
+  text-align: center;
+  z-index: 5;
+  cursor: pointer;
+  position: fixed;
+  background-color: #fff;
+}
+.scw-trigger-icon i {
+  color: #C39;
+  font-size: 18px;
+}
+</style>
+<div class="scw-switcher-wrap">
+  <button class="scw-trigger-icon scw-trigger" data-toggle="modal" data-target=".question-modal">
+    <i class="icon-question"></i>
+</button>
+</div>
+<div class="modal fade question-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-body">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="myModalLabel">Issue with {{object.name}}'s' Page</h4>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<p>Thanks for noting that there is something wrong with {{object.name}}'s page.</p>
+<p>Please fill out the form below so that we can make the appropriate updates.</p>
+<form>
+<div class="form-group">
+<label for="exampleFormControlInput1">Your Name</label>
+<input type="email" class="form-control required" name="name" placeholder="name@example.com" required>
+</div>
+<div class="form-group">
+<label for="exampleFormControlInput1">Your Email address</label>
+<input type="text" class="form-control required" name="email" placeholder="Christopher Malon" required>
+</div>
+<div class="form-group">
+<label for="exampleFormControlSelect1">Issue/Problem Type</label>
+<select class="form-control required" name="issue" required>
+<option disabled selected value>-- Please Specify --</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+</div>
+<div class="form-group">
+<label for="exampleFormControlTextarea1">Other Information (optional)</label>
+<textarea class="form-control" name="other" rows="3"></textarea>
+</div>
+<button type="submit" class="button button-3d button-large button-brand nomargin white-font">Submit Issue</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
 {% block content %}
+
 <section id="page-title" class="page-title-mini page-title-nobg">
   <div class="container clearfix">
     <ol class="breadcrumb">
@@ -21,7 +109,7 @@
       <h4>{{object.identifier}}</h4>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-12 center bottommargin">
+      <div class="col-lg-4 col-md-4 col-sm-6 center bottommargin">
         {% if object.image_url %}
         <img data-animate="fadeInLeftBig" src="{{object.image_url}}" alt="{{object.name}} Headshot" class="center-block fadeInLeftBig animated img-border">
         {% if object.image_attribution %}
@@ -62,30 +150,22 @@
         </div>
         {% endif %}
       </div>
-      <div class="col-lg-8 col-md-8 col-sm-12 bottommargin">
+      <div class="col-lg-4 col-md-4 col-sm-6 bottommargin">
         {{object.bio|safe}}
         <div>
-          <div class="heading-block topmargin-sm bottommargin-sm">
+          <div class="heading-block bottommargin-sm">
             <h4>Candidate's <span>Info</span></h4>
           </div>
-          {% if object.facebook %}
-            <strong>Facebook</strong> <span class="theme-color">&mdash;</span> <a href="{{object.facebook}}" target="_blank">{{object.facebook}}</a><br>
-          {% endif %}
+            <strong>Facebook</strong> <span class="theme-color">&mdash;</span> {% if object.facebook %}<a href="{{object.facebook}}" target="_blank">{% endif %}{{object.facebook|default:"Not Found&nbsp;&nbsp;<sup data-toggle='tooltip' data-placement='top' data-original-title='Our researchers could not find any info' style='color: #c39; border-bottom: 1px dotted #c39;'>?</sup>"}}</a><br>
           {% if object.facebook_follower %}
             <strong>Facebook Followers</strong> <span class="theme-color">&mdash;</span> {{object.facebook_follower}}<br>
           {% endif %}
-          {% if object.twitter %}
-            <strong>Twitter</strong> <span class="theme-color">&mdash;</span> <a href="{{object.twitter}}" target="_blank">{{object.twitter}}</a><br>
-          {% endif %}
+            <strong>Twitter</strong> <span class="theme-color">&mdash;</span> {% if object.facebook %}<<a href="{{object.twitter}}" target="_blank">{% endif %}{{object.twitter|default:"Not Found&nbsp;&nbsp;<sup data-toggle='tooltip' data-placement='top' data-original-title='Our researchers could not find any info' style='color: #c39; border-bottom: 1px dotted #c39;'>?</sup>"}}</a><br>
           {% if object.twitter_follower %}
             <strong>Twitter Followers</strong> <span class="theme-color">&mdash;</span> {{object.twitter_follower}}<br>
           {% endif %}
-          {% if object.website %}
-            <strong>Website</strong> <span class="theme-color">&mdash;</span> <a href="{{object.website}}" target="_blank">{{object.website}}</a><br>
-          {% endif %}
-          {% if object.college %}
-            <strong>College</strong> <span class="theme-color">&mdash;</span> {{object.college}}<br>
-          {% endif %}
+            <strong>Website</strong> <span class="theme-color">&mdash;</span> <a {% if object.website %}href="{{object.website}}"{% endif %} target="_blank">{{object.website|default:"Not Found&nbsp;&nbsp;<sup data-toggle='tooltip' data-placement='top' data-original-title='Our researchers could not find any info' style='color: #c39; border-bottom: 1px dotted #c39;'>?</sup>"}}</a><br>
+            <strong>College</strong> <span class="theme-color">&mdash;</span> {{object.college|default:"Not Found&nbsp;&nbsp;<sup data-toggle='tooltip' data-placement='top' data-original-title='Our researchers could not find any info' style='color: #c39; border-bottom: 1px dotted #c39;'>?</sup>"}}<br>
           {% if object.phone %}
             <strong>Phone Number</strong> <span class="theme-color">&mdash;</span> <a href="tel:{{object.phone}}">{{object.phone}}</a><br>
           {% endif %}
@@ -93,6 +173,15 @@
             <strong>Ethnicity</strong> <span class="theme-color">&mdash;</span> {% for eth in object.ethnicity.all %}{{eth.name}}<br>{% endfor %}
           {% endif %}
         </div>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12">
+          {% if not user.is_authenticated %}
+            <div class="promo promo-border promo-mini promo-center">
+              <h3>Interested in More Information about {{object.name}}?</h3>
+              <span>Learn about our <a href="{% url 'candidate:pricing' %}">pricing</a></span>
+              <a href="#" class="button button-large button-rounded">Purchase Credits</a>
+            </div>
+          {% endif %}
       </div>
     </div>
   </div>
@@ -183,6 +272,7 @@
 {% endif %}
 {% endblock %}
 {% block extra_js %}
+{% if object.map %}
 <script async defer>
 function initMap() {
   var uluru = {lat: {{object.campaign_lat}}, lng: {{object.campaign_long}}};
@@ -198,6 +288,7 @@ function initMap() {
   });
 }
 </script>
+{% endif %}
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9Zc2wxmbSZBpZBFumvWofafJIbQRScQw&callback=initMap">
 </script>
 {% endblock %}

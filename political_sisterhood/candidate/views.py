@@ -126,3 +126,6 @@ class CreateCandidate(UpdateView):
         instance = form.save(commit=True)
         CandidateInvite.objects.filter(md5_email=self.kwargs['hash']).update(candidate=instance)
         return super(CreateCandidate, self).form_valid(form)
+
+class CandidatePricing(TemplateView):
+    template_name = "candidate/pricing.html"

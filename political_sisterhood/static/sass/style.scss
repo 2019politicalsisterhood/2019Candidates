@@ -141,7 +141,7 @@ b, strong {
 }
 
 .report-about {
-    background-color: $theme-color;
+    background-color: #283971;
     h3, h5, p {
         color: #fff;
     }
@@ -152,6 +152,15 @@ b, strong {
     }
     h5 {
         font-size:1.5em;
+        &:after {
+            margin: 30px auto 0;
+            text-align: center;
+    content: '';
+    display: block;
+    margin-top: 15px;
+    width: 60px;
+    border-top: 2px solid #c39;
+}
     }
 }
 .jsmaps-text {

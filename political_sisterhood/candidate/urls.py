@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from .views import CandidateView, StateListView, AllCandidates, CreateCandidate
+from .views import CandidateView, StateListView, AllCandidates, CreateCandidate, CandidatePricing
 
 app_name = 'candidate'
 
@@ -7,6 +7,10 @@ urlpatterns = [
     url(r'^$',
         AllCandidates.as_view(),
         name='all'
+    ),
+    url(r'^pricing/$',
+        CandidatePricing.as_view(),
+        name='pricing'
     ),
     url(r'^create/(?P<hash>[\w.@+-]+)/$',
         CreateCandidate.as_view(),

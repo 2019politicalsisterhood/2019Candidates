@@ -13712,7 +13712,7 @@ b, strong {
   border-color: #CC3399; }
 
 .report-about {
-  background-color: #CC3399; }
+  background-color: #283971; }
   .report-about h3, .report-about h5, .report-about p {
     color: #fff; }
   .report-about h3 {
@@ -13721,6 +13721,14 @@ b, strong {
     font-size: 2.25em; }
   .report-about h5 {
     font-size: 1.5em; }
+    .report-about h5:after {
+      margin: 30px auto 0;
+      text-align: center;
+      content: '';
+      display: block;
+      margin-top: 15px;
+      width: 60px;
+      border-top: 2px solid #c39; }
 
 .jsmaps-text {
   display: none !important; }

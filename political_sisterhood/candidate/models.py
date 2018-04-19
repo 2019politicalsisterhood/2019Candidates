@@ -103,6 +103,11 @@ class Candidate(models.Model):
         if self.campaign_street or self.campaign_city or self.campaign_zip:
             return True
         return False
+    @property
+    def map(self):
+        if self.campaign_lat and self.campaign_long:
+            return True
+        return False
 
     def get_absolute_url(self):
         return reverse('candidate:detail', kwargs={
