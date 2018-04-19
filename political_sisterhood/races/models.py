@@ -58,7 +58,7 @@ class Race(models.Model):
     district = models.CharField(max_length=255, blank=True)
     other = models.CharField(max_length=255, blank=True,
                              help_text="If there is another descriptor for the race")
-    RACE = Choices('Senate', 'House')
+    RACE = Choices('Senate', 'House', 'Governor')
     race_type = StatusField(choices_name='RACE')
     filing_date = models.DateField(blank=True, null=True)
 
@@ -67,6 +67,8 @@ class Race(models.Model):
             return "District {} - {}".format(self.district, self.state)
         elif self.other:
             return "{} - {}".format(self.other, self.state)
+        elif self.race_type == "Governor":
+            return "Governor - {}".format(self.state)
         else:
             return "{}".format(self.state)
 
