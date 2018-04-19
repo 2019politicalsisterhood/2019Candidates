@@ -7,7 +7,7 @@
   <div class="container clearfix">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{object.state}}</li>
+      <li class="breadcrumb-item active" aria-current="page">{{object.get_state_display}}</li>
     </ol>
   </div>
 </section>
