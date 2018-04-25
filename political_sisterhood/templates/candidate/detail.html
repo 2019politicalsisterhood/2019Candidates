@@ -6,12 +6,12 @@
 {% block modal %}
 <style>
 .scw-switcher-wrap{
-  top: 120px;
+  top: 200px;
   left: 32px;
   padding: 23px;
   width: 0;
   height: 0;
-  border: 1px solid #00000017;
+  border: 1px solid #c39;
   border-radius: 3px;
   box-shadow: 0 13px 42px 11px rgba(0,0,0,.05);
   z-index: 9999;
@@ -20,12 +20,12 @@
   -o-transition: all .45s ease;
   transition: all .45s ease;
     position: fixed;
-  background-color: #fff;
+  background-color: #c39;
 }
 .scw-trigger-icon {
   width: 44px;
   height: 44px;
-  top: 121px;
+  top: 201px;
   left: 34px;
   border: 0;
   padding: 0;
@@ -56,29 +56,31 @@
 <div class="modal-body">
 <p>Thanks for noting that there is something wrong with {{object.name}}'s page.</p>
 <p>Please fill out the form below so that we can make the appropriate updates.</p>
-<form>
+<form method="post" method="post" action="{% url 'candidate:issue' %}">
+  {% csrf_token %}
 <div class="form-group">
 <label for="exampleFormControlInput1">Your Name</label>
-<input type="email" class="form-control required" name="name" placeholder="name@example.com" required>
+<input type="text" class="form-control required" name="name" placeholder="Christopher Mallon" required>
 </div>
 <div class="form-group">
 <label for="exampleFormControlInput1">Your Email address</label>
-<input type="text" class="form-control required" name="email" placeholder="Christopher Malon" required>
+<input type="email" class="form-control required" name="email" placeholder="name@example.com" required>
 </div>
 <div class="form-group">
 <label for="exampleFormControlSelect1">Issue/Problem Type</label>
 <select class="form-control required" name="issue" required>
 <option disabled selected value>-- Please Specify --</option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
+<option>Update on Candidate</option>
+<option>No Longer Running</option>
+<option>Data Appears Incorrect</option>
+<option>Other</option>
 </select>
 </div>
 <div class="form-group">
 <label for="exampleFormControlTextarea1">Other Information (optional)</label>
 <textarea class="form-control" name="other" rows="3"></textarea>
+<input type="hidden" name="candidate" value="{{object.name}}">
+<input type="hidden" name="return" value="{{object.get_absolute_url}}">
 </div>
 <button type="submit" class="button button-3d button-large button-brand nomargin white-font">Submit Issue</button>
 </form>

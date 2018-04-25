@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic import DetailView, CreateView, TemplateView, UpdateView, ListView, RedirectView
+from django.core.mail import send_mail
+from django.contrib import messages
 from .models import Candidate, CandidateInvite
 from haystack.generic_views import SearchView as BaseFacetedSearchView
 from political_sisterhood.races.models import State, Race
@@ -129,3 +131,22 @@ class CreateCandidate(UpdateView):
 
 class CandidatePricing(TemplateView):
     template_name = "candidate/pricing.html"
+
+def CandidateIssue(request):
+    name = request.POST.get('name', '')
+    email =  request.POST.get('email', '')
+    other = request.POST.get('other', '')
+    issue = request.POST.get('issue', '')
+    candidate = request.POST.get('candidate', '')
+    return_slug = request.POST.get('return', '')
+
+
+    subject = '[CANDIDATE ISSUE] Issue on {}'.format(candidate)
+    body = 'NAME: %s\n\nEMAIL: %s\n\nISSUE: %s\n\nMESSAGE: %s' % (name, email, issue, other)
+    from_email = 'info@politicalsisterhood.com'
+    recipients = [
+        'chris@politicalsisterhood.com'
+        ]
+    send_mail(subject, body, from_email, recipients)
+    messages.success(request, 'We appreciate your feedback!')
+    return HttpResponseRedirect(return_slug)
