@@ -86,7 +86,7 @@ LOCAL_APPS = [
     'political_sisterhood.news',
     'political_sisterhood.races',
     'political_sisterhood.jobs',
-    'political_sisterhood.consultants',
+    'political_sisterhood.resources',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
