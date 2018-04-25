@@ -27,7 +27,15 @@ class State(models.Model):
 
     state = StatusField(choices_name='STATES')
     seal = models.FileField(blank=True, null=True)
+    website = models.CharField(max_length=1024, blank=True)
     bio = RichTextField(blank=True)
+    senate_compensation = models.CharField(max_length=1024, blank=True)
+    senate_requirements = models.CharField(max_length=1024, blank=True)
+    housee_compensation = models.CharField(max_length=1024, blank=True)
+    house_requirements = models.CharField(max_length=1024, blank=True)
+    legislative_benefits = models.CharField(max_length=1024, blank=True)
+    salary_schedule = models.CharField(max_length=1024, blank=True)
+    declaration_candidacy = models.CharField(max_length=1024, blank=True)
 
     @property
     def seal_url(self):
