@@ -58,9 +58,12 @@ class Race(models.Model):
     district = models.CharField(max_length=255, blank=True)
     other = models.CharField(max_length=255, blank=True,
                              help_text="If there is another descriptor for the race")
-    RACE = Choices('Senate', 'House', 'Governor')
+    RACE = Choices('Senate', 'House', 'Governor', 'State House', 'State Senate')
     race_type = StatusField(choices_name='RACE')
     filing_date = models.DateField(blank=True, null=True)
+    primary_date = models.DateField(blank=True, null=True)
+    caucus_date = models.DateField(blank=True, null=True)
+    election_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         if self.district:
