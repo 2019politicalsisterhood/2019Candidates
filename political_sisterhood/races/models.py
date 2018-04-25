@@ -31,7 +31,7 @@ class State(models.Model):
     bio = RichTextField(blank=True)
     senate_compensation = models.CharField(max_length=1024, blank=True)
     senate_requirements = models.CharField(max_length=1024, blank=True)
-    housee_compensation = models.CharField(max_length=1024, blank=True)
+    house_compensation = models.CharField(max_length=1024, blank=True)
     house_requirements = models.CharField(max_length=1024, blank=True)
     legislative_benefits = models.CharField(max_length=1024, blank=True)
     salary_schedule = models.CharField(max_length=1024, blank=True)
@@ -73,15 +73,19 @@ class Race(models.Model):
     caucus_date = models.DateField(blank=True, null=True)
     election_date = models.DateField(blank=True, null=True)
 
-    def __str__(self):
+    @property
+    def title(self):
         if self.district:
-            return "District {} - {}".format(self.district, self.state)
+            return "District {}".format(self.district)
         elif self.other:
             return "{} - {}".format(self.other, self.state)
         elif self.race_type == "Governor":
             return "Governor - {}".format(self.state)
         else:
             return "{}".format(self.state)
+
+    def __str__(self):
+        return self.title
 
     @property
     def open(self):

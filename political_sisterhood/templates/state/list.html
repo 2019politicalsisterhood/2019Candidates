@@ -25,6 +25,24 @@
       </div>
       <div class="col-lg-8 col-md-12 col-sm-12 center bottommargin">
         <div class="row">
+          <div class="col-sm-12">
+            <div class="fancy-title title-dotted-border title-center">
+                <h2>State <span>Details</span></h2>
+            </div>
+            <div class="col-sm-12 text-left">
+              <p>{{object.bio|safe}}</p>
+              {% if object.website %}<h4>State Website: {{object.website}}</h4>{% endif %}
+              {% if object.senate_compensation %}<h4>Senate Compensation: ${{object.senate_compensation}}</h4>{% endif %}
+              {% if object.senate_requirements %}<h4>Senate Requirements: {{object.senate_requirements}}</h4>{% endif %}
+              {% if object.house_compensation %}<h4>House Compensation: ${{object.house_compensation}}</h4>{% endif %}
+              {% if object.house_requirements %}<h4>House Requirements: <a href="{{object.house_requirements}}">Learn more here</a></h4>{% endif %}
+              {% if object.legislative_benefits %}<h4>Legislative Benefits: <a href="{{object.legislative_benefits}}">Learn more here</a></h4>{% endif %}
+              {% if object.salary_schedule %}<h4>Salary Schedule: <a href="{{object.salary_schedule}}">Learn more here</a></h4>{% endif %}
+              {% if object.declaration_candidacy %}<h4>Declartion of Candidacy: <a href="{{object.declaration_candidacy}}">Learn more here</a></h4>{% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-sm-12 col-md-4">
             <div class="feature-box fbox-center fbox-bg  fbox-border fbox-light">
               <div class="fbox-icon">
@@ -53,5 +71,36 @@
       </div>
     </div>
   </div>
+</section>
+<section>
+    <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-lg">
+      <div class="heading-block center">
+        <h2 class="normal-case">{{object.get_state_display}} Race Information</h2>
+      </div>
+      <div class="row">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Race Type</th>
+              <th>Name</th>
+              <th>Filing Date</th>
+              <th>Primary Date</th>
+              <th>Election Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for race in object.states.all|dictsort:"title" %}
+          <tr>
+            <td>{{race.race_type}}</td>
+            <td>{{race.title}}</td>
+            <td>{{race.filing_date|default_if_none:""}}</td>
+            <td>{{race.primary_date|default_if_none:""}}</td>
+            <th>{{race.election_date|default_if_none:""}}</th>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
 </section>
 {% endblock %}
