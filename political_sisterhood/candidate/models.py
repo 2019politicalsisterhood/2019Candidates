@@ -43,6 +43,7 @@ class Candidate(models.Model):
     bio = RichTextField(blank=True)
 
     # Campaign Office Info
+    phone = models.CharField(max_length=255, blank=True, verbose_name="Campaign Phone")
     campaign_street = models.CharField(max_length=255, blank=True, verbose_name="Campaign HQ Street")
     campaign_street2 = models.CharField(max_length=255, blank=True, verbose_name="Campaign HQ Street 2 (if applicable)")
     campaign_city = models.CharField(max_length=255, blank=True, verbose_name="Campaign HQ City")

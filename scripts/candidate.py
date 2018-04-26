@@ -14,8 +14,14 @@ def run():
         try:
             first = row[3]
             last = row[4]
-            website = row[8]
-            if website:
-                Candidate.objects.filter(first_name=first, last_name=last).update(website=website)
+            email = row[12]
+            phone = row[12]
+            fbook = row[12]
+            if email:
+                Candidate.objects.filter(first_name=first, last_name=last).update(email=email)
+            if phone:
+                Candidate.objects.filter(first_name=first, last_name=last).update(phone=phone)
+            if fbook:
+                Candidate.objects.filter(first_name=first, last_name=last).update(facebook=fbook)
         except Exception as e:
             logger.warning(e, exc_info=True)
