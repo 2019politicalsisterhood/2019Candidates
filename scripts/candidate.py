@@ -14,9 +14,8 @@ def run():
         try:
             first = row[3]
             last = row[4]
-            college = row[7]
-            if college:
-                college_lookup, create = College.objects.get_or_create(name=college)
-                Candidate.objects.filter(first_name=first, last_name=last).update(college=college_lookup)
+            website = row[8]
+            if website:
+                Candidate.objects.filter(first_name=first, last_name=last).update(website=website)
         except Exception as e:
             logger.warning(e, exc_info=True)
