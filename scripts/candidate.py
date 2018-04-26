@@ -1,4 +1,4 @@
-from political_sisterhood.candidate.models import Candidate
+from political_sisterhood.candidate.models import Candidate, College
 import pandas as pd
 import os
 import logging
@@ -8,17 +8,15 @@ logger = logging.getLogger(__name__)
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def run():
-    data = pd.read_csv(os.path.join(ROOT_DIR, 'candidate.csv'), keep_default_na=False)
+    data = pd.read_csv(os.path.join(ROOT_DIR, 'import.csv'), keep_default_na=False)
     df = pd.DataFrame(data)
     for index, row in df.iterrows():
         try:
-            unique = row[0]
-            first = row[1]
-            last = row[2]
-            full = row[3]
-            party = row[4]
-            Candidate.objects.create(unique_identifier=unique,
-                                     first_name=first, last_name=last,
-                                     full=full, party=party)
+            first = row[3]
+            last = row[4]
+            college = row[7]
+            if college:
+                college_lookup, create = College.objects.get_or_create(name=college)
+                Candidate.objects.filter(first_name=first, last_name=last).update(college=college_lookup)
         except Exception as e:
             logger.warning(e, exc_info=True)
