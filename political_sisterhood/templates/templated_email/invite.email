@@ -1,7 +1,19 @@
 {% block subject %}Request from Political Sisterhood to Update Candidate Information{% endblock %}
 {% block html %}
-{% if name %}{{name}}{% else %}Hello{% endif %},<br><br>
-www.politicalsisterhood.com/candidates/create/{{hash}}<br><br>
+Dear {{name}},
+<br><br>
+<h3 style="color: #C39; text-align:center">ALL WOMEN ~ ALL POLITICAL PARTIES ~ FEDERAL AND STATE ELECTIONS ~ ONE PLACE</h3>
+Thank you for running in {% for race in candidate.candidates.all %} {{race.race.state}}, {{race.race.title}}{% endfor %}.   We at Political Sisterhood™ wish you the best of luck and we are committed to supporting your efforts.  By working together, we can achieve the goal of equal representation for women in government.  It is up to us to take it to the next level.
+<h3 style="color: #C39; text-align:center">20% IS NOT ENOUGH</h3>
+That’s where Political Sisterhood™ comes in. With its unique concept, we now have a definitive place for objective data on all women running for office – and only the women.   The vision of Political Sisterhood™ is to increase the visibility and support of registered women candidates in order to improve the representative structure of women in government throughout the United States.
+
+<h3 style="color: #C39; text-align:center">HELP EMPOWER THE POLITICAL SISTERHOOD MOVEMENT</h3>
+<strong>All registered candidates pages are free</strong>. Your candidate page includes space for your picture, education, social media links, stance on the issues, and a unique mix of identifiers that will help build connections to voters.   We would like a member of your campaign to confirm that the data we collected is in line with how you want to be viewed.  Please have them follow this  <a href="{{url}}">link</a> to begin the update process for your campaign which will also allow them to enter additional information directly onto your page. <a href="{{url}}">View your page here</a>.
+<br><br>
+I look forward to seeing your completed candidate page and supporting your candidacy.  Please let me know if you have any suggestions or questions.
+<br><br>
+Sincerely,<br><br>
+<img
 Susan Wood<br>
 Founder, Political Sisterhood<br>
 <a href="https://www.politicalsisterhood.com">www.politicalsisterhood.com</a>

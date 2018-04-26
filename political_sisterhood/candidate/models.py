@@ -136,14 +136,16 @@ class Ethnicity(models.Model):
 
 class CandidateInvite(models.Model):
     email = models.CharField(max_length=1025)
-    name = models.CharField(max_length=1025, blank=True)
+    first_name = models.CharField(max_length=1025)
+    last_name = models.CharField(max_length=1025)
     md5_email = models.CharField(max_length=32, editable=False)
     used = models.BooleanField(default=False)
     emailed = models.DateTimeField(null=True, blank=True)
-    candidate = models.ForeignKey('Candidate', on_delete=models.SET_NULL, null=True, blank=True)
+    candidate = models.ForeignKey('Candidate', on_delete=models.SET_NULL, null=True)
 
     def save(self, *args, **kwargs):
         self.md5_email = hashlib.md5(self.email.encode()).hexdigest()
+        url = "https://www.politicalsisterhood.com/candidates/create/{}".format(self.md5_email)
         if not self.emailed:
                 send_templated_mail(
                     template_name='invite',
@@ -151,11 +153,16 @@ class CandidateInvite(models.Model):
                     recipient_list=[self.email],
                     context={
                         'name': self.name,
-                        'hash': self.md5_email,
+                        'url': url,
+                        'candidate': self.candidate
                     }
                 )
                 self.emailed = datetime.now()
         super(CandidateInvite, self).save(*args, **kwargs)
+
+    @property
+    def name(self):
+        return "{} {}".format(self.first_name, self.last_name)
 
     def __str__(self):
         return "Invite for: {}".format(self.email)
