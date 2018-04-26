@@ -166,7 +166,7 @@
           {% if object.twitter_follower %}
             <strong>Twitter Followers</strong> <span class="theme-color">&mdash;</span> {{object.twitter_follower}}<br>
           {% endif %}
-            <strong>Website</strong> <span class="theme-color">&mdash;</span> <a {% if object.website %}href="{{object.website}}"{% endif %} target="_blank">{{object.website|default:"Not Found&nbsp;&nbsp;<sup data-toggle='tooltip' data-placement='top' data-original-title='Our researchers could not find any info' style='color: #c39; border-bottom: 1px dotted #c39;'>?</sup>"}}</a><br>
+            <strong>Website</strong> <span class="theme-color">&mdash;</span> <a {% if object.website %}href="//{{object.website}}"{% endif %} target="_blank">{{object.website|default:"Not Found&nbsp;&nbsp;<sup data-toggle='tooltip' data-placement='top' data-original-title='Our researchers could not find any info' style='color: #c39; border-bottom: 1px dotted #c39;'>?</sup>"}}</a><br>
             <strong>College</strong> <span class="theme-color">&mdash;</span> {{object.college|default:"Not Found&nbsp;&nbsp;<sup data-toggle='tooltip' data-placement='top' data-original-title='Our researchers could not find any info' style='color: #c39; border-bottom: 1px dotted #c39;'>?</sup>"}}<br>
           {% if object.phone %}
             <strong>Phone Number</strong> <span class="theme-color">&mdash;</span> <a href="tel:{{object.phone}}">{{object.phone}}</a><br>
