@@ -1,4 +1,5 @@
 from political_sisterhood.candidate.models import Candidate, College
+from political_sisterhood.issue.models import Issue, CandidateIssue
 import pandas as pd
 import os
 import logging
@@ -14,14 +15,15 @@ def run():
         try:
             first = row[3]
             last = row[4]
-            email = row[12]
-            phone = row[12]
-            fbook = row[12]
-            if email:
-                Candidate.objects.filter(first_name=first, last_name=last).update(email=email)
-            if phone:
-                Candidate.objects.filter(first_name=first, last_name=last).update(phone=phone)
-            if fbook:
-                Candidate.objects.filter(first_name=first, last_name=last).update(facebook=fbook)
+            iss1 = row[9]
+            iss2 = row[10]
+            iss3 = row[11]
+            can = Candidate.objects.get(first_name=first, last_name=last)
+            issue1, get = Issue.objects.get_or_create(name=iss1)
+            issue2, get = Issue.objects.get_or_create(name=iss2)
+            issue3, get = Issue.objects.get_or_create(name=iss3)
+            CandidateIssue.objects.create(candidate=can, issue=issue1)
+            CandidateIssue.objects.create(candidate=can, issue=issue2)
+            CandidateIssue.objects.create(candidate=can, issue=issue3)
         except Exception as e:
-            logger.warning(e, exc_info=True)
+            logger.info(index)

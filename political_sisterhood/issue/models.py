@@ -6,7 +6,7 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Issue(MPTTModel):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=1024, unique=True)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True, on_delete=models.CASCADE)
 
     class MPTTMeta:
