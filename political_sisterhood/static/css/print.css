@@ -1,0 +1,4 @@
+@media print {
+    #primary-menu, #primary-menu-trigger,  #footer, .scw-switcher-wrap, .sidebar {display: none}
+}
+

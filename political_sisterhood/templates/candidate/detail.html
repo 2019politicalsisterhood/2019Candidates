@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
-{% load }
+{% load static %}
 {% block seo_title %}
 {{object.name}} - Political Sisterhood
+{% endblock %}
+{% block extra_css %}
+{% if not request.user.is_authenticated %}
+<link rel="stylesheet" href="{% static 'css/print_u.css' %}" type="text/css" />
+{% endif %}
 {% endblock %}
 {% block modal %}
 <style>

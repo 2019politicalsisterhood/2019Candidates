@@ -27,9 +27,10 @@
     <link rel="stylesheet" href="{% static 'css/font-icons.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/animate.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css" />
-
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}" type="text/css" />
-
+    <link rel="stylesheet" href="{% static 'css/print.css' %}" type="text/css" />
+    {% endblock %}
+    {% block extra_css %}
     {% endblock %}
 
   </head>
@@ -223,6 +224,21 @@
       </div><!-- #copyrights end -->
 
     </footer><!-- #footer end -->
+    <div id="print" style="display: none">
+        <h1>Welcome to Political Sisterhood</h1>
+        <p>If you want the full details of this candidate, you'll need to login and register</p>
+        <p>Once you are registered you can see up to three candidates information, for free</p>
+        <p><strong>To get the most out of Political Sisterhood</strong>, we suggest buying credits to see detailed candidate information. We have information about everything from:
+          <ul>
+            <li>individual candidate summaries</li>
+            <li>campaign summaries</li>
+            <li>social media connections</li>
+            <li>education and background</li>
+            <li>Candidates stance on the issues</li>
+          </ul>
+        <br><br>
+        <p>If you have any questions, please feel free to contact us at info@politicalsisterhood.com</p>
+    </div>
     <div id="gotoTop" class="icon-angle-up"></div>
 
     {% block modal %}{% endblock modal %}
