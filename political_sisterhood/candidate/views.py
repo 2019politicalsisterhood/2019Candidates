@@ -7,7 +7,8 @@ from .models import Candidate, CandidateInvite
 from haystack.generic_views import SearchView as BaseFacetedSearchView
 from political_sisterhood.races.models import State, Race
 import logging
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from .forms import CandidateForm
 from political_sisterhood.search.forms import SearchForm
 from haystack.query import SearchQuerySet, EmptySearchQuerySet, SQ
@@ -26,7 +27,6 @@ class AllCandidates(BaseFacetedSearchView):
     # All CHANGES NEED TO BE DONE IN SEARCH/VIEWS AND CANDIDATE/VIEWS
     def get_queryset(self):
         queryset = SearchQuerySet().order_by('random')
-        logger.info(queryset)
         # further filter queryset based on some set of criteria
         party = self.request.GET.getlist('party', '')
         party_or = ""
@@ -89,6 +89,27 @@ class CandidateView(DetailView):
     model = Candidate
     template_name = "candidate/detail.html"
 
+    def dispatch(self, *args, **kwargs):
+        user = self.request.user.is_authenticated
+        if 'visited' in self.request.session:
+            visits = self.request.session['visited']
+        else:
+            visits = None
+        if visits and len(visits) > 3:
+            return redirect(reverse('candidate:paywall'))
+        if not user:
+            visited = []
+            candidate = self.get_object().id
+            if visits:
+                visited.extend(visits)
+                if not candidate in visits:
+                    visited.append(candidate)
+            else:
+                visited.append(candidate)
+            self.request.session['visited'] = visited
+            logger.info(self.request.session['visited'] )
+        return super().dispatch(*args, **kwargs)
+
 
 class StateListView(ListView):
     model = Candidate
@@ -131,6 +152,10 @@ class CreateCandidate(UpdateView):
 
 class CandidatePricing(TemplateView):
     template_name = "candidate/pricing.html"
+
+
+class CandidatePaywall(TemplateView):
+    template_name = "candidate/paywall.html"
 
 def CandidateIssue(request):
     name = request.POST.get('name', '')

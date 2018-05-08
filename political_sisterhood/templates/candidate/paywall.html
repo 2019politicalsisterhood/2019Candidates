@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block seo_title %}
+Next Steps - Political Sisterhood
+{% endblock %}
+
+{% block content %}
+
+<section id="page-title" class="page-title-mini page-title-nobg">
+  <div class="container clearfix">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'candidate:all' %}">Candidate Reports</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Next Steps</li>
+    </ol>
+  </div>
+</section>
+<section class="themebg"></section>
+{% endblock %}
