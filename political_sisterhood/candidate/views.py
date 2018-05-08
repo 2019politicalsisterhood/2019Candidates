@@ -95,9 +95,9 @@ class CandidateView(DetailView):
             visits = self.request.session['visited']
         else:
             visits = None
-        if visits and len(visits) > 3:
-            return redirect(reverse('candidate:paywall'))
         if not user:
+            if visits and len(visits) > 3:
+                return redirect(reverse('candidate:paywall'))
             visited = []
             candidate = self.get_object().id
             if visits:
