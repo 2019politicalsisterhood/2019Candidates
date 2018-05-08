@@ -1,9 +1,9 @@
-var color1 = "#cc3399";
-var color2 = "#283971";
-var color3 = "#9B9B9B";
+var color1 = "#26A65B";
+var color2 = "#5e5e5e";
+var color3 = "#a65b26";
 
-var colorHover = "#C6C6C6"
-var selectColor = "#CCC"
+var colorHover = "#d7d6d6"
+var selectColor = "#000"
 
 window.JSMaps.maps.usa = {
 	"config": {
