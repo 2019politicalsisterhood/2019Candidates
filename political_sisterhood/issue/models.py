@@ -12,6 +12,12 @@ class Issue(MPTTModel):
     class MPTTMeta:
         order_insertion_by = ['name']
 
+    @property
+    def parent_name(self):
+        if self.parent:
+            return self.parent.name
+        return "N/A"
+
     def __str__(self):
         return self.name
 

@@ -15,7 +15,7 @@ class CandidateIndex(indexes.SearchIndex, indexes.Indexable):
         return Candidate
 
     def prepare_issues(self, obj):
-        return [(issue.name) for issue in obj.issues.all()] or None
+        return [(issue.issue.parent_name) for issue in obj.issues.all()] or None
 
     def prepare_party(self,obj):
         return obj.party
