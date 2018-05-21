@@ -212,3 +212,11 @@ HAYSTACK_CONNECTIONS = {
             }
     },
 }
+
+INSTALLED_APPS += ['raven.contrib.django.raven_compat',]
+import os
+import raven
+
+RAVEN_CONFIG = {
+    'dsn': 'https://4098c0f01bd54a71a03566a60a62f407:fd9ab6fd7add490189df6b646d999c0e@sentry.io/1199234',
+}
