@@ -38,7 +38,7 @@
       }
     });
   }
-    
+
   /////////////////////////////
   //Mobile detection
   /////////////////////////////
@@ -94,7 +94,7 @@
       'strokeColor': '#24221f',
       'offStrokeColor': '#444',
       'strokeWidth': 1,
-      'abbreviationColor': '#f2f2f2',
+      'abbreviationColor': '#000',
       'abbreviationFontSize': 12,
       'displayAbbreviations': true,
       'displayAbbreviationOnDisabledStates': false,
@@ -209,7 +209,7 @@
         t.scrollTop = 0;
       }
     }
-    
+
     /////////////////////////////
     //Render map
     /////////////////////////////
@@ -221,13 +221,13 @@
       var mapWidth = config.mapWidth;
       var mapHeight = config.mapHeight;
       var ratio = mapWidth / mapHeight;
-      
+
       // Pan/zoom
       if (config.enablePanZoom) {
         var mapConsole = $('<div class=jsmaps-console><ul><li class=jsmaps-zoom-in><button type=button><div class="jsmaps-icon jsmaps-icon-plus"></div></button><li class=jsmaps-zoom-out><button type=button><div class="jsmaps-icon jsmaps-icon-minus"></div></button><li class=jsmaps-move-up><button type=button><div class="jsmaps-icon jsmaps-icon-chevron jsmaps-icon-chevron-up"></div></button><li class=jsmaps-move-down><button type=button><div class="jsmaps-icon jsmaps-icon-chevron jsmaps-icon-chevron-down"></div></button><li class=jsmaps-move-left><button type=button><div class="jsmaps-icon jsmaps-icon-chevron jsmaps-icon-chevron-left"></div></button><li class=jsmaps-move-right><button type=button><div class="jsmaps-icon jsmaps-icon-chevron jsmaps-icon-chevron-right"></div></button><li class=jsmaps-zoom-reset><button type=button><div class="jsmaps-icon jsmaps-icon-reset"></div></button></ul></div>').appendTo(mapWrapper);
       }
 
-      
+
       /////////////////////////////
       //Mouse position
       /////////////////////////////
@@ -332,7 +332,7 @@
           path = r.path(paths[i].path).attr(pathProperties);
           pathsAr.push(path);
 
-          // Create text on enabled states unless disabled in config 
+          // Create text on enabled states unless disabled in config
           if (paths[i].enable && config.displayAbbreviations || !paths[i].enable && config.displayAbbreviationOnDisabledStates) {
             if (config.autoPositionAbbreviations) {
               pathBBox = path.getBBox();
@@ -375,7 +375,7 @@
 
 
           function hitAreaOverOut(e) {
-            
+
             var id = this.data('id');
             var isGroup = !!this.data('group');
             var target = isGroup ? this.data('group') : paths[id];
@@ -391,7 +391,7 @@
                 var pathIds = isGroup ? this.data('group').groupIds : [id];
                 animatePaths(pathsAr, pathIds, color);
               }
-              
+
               // Tooltip
               isMouseover ? showTooltip(target.name) : removeTooltip();
 
@@ -420,7 +420,7 @@
 
               //Reset scrollbar
               resetScrollBar();
-              
+
               //Animate previous state out
               if (current && current != target) {
                 pathIds = current.groupIds || [current.id];
@@ -439,7 +439,7 @@
               }
 
               current = target;
-              
+
               if (config.stateClickAction === 'text') {
                 textArea.html(target.text);
               } else if (config.stateClickAction === 'url') {
@@ -807,12 +807,12 @@
 
         // Display console
         mapConsole.fadeIn();
-        
+
       }
 
       createMap();
       layerMap();
-      
+
       if (pins && pins.length) {
         createPins();
       }
@@ -828,7 +828,7 @@
 
       mapWrapper.fadeIn();
 
-    
+
     }
 
     function clearMap() {
