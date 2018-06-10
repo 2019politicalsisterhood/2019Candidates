@@ -147,6 +147,7 @@ class CreateCandidate(UpdateView):
 
     def form_valid(self, form):
         instance = form.save(commit=True)
+        logger.info(instance)
         CandidateInvite.objects.filter(md5_email=self.kwargs['hash']).update(candidate=instance)
         return super(CreateCandidate, self).form_valid(form)
 

@@ -73,3 +73,4 @@ wikipedia==1.4.0
 pandas==0.22.0
 django-extensions==2.0.6
 git+https://github.com/dj-stripe/dj-stripe@master#egg=dj-stripe
+django-autocomplete-light==3.2.10

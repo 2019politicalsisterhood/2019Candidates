@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from django.views.generic.base import RedirectView
 from allauth.account import views
+from political_sisterhood.issue.views import IssueAutocomplete
 from political_sisterhood.search.views import MySearchView
 from .views import HomePage, Mailchimp
 
@@ -14,7 +15,7 @@ urlpatterns = [
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
     url(r'^news/$', TemplateView.as_view(template_name='pages/news.html'), name='news'),
     url(r'^contact-us/$', TemplateView.as_view(template_name='pages/contact.html'), name='contact'),
-
+    url(r'^issue-ac/', IssueAutocomplete.as_view(), name="issue-autocomplete"),
     # UTILITY VIEWS
     url(r'mailchimp-signup/$', Mailchimp, name='mailchimp'),
 

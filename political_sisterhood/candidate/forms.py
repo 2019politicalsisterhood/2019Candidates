@@ -1,8 +1,10 @@
 from django import forms
-from .models import Candidate
+from .models import Candidate, College
+from political_sisterhood.issue.models import Issue
 from ckeditor.widgets import CKEditorWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Div
+from dal import autocomplete
 from model_utils import Choices
 import logging
 logger = logging.getLogger(__name__)
@@ -32,24 +34,32 @@ STATES = Choices(('', ''),
 class CandidateForm(forms.ModelForm):
     first_name = forms.CharField(max_length=255, label='Candidate First Name')
     last_name = forms.CharField(max_length=255, label='Candidate Last Name')
-    identifier = forms.CharField(max_length=255, label='How can the viewer connect with you?\
-                                                        - two words max(Mom/Doctor/Veteran/dogs/cats/yoga/widow,\
-                                                        etc.)')
-    bio = forms.CharField(widget=CKEditorWidget(), label='Candidate Bio', required=False,)
+    identifier = forms.CharField(max_length=255,
+                                 label='How can the viewer connect with you?\
+                                       - two words max(Mom/Doctor/Veteran/\
+                                       dogs/cats/yoga/widow,\
+                                       etc.)', required=False)
+    bio = forms.CharField(widget=CKEditorWidget(),
+                          label='Candidate Bio', required=False)
     email = forms.EmailField(max_length=254)
 
     state = forms.ChoiceField(choices=STATES)
-    party = forms.ChoiceField(choices=Choices('', 'Democrat', 'Republican', 'Independent'))
+    party = forms.ChoiceField(choices=Choices('', 'Democrat',
+                                              'Republican', 'Independent'))
 
-    facebook = forms.CharField(max_length=1064, label="Campaign Facebook Page")
-    twitter = forms.CharField(max_length=1064, label="Campaign Twitter Page")
-    linkedin = forms.CharField(max_length=1064, label="Campaign LinkedIn Page")
-    website = forms.CharField(max_length=1064, label="Campaign site (direct link) please")
+    facebook = forms.CharField(max_length=1064, label="Campaign Facebook Page", required=False)
+    twitter = forms.CharField(max_length=1064, label="Campaign Twitter Page", required=False)
+    linkedin = forms.CharField(max_length=1064, label="Campaign LinkedIn Page", required=False)
+    website = forms.CharField(max_length=1064, label="Campaign site (direct link) please)", required=False)
 
-    campaign_street = forms.CharField(max_length=255, label="Campaign HQ Street")
-    campaign_street2 = forms.CharField(max_length=255, label="Campaign HQ Street 2 (if applicable)")
-    campaign_city = forms.CharField(max_length=255, label="Campaign HQ City")
-    campaign_zip = forms.CharField(max_length=9, label="Campaign HQ Zip/Postal Code")
+    campaign_street = forms.CharField(max_length=255, label="Campaign HQ Street", required=False)
+    campaign_street2 = forms.CharField(max_length=255, label="Campaign HQ Street 2 (if applicable)", required=False)
+    campaign_city = forms.CharField(max_length=255, label="Campaign HQ City", required=False)
+    campaign_zip = forms.CharField(max_length=9, label="Campaign HQ Zip/Postal Code", required=False)
+
+    college_free = forms.CharField(max_length=1024, label="College/University", required=False)
+    issue1 = forms.ModelChoiceField(queryset=Issue.objects.all(),
+        widget=autocomplete.ModelSelect2(url='issue-autocomplete'))
 
     def clean(self):
         cleaned_data = super(CandidateForm, self).clean()
@@ -63,12 +73,21 @@ class CandidateForm(forms.ModelForm):
         if not party:
             raise forms.ValidationError("Please select a party")
 
+    def save(self, commit=True):
+        instance = super(CandidateForm, self).save(commit=False)
+        college, create = College.objects.get_or_create(name=self.cleaned_data['college_free'])
+        instance.college = college
+        instance.save()
+        return instance
+
 
     class Meta:
         model = Candidate
         fields = ['first_name', 'last_name', 'email', 'identifier', 'state',
                   'party', 'bio', 'email', 'facebook', 'twitter', 'linkedin',
-                  'website', 'campaign_street', 'campaign_street2', 'campaign_city', 'campaign_zip']
+                  'website', 'campaign_street', 'campaign_street2',
+                  'campaign_city', 'campaign_zip',
+                  'college_free', 'issue1']
 
     def __init__(self, *args, **kwargs):
         super(CandidateForm, self).__init__(*args, **kwargs)
@@ -80,12 +99,17 @@ class CandidateForm(forms.ModelForm):
                 'last_name',
                 'email',
                 'identifier',
-                'bio'
+                'bio',
+                'college_free'
             ),
             Fieldset(
                 'Race Info',
                 'state',
                 'party',
+            ),
+            Fieldset(
+                'Campaign Issues',
+                'issue1',
             ),
             Fieldset(
                 'Campaign Office Info',
@@ -101,4 +125,7 @@ class CandidateForm(forms.ModelForm):
                 'twitter',
                 'linkedin',
             ),
+            ButtonHolder(
+                Submit('submit', 'Submit', css_class='button button-3d button-large button-brand nomargin')
+            )
         )

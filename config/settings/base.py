@@ -53,7 +53,8 @@ DJANGO_APPS = [
 
     # Useful template tags:
     # 'django.contrib.humanize',
-
+    'dal',
+    'dal_select2',
     # Admin
     'django.contrib.admin',
 ]
