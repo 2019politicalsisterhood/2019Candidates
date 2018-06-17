@@ -9,6 +9,7 @@ import hashlib
 from templated_email import send_templated_mail
 from datetime import datetime
 from django.template.defaultfilters import slugify
+from django.contrib.sites.models import Site
 import geocoder
 import logging
 
@@ -196,7 +197,8 @@ class CandidateInvite(models.Model):
 
     def save(self, *args, **kwargs):
         self.md5_email = hashlib.md5(self.email.encode()).hexdigest()
-        url = "https://www.politicalsisterhood.com/candidates/create/{}".format(self.md5_email)
+        site_url = Site.objects.get_current().domain
+        url = "https://{}/candidates/create/{}".format(site_url, self.md5_email)
         if not self.emailed:
                 send_templated_mail(
                     template_name='invite',
