@@ -164,6 +164,14 @@ class CreateCandidate(UpdateView):
                                                         issue2=form.cleaned_data.get('issue2').id,
                                                         issue3=form.cleaned_data.get('issue3').id,
                                                         college=college)
+        subject = '[CANDIDATE UPDATE] Candidate Updated on {}'.format(instance.full_name)
+        body = 'NAME: %s\n\n' % (instance.full_name)
+        from_email = 'info@politicalsisterhood.com'
+        recipients = [
+            'chris@politicalsisterhood.com'
+        ]
+        send_mail(subject, body, from_email, recipients)
+
         return super(CreateCandidate, self).form_valid(form)
 
 
