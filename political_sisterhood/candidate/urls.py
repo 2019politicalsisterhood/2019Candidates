@@ -1,5 +1,7 @@
 from django.conf.urls import include, url
-from .views import CandidateView, StateListView, AllCandidates, CreateCandidate, CandidatePricing, CandidateIssue, CandidatePaywall
+from .views import CandidateView, StateListView, AllCandidates,\
+                   CreateCandidate, CandidatePricing,\
+                   CandidateIssueReport, CandidatePaywall
 
 app_name = 'candidate'
 
@@ -17,7 +19,7 @@ urlpatterns = [
         name='paywall'
     ),
     url(r'^issue/$',
-        CandidateIssue,
+        CandidateIssueReport,
         name='issue'
     ),
     url(r'^create/(?P<hash>[\w.@+-]+)/$',

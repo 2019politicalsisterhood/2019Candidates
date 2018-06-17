@@ -157,7 +157,11 @@
         </div>
         {% endif %}
       </div>
+      {% if not user.is_authenticated %}
       <div class="col-lg-4 col-md-4 col-sm-6 bottommargin">
+      {% else %}
+      <div class="col-lg-8 col-md-8 col-sm-6 bottommargin">
+      {% endif %}
         {{object.bio|safe}}
         <div>
           <div class="heading-block bottommargin-sm">
@@ -181,15 +185,15 @@
           {% endif %}
         </div>
       </div>
+      {% if not user.is_authenticated %}
       <div class="col-lg-4 col-md-12 col-sm-12">
-          {% if not user.is_authenticated %}
             <div class="promo promo-border promo-mini promo-center">
               <h3>Interested in More Information about {{object.name}}?</h3>
               <span>Learn about our <a href="{% url 'candidate:pricing' %}">pricing</a></span>
               <a href="#" class="button button-large button-rounded">Purchase Credits</a>
             </div>
-          {% endif %}
       </div>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -279,6 +283,8 @@
 {% endif %}
 {% endblock %}
 {% block extra_js %}
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9Zc2wxmbSZBpZBFumvWofafJIbQRScQw&callback=initMap">
+</script>
 {% if object.map %}
 <script async defer>
 function initMap() {
@@ -296,6 +302,4 @@ function initMap() {
 }
 </script>
 {% endif %}
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9Zc2wxmbSZBpZBFumvWofafJIbQRScQw&callback=initMap">
-</script>
 {% endblock %}

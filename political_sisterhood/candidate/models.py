@@ -9,6 +9,10 @@ import hashlib
 from templated_email import send_templated_mail
 from datetime import datetime
 from django.template.defaultfilters import slugify
+import geocoder
+import logging
+
+logger = logging.getLogger(__name__)
 # Create your models here.
 
 
@@ -17,28 +21,40 @@ class Candidate(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     full = models.CharField(max_length=1024, blank=True, null=True, help_text="Only use if different than\
-                                                                                    first and last combined.")
+                                                                               first and last combined.")
     email = models.EmailField(max_length=255, blank=True)
     image = models.FileField(blank=True, null=True)
-    image_attribution = models.CharField(max_length=1024, blank=True, null=True)
-    STATES = Choices(('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'), ('AR', 'Arkansas'), ('CA', 'California'),
+    image_attribution = models.CharField(max_length=1024,
+                                         blank=True, null=True)
+    STATES = Choices(('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'),
+                     ('AR', 'Arkansas'), ('CA', 'California'),
                      ('CO', 'Colorado'), ('CT', 'Connecticut'),
                      ('DE', 'Delaware'), ('DC', 'District of Columbia'),
                      ('FL', 'Florida'), ('GA', 'Georgia'),
                      ('HI', 'Hawaii'),
                      ('ID', 'Idaho'), ('IL', 'Illinois'),
-                     ('IN', 'Indiana'), ('IA', 'Iowa'), ('KS', 'Kansas'), ('KY', 'Kentucky'),
+                     ('IN', 'Indiana'), ('IA', 'Iowa'), ('KS', 'Kansas'),
+                     ('KY', 'Kentucky'),
                      ('LA', 'Louisiana'), ('ME', 'Maine'), ('MD', 'Maryland'),
-                     ('MA', 'Massachusetts'), ('MI', 'Michigan'), ('MN', 'Minnesota'),
-                     ('MS', 'Mississippi'), ('MO', 'Missouri'), ('MT', 'Montana'),
-                     ('NE', 'Nebraska'), ('NV', 'Nevada'), ('NH', 'New Hampshire'),
-                     ('NJ', 'New Jersey'), ('NM', 'New Mexico'), ('NY', 'New York'),
-                     ('NC', 'North Carolina'), ('ND', 'North Dakota'), ('OH', 'Ohio'),
-                     ('OK', 'Oklahoma'), ('OR', 'Oregon'), ('PA', 'Pennsylvania'),
-                     ('RI', 'Rhode Island'), ('SC', 'South Carolina'), ('SD', 'South Dakota'),
+                     ('MA', 'Massachusetts'), ('MI', 'Michigan'),
+                     ('MN', 'Minnesota'),
+                     ('MS', 'Mississippi'), ('MO', 'Missouri'),
+                     ('MT', 'Montana'),
+                     ('NE', 'Nebraska'), ('NV', 'Nevada'),
+                     ('NH', 'New Hampshire'),
+                     ('NJ', 'New Jersey'), ('NM', 'New Mexico'),
+                     ('NY', 'New York'),
+                     ('NC', 'North Carolina'), ('ND', 'North Dakota'),
+                     ('OH', 'Ohio'),
+                     ('OK', 'Oklahoma'), ('OR', 'Oregon'),
+                     ('PA', 'Pennsylvania'),
+                     ('RI', 'Rhode Island'), ('SC', 'South Carolina'),
+                     ('SD', 'South Dakota'),
                      ('TN', 'Tennessee'), ('TX', 'Texas'), ('UT', 'Utah'),
-                     ('VT', 'Vermont'), ('VA', 'Virginia'), ('WA', 'Washington'),
-                     ('WV', 'West Virginia'), ('WI', 'Wisconsin'), ('WY', 'Wyoming'))
+                     ('VT', 'Vermont'), ('VA', 'Virginia'),
+                     ('WA', 'Washington'),
+                     ('WV', 'West Virginia'), ('WI', 'Wisconsin'),
+                     ('WY', 'Wyoming'))
     state = StatusField(choices_name='STATES', db_index=True)
     bio = RichTextField(blank=True)
 
@@ -48,8 +64,8 @@ class Candidate(models.Model):
     campaign_street2 = models.CharField(max_length=255, blank=True, verbose_name="Campaign HQ Street 2 (if applicable)")
     campaign_city = models.CharField(max_length=255, blank=True, verbose_name="Campaign HQ City")
     campaign_zip = models.CharField(max_length=9, blank=True, verbose_name="Campaign HQ Zip/Postal Code")
-    campaign_lat = models.CharField(max_length=255, blank=True)
-    campaign_long = models.CharField(max_length=255, blank=True)
+    campaign_lat = models.CharField(max_length=255, blank=True, null=True)
+    campaign_long = models.CharField(max_length=255, blank=True, null=True)
 
     # Social Accounts
     facebook = models.CharField(max_length=1064, blank=True)
@@ -59,8 +75,20 @@ class Candidate(models.Model):
     linkedin = models.CharField(max_length=1064, blank=True)
     website = models.CharField(max_length=1064, blank=True)
 
+    # Issues
+    issue1 = models.CharField(max_length=1064, blank=True, null=True)
+    issue1_detail = models.TextField(max_length=1064,
+                                     blank=True)
+    issue2 = models.CharField(max_length=1064, blank=True, null=True)
+    issue2_detail = models.TextField(max_length=1064,
+                                     blank=True)
+    issue3 = models.CharField(max_length=1064, blank=True, null=True)
+    issue3_detail = models.TextField(max_length=1064,
+                                     blank=True)
+
     # Candidate Info
-    PARTY = Choices('Democrat', 'Republican', 'Independent', 'Green', 'Not Listed', 'Non-Partisian')
+    PARTY = Choices('Democrat', 'Republican', 'Independent', 'Green',
+                    'Not Listed', 'Non-Partisian')
     party = StatusField(choices_name='PARTY', db_index=True)
     college = models.ForeignKey('College', on_delete=models.CASCADE, null=True, blank=True)
     phone = models.CharField(max_length=255, blank=True)
@@ -90,6 +118,21 @@ class Candidate(models.Model):
         return "{} {}".format(self.campaign_street, self.campaign_street2)
 
     @property
+    def full_address(self):
+        full_addres = ""
+        if self.campaign_street:
+            full_addres += "{} ".format(self.campaign_street)
+        if self.campaign_street2:
+            full_addres += "{} ".format(self.campaign_street2)
+        if self.campaign_city:
+            full_addres += "{} ".format(self.campaign_city)
+        if self.state:
+            full_addres += "{} ".format(self.state)
+        if self.campaign_zip:
+            full_addres += "{} ".format(self.campaign_zip)
+        return full_addres
+
+    @property
     def follow(self):
         if self.facebook or self.twitter or self.linkedin or self.website:
             return True
@@ -104,6 +147,7 @@ class Candidate(models.Model):
         if self.campaign_street or self.campaign_city or self.campaign_zip:
             return True
         return False
+
     @property
     def map(self):
         if self.campaign_lat and self.campaign_long:
@@ -117,6 +161,12 @@ class Candidate(models.Model):
         })
 
     def save(self, *args, **kwargs):
+        result = geocoder.google(self.full_address)
+        if result:
+            self.campaign_lat = result.lat
+            self.campaign_long = result.lng
+        else:
+            logger.error("Issue with GeoCoding: {}".format(self.id))
         super(Candidate, self).save(*args, **kwargs)
 
 class College(models.Model):

@@ -1,9 +1,11 @@
 from django import forms
 from .models import Candidate, College
-from political_sisterhood.issue.models import Issue
+from political_sisterhood.issue.models import Issue,\
+                                              CandidateIssue
 from ckeditor.widgets import CKEditorWidget
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Div
+from crispy_forms.layout import Layout, Fieldset,\
+                                ButtonHolder, Submit
 from dal import autocomplete
 from model_utils import Choices
 import logging
@@ -45,7 +47,11 @@ class CandidateForm(forms.ModelForm):
 
     state = forms.ChoiceField(choices=STATES)
     party = forms.ChoiceField(choices=Choices('', 'Democrat',
-                                              'Republican', 'Independent'))
+                                              'Republican',
+                                              'Green',
+                                              'Not Listed',
+                                              'Non-Partisian',
+                                              'Independent'))
 
     facebook = forms.CharField(max_length=1064, label="Campaign Facebook Page", required=False)
     twitter = forms.CharField(max_length=1064, label="Campaign Twitter Page", required=False)
@@ -58,8 +64,35 @@ class CandidateForm(forms.ModelForm):
     campaign_zip = forms.CharField(max_length=9, label="Campaign HQ Zip/Postal Code", required=False)
 
     college_free = forms.CharField(max_length=1024, label="College/University", required=False)
-    issue1 = forms.ModelChoiceField(queryset=Issue.objects.all(),
-        widget=autocomplete.ModelSelect2(url='issue-autocomplete'))
+    issue1 = forms.ModelChoiceField(
+                queryset=Issue.objects.all(),
+                widget=autocomplete.ModelSelect2(url='issue-autocomplete'),
+                label="1st Most Important Issue"
+              )
+    issue1_detail = forms.CharField(required=False,
+                                    widget=forms.Textarea,
+                                    label="Feel free to describe \
+                                           your feelings on this issue")
+    issue2 = forms.ModelChoiceField(
+                queryset=Issue.objects.all(),
+                widget=autocomplete.ModelSelect2(url='issue-autocomplete'),
+                label="2nd Most Important Issue"
+              )
+    issue2_detail = forms.CharField(required=False,
+                                    widget=forms.Textarea,
+                                    label="Feel free to describe \
+                                           your feelings on this issue")
+
+    issue3 = forms.ModelChoiceField(
+                queryset=Issue.objects.all(),
+                widget=autocomplete.ModelSelect2(url='issue-autocomplete'),
+                label="3rd Most Important Issue"
+              )
+    issue3_detail = forms.CharField(required=False,
+                                    widget=forms.Textarea,
+                                    label="Feel free to describe \
+                                           your feelings on this issue")
+
 
     def clean(self):
         cleaned_data = super(CandidateForm, self).clean()
@@ -77,9 +110,7 @@ class CandidateForm(forms.ModelForm):
         instance = super(CandidateForm, self).save(commit=False)
         college, create = College.objects.get_or_create(name=self.cleaned_data['college_free'])
         instance.college = college
-        instance.save()
         return instance
-
 
     class Meta:
         model = Candidate
@@ -87,11 +118,15 @@ class CandidateForm(forms.ModelForm):
                   'party', 'bio', 'email', 'facebook', 'twitter', 'linkedin',
                   'website', 'campaign_street', 'campaign_street2',
                   'campaign_city', 'campaign_zip',
-                  'college_free', 'issue1']
+                  'college_free', 'issue1', 'issue2', 'issue3',
+                  'issue1_detail', 'issue2_detail', 'issue3_detail']
 
     def __init__(self, *args, **kwargs):
         super(CandidateForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.fields['issue1_detail'].widget.attrs['rows'] = 2
+        self.fields['issue2_detail'].widget.attrs['rows'] = 2
+        self.fields['issue3_detail'].widget.attrs['rows'] = 2
         self.helper.layout = Layout(
             Fieldset(
                 'Candidate Info',
@@ -110,13 +145,18 @@ class CandidateForm(forms.ModelForm):
             Fieldset(
                 'Campaign Issues',
                 'issue1',
+                'issue1_detail',
+                'issue2',
+                'issue2_detail',
+                'issue3',
+                'issue3_detail',
             ),
             Fieldset(
                 'Campaign Office Info',
-                 'campaign_street',
-                 'campaign_street2',
-                 'campaign_city',
-                 'campaign_zip'
+                'campaign_street',
+                'campaign_street2',
+                'campaign_city',
+                'campaign_zip'
             ),
             Fieldset(
                 'Digital Info',

@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 {% block extra_css %}
 <style>
-#zipsearch_container {
+#zipsearch {
     border-top: 2px solid #c39;
     padding-top: 10px;
 }
-#zs_search_container{
+#zr_widget_jobs {
+    margin-top: 0px !important;
+}
+#zs_search_container, #zr_pro_widget_filter, #zr_results{
     display: none !important;
 }
 </style>
@@ -25,9 +28,10 @@
         <div class="container clearfix">
             <div class="postcontent nobottommargin clearfix">
 
-                <div id="zipsearch_container">
 
-                 <a href="https://www.ziprecruiter.com/jobs" id="jobs_widget_link"><span>Job Search by</span> <span id="zr_logo_container"><img id="zr_logo" src="https://www.ziprecruiter.com/img/logos/logo-sm-black-304px.png" alt="ZipRecruiter" width="120" /></span></a>
+                <div id="zipsearch">
+                    <h2>More Political Jobs</h2>
+                    <div id="zipsearch_container"></div>
                 </div>
 
                 <script data-cfasync="false" type="text/javascript" src="https://www.ziprecruiter.com/jobs-widget/pro/v1/qdympz2hnysdvijsi4eey9eqbgac9txf"></script>

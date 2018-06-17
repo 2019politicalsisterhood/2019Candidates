@@ -3,7 +3,8 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic import DetailView, CreateView, TemplateView, UpdateView, ListView, RedirectView
 from django.core.mail import send_mail
 from django.contrib import messages
-from .models import Candidate, CandidateInvite
+from .models import Candidate, CandidateInvite, College
+from political_sisterhood.issue.models import CandidateIssue
 from haystack.generic_views import SearchView as BaseFacetedSearchView
 from political_sisterhood.races.models import State, Race
 import logging
@@ -145,11 +146,26 @@ class CreateCandidate(UpdateView):
         data['contact'] = CandidateInvite.objects.get(md5_email=self.kwargs['hash'])
         return data
 
+
     def form_valid(self, form):
         instance = form.save(commit=True)
-        logger.info(instance)
         CandidateInvite.objects.filter(md5_email=self.kwargs['hash']).update(candidate=instance)
+        CandidateIssue.objects.get_or_create(candidate=instance,
+                                             issue=form.cleaned_data.get('issue1'),
+                                             desc=form.cleaned_data.get('issue1_detail'))
+        CandidateIssue.objects.get_or_create(candidate=instance,
+                                             issue=form.cleaned_data.get('issue2'),
+                                             desc=form.cleaned_data.get('issue2_detail'))
+        CandidateIssue.objects.get_or_create(candidate=instance,
+                                             issue=form.cleaned_data.get('issue3'),
+                                             desc=form.cleaned_data.get('issue3_detail'))
+        college, create = College.objects.get_or_create(name=form.cleaned_data['college_free'])
+        Candidate.objects.filter(id=instance.id).update(issue1=form.cleaned_data.get('issue1').id,
+                                                        issue2=form.cleaned_data.get('issue2').id,
+                                                        issue3=form.cleaned_data.get('issue3').id,
+                                                        college=college)
         return super(CreateCandidate, self).form_valid(form)
+
 
 class CandidatePricing(TemplateView):
     template_name = "candidate/pricing.html"
@@ -158,7 +174,8 @@ class CandidatePricing(TemplateView):
 class CandidatePaywall(TemplateView):
     template_name = "candidate/paywall.html"
 
-def CandidateIssue(request):
+
+def CandidateIssueReport(request):
     name = request.POST.get('name', '')
     email =  request.POST.get('email', '')
     other = request.POST.get('other', '')
