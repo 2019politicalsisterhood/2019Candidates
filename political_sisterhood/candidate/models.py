@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 class Candidate(models.Model):
+    active = models.BooleanField(default=True)
     unique_identifier = models.CharField(max_length=255, blank=True, null=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)

@@ -18,7 +18,7 @@ class IssueInline(admin.TabularInline):
 class CandidateAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('first_name', 'last_name')}
     search_fields = ('full', 'first_name', 'last_name', )
-    list_filter = ['state', 'party']
+    list_filter = ['state', 'party', 'active']
     inlines = [
         IssueInline,
         RaceEntryInline
