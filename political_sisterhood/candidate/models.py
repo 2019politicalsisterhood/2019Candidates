@@ -143,7 +143,7 @@ class Candidate(models.Model):
     def image_url(self):
         if self.image:
             return self.image.url
-        return "/static/images/icons/avatar.jpg"
+        return "/static/images/missingLogo.jpg"
 
     def hq(self):
         if self.campaign_street or self.campaign_city or self.campaign_zip:
