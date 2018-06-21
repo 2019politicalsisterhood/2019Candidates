@@ -207,7 +207,7 @@
         {% for issue in object.issues.all %}
         <div class="col-sm-4 text-center">
           <div class="feature-box fbox-center fbox-border fbox-light fbox-effect">
-            <h3><a href="/search?q=&issues={{issue.issue.get_root}}">{{issue.issue.get_root}}</a></h3>
+            <h3>{{issue.issue.get_root}}</h3>
             <p>{{issue.desc|safe}}</p>
           </div>
         </div>
