@@ -36,14 +36,17 @@ STATES = Choices(('', ''),
 class CandidateForm(forms.ModelForm):
     first_name = forms.CharField(max_length=255, label='Candidate First Name')
     last_name = forms.CharField(max_length=255, label='Candidate Last Name')
-    identifier = forms.CharField(max_length=255,
-                                 label='How can the viewer connect with you?\
-                                       - two words max(Mom/Doctor/Veteran/\
-                                       dogs/cats/yoga/widow,\
-                                       etc.)', required=False)
+    unique_identifier = forms.CharField(max_length=255,
+                                        help_text="Max length is 255 characters",
+                                        label='How can the viewer connect with you?\
+                                               - two words max(Mom/Doctor/Veteran/\
+                                               dogs/cats/yoga/widow,\
+                                               etc.)', required=False)
     bio = forms.CharField(widget=CKEditorWidget(),
                           label='Candidate Bio', required=False)
     email = forms.EmailField(max_length=254)
+    image = forms.FileField(label="Headshot of Candidate",
+                            required=False)
 
     state = forms.ChoiceField(choices=STATES)
     party = forms.ChoiceField(choices=Choices('', 'Democrat',
@@ -106,15 +109,9 @@ class CandidateForm(forms.ModelForm):
         if not party:
             raise forms.ValidationError("Please select a party")
 
-    def save(self, commit=True):
-        instance = super(CandidateForm, self).save(commit=False)
-        college, create = College.objects.get_or_create(name=self.cleaned_data['college_free'])
-        instance.college = college
-        return instance
-
     class Meta:
         model = Candidate
-        fields = ['first_name', 'last_name', 'email', 'identifier', 'state',
+        fields = ['first_name', 'last_name', 'image', 'email', 'unique_identifier', 'state',
                   'party', 'bio', 'email', 'facebook', 'twitter', 'linkedin',
                   'website', 'campaign_street', 'campaign_street2',
                   'campaign_city', 'campaign_zip',
@@ -133,8 +130,9 @@ class CandidateForm(forms.ModelForm):
                 'first_name',
                 'last_name',
                 'email',
-                'identifier',
+                'unique_identifier',
                 'bio',
+                'image',
                 'college_free'
             ),
             Fieldset(

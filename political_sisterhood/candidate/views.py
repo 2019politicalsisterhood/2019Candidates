@@ -149,28 +149,35 @@ class CreateCandidate(UpdateView):
 
     def form_valid(self, form):
         instance = form.save(commit=True)
-        CandidateInvite.objects.filter(md5_email=self.kwargs['hash']).update(candidate=instance)
-        CandidateIssue.objects.get_or_create(candidate=instance,
-                                             issue=form.cleaned_data.get('issue1'),
-                                             desc=form.cleaned_data.get('issue1_detail'))
-        CandidateIssue.objects.get_or_create(candidate=instance,
-                                             issue=form.cleaned_data.get('issue2'),
-                                             desc=form.cleaned_data.get('issue2_detail'))
-        CandidateIssue.objects.get_or_create(candidate=instance,
-                                             issue=form.cleaned_data.get('issue3'),
-                                             desc=form.cleaned_data.get('issue3_detail'))
-        college, create = College.objects.get_or_create(name=form.cleaned_data['college_free'])
-        Candidate.objects.filter(id=instance.id).update(issue1=form.cleaned_data.get('issue1').id,
-                                                        issue2=form.cleaned_data.get('issue2').id,
-                                                        issue3=form.cleaned_data.get('issue3').id,
-                                                        college=college)
-        subject = '[CANDIDATE UPDATE] Candidate Updated on {}'.format(instance.full_name)
-        body = 'NAME: %s\n\n' % (instance.full_name)
-        from_email = 'info@politicalsisterhood.com'
-        recipients = [
-            'chris@politicalsisterhood.com'
-        ]
-        send_mail(subject, body, from_email, recipients)
+        try:
+            CandidateInvite.objects.filter(md5_email=self.kwargs['hash']).update(candidate=instance)
+            CandidateIssue.objects.get_or_create(candidate=instance,
+                                                 issue=form.cleaned_data.get('issue1'),
+                                                 desc=form.cleaned_data.get('issue1_detail'))
+            CandidateIssue.objects.get_or_create(candidate=instance,
+                                                 issue=form.cleaned_data.get('issue2'),
+                                                 desc=form.cleaned_data.get('issue2_detail'))
+            CandidateIssue.objects.get_or_create(candidate=instance,
+                                                 issue=form.cleaned_data.get('issue3'),
+                                                 desc=form.cleaned_data.get('issue3_detail'))
+            college, create = College.objects.get_or_create(name=form.cleaned_data['college_free'])
+            Candidate.objects.filter(id=instance.id).update(issue1=form.cleaned_data.get('issue1').id,
+                                                            issue2=form.cleaned_data.get('issue2').id,
+                                                            issue3=form.cleaned_data.get('issue3').id,
+                                                            college=college)
+        except Exception as e:
+            logger.error(e)
+        try:
+            subject = '[CANDIDATE UPDATE] Candidate Updated on {}'.format(instance.full_name)
+            body = 'NAME: %s\n\n' % (instance.full_name)
+            from_email = 'info@politicalsisterhood.com'
+            recipients = [
+                'chris@politicalsisterhood.com',
+                'susan@politicalsisterhood.com'
+            ]
+            send_mail(subject, body, from_email, recipients)
+        except Exception as e:
+            logger.error(e)
 
         return super(CreateCandidate, self).form_valid(form)
 
@@ -185,7 +192,7 @@ class CandidatePaywall(TemplateView):
 
 def CandidateIssueReport(request):
     name = request.POST.get('name', '')
-    email =  request.POST.get('email', '')
+    email = request.POST.get('email', '')
     other = request.POST.get('other', '')
     issue = request.POST.get('issue', '')
     candidate = request.POST.get('candidate', '')

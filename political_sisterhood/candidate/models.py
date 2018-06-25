@@ -25,7 +25,7 @@ class Candidate(models.Model):
     full = models.CharField(max_length=1024, blank=True, null=True, help_text="Only use if different than\
                                                                                first and last combined.")
     email = models.EmailField(max_length=255, blank=True)
-    image = models.FileField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True, verbose_name="Headshot")
     image_attribution = models.CharField(max_length=1024,
                                          blank=True, null=True)
     STATES = Choices(('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'),

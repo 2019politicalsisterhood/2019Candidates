@@ -1,10 +1,11 @@
 @media print {
-    header, #content, #footer, .scw-switcher-wrap {display: none}
+    header, #content, #footer, .content-wrap, .scw-switcher-wrap, .breadcrumb, button {display: none}
     #print{
             padding-top: 5in;
             margin: 0 auto;
             display: block !important;
         }
+
     h1 { text-align: center; font-size: 46px; }
     p {font-size: 26px; display: block; color: black;}
     ul, li {list-style: square; font-size: 26px;}
