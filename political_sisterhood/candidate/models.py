@@ -31,6 +31,8 @@ class Candidate(models.Model):
     image = models.ImageField(blank=True, null=True, verbose_name="Headshot")
     image_attribution = models.CharField(max_length=1024,
                                          blank=True, null=True)
+    filing_number = models.CharField(max_length=1024,
+                                     blank=True, null=True)
     STATES = Choices(('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'),
                      ('AR', 'Arkansas'), ('CA', 'California'),
                      ('CO', 'Colorado'), ('CT', 'Connecticut'),

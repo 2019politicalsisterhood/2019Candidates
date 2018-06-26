@@ -49,6 +49,8 @@ class CandidateForm(forms.ModelForm):
                                                etc.)', required=False)
     bio = forms.CharField(widget=CKEditorWidget(),
                           label='Candidate Bio', required=False)
+    filing_number = forms.CharField(label="Candidate Filing Number (if applicable)",
+                                    required=False)
     email = forms.EmailField(max_length=254)
     image = forms.FileField(label="Headshot of Candidate",
                             required=False)
@@ -127,6 +129,7 @@ class CandidateForm(forms.ModelForm):
     class Meta:
         model = Candidate
         fields = ['first_name', 'last_name', 'image', 'email',
+                  'filing_number',
                   'unique_identifier1', 'unique_identifier2', 'state',
                   'party', 'bio', 'email', 'facebook', 'twitter', 'linkedin',
                   'website', 'campaign_street', 'campaign_street2',
@@ -147,6 +150,7 @@ class CandidateForm(forms.ModelForm):
                 'last_name',
                 'email',
                 'bio',
+                'filing_number',
                 'image',
                 'college_free'
             ),
