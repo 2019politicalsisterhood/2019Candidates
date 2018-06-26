@@ -227,7 +227,7 @@ class CandidateReferral(models.Model):
     @property
     def url(self):
         name = slugify(self.name)
-        return "https://www.politicalsisterhood.org/create/?ref={}".format(name)
+        return "https://www.politicalsisterhood.org/candidates/create/?ref={}".format(name)
 
     class Meta:
         verbose_name_plural = "Candidate Referral Source"
