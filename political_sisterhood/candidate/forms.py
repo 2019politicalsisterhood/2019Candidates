@@ -36,10 +36,15 @@ STATES = Choices(('', ''),
 class CandidateForm(forms.ModelForm):
     first_name = forms.CharField(max_length=255, label='Candidate First Name')
     last_name = forms.CharField(max_length=255, label='Candidate Last Name')
-    unique_identifier = forms.CharField(max_length=255,
+    unique_identifier1 = forms.CharField(max_length=255,
                                         help_text="Max length is 255 characters",
-                                        label='How can the viewer connect with you?\
-                                               - two words max(Mom/Doctor/Veteran/\
+                                        label='First word to describe you (Mom/Doctor/Veteran/\
+                                               dogs/cats/yoga/widow,\
+                                               etc.)', required=False)
+    unique_identifier2 = forms.CharField(max_length=255,
+                                        help_text="Max length is 255 characters",
+                                        label='Second word to describe you\
+                                               - (Mom/Doctor/Veteran/\
                                                dogs/cats/yoga/widow,\
                                                etc.)', required=False)
     bio = forms.CharField(widget=CKEditorWidget(),
@@ -56,9 +61,15 @@ class CandidateForm(forms.ModelForm):
                                               'Non-Partisian',
                                               'Independent'))
 
-    facebook = forms.CharField(max_length=1064, label="Campaign Facebook Page", required=False)
-    twitter = forms.CharField(max_length=1064, label="Campaign Twitter Page", required=False)
-    linkedin = forms.CharField(max_length=1064, label="Campaign LinkedIn Page", required=False)
+    facebook = forms.CharField(max_length=1064,
+                               label="Campaign Facebook Page",
+                               required=False)
+    twitter = forms.CharField(max_length=1064,
+                              label="Campaign Twitter Page",
+                              required=False)
+    linkedin = forms.CharField(max_length=1064,
+                               label="Campaign LinkedIn Page",
+                               required=False)
     website = forms.CharField(max_length=1064, label="Campaign site (direct link) please)", required=False)
 
     campaign_street = forms.CharField(max_length=255, label="Campaign HQ Street", required=False)
@@ -96,14 +107,10 @@ class CandidateForm(forms.ModelForm):
                                     label="Feel free to describe \
                                            your feelings on this issue")
 
-    update_email = forms.CharField(required=False,
-                                   label="Updatee Email Address")
-    update_first_name = forms.CharField(required=False,
-                                        label="Updatee First Name")
-    update_last_name = forms.CharField(required=False,
-                                       label="Updatee Last Name")
-    update_relation = forms.CharField(required=False,
-                                      label="Updatee Relation to Candidate")
+    update_email = forms.CharField(label="Updatee Email Address")
+    update_first_name = forms.CharField(label="Updatee First Name")
+    update_last_name = forms.CharField(label="Updatee Last Name")
+    update_relation = forms.CharField(label="Updatee Relation to Candidate")
 
     def clean(self):
         cleaned_data = super(CandidateForm, self).clean()
@@ -120,7 +127,7 @@ class CandidateForm(forms.ModelForm):
     class Meta:
         model = Candidate
         fields = ['first_name', 'last_name', 'image', 'email',
-                  'unique_identifier', 'state',
+                  'unique_identifier1', 'unique_identifier2', 'state',
                   'party', 'bio', 'email', 'facebook', 'twitter', 'linkedin',
                   'website', 'campaign_street', 'campaign_street2',
                   'campaign_city', 'campaign_zip',
@@ -139,10 +146,14 @@ class CandidateForm(forms.ModelForm):
                 'first_name',
                 'last_name',
                 'email',
-                'unique_identifier',
                 'bio',
                 'image',
                 'college_free'
+            ),
+            Fieldset(
+                'How can the viewer connect with you? (Short Two Word Descriptors)',
+                'unique_identifier1',
+                'unique_identifier2',
             ),
             Fieldset(
                 'Race Info',

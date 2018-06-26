@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Candidate, College, Ethnicity, CandidateInvite
+from .models import Candidate, College,\
+                    Ethnicity, CandidateInvite, CandidateUpdate
 from political_sisterhood.issue.models import CandidateIssue
 from political_sisterhood.races.models import RaceEntry
 # Register your models here.
@@ -29,3 +30,4 @@ admin.site.register(Candidate, CandidateAdmin)
 admin.site.register(College)
 admin.site.register(Ethnicity)
 admin.site.register(CandidateInvite)
+admin.site.register(CandidateUpdate)

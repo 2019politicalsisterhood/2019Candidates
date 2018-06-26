@@ -3,7 +3,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic import DetailView, CreateView, TemplateView, UpdateView, ListView, RedirectView
 from django.core.mail import send_mail
 from django.contrib import messages
-from .models import Candidate, CandidateInvite, College
+from .models import Candidate, CandidateInvite, College, CandidateUpdate
 from political_sisterhood.issue.models import CandidateIssue
 from haystack.generic_views import SearchView as BaseFacetedSearchView
 from political_sisterhood.races.models import State, Race
@@ -175,6 +175,10 @@ class CreateCandidate(UpdateView):
                                                             issue2=issue2.issue_num,
                                                             issue3=issue3.issue_num,
                                                             college=college, approval="Pending")
+            CandidateUpdate.objects.create(email=form.cleaned_data.get('update_email'),
+                                           first_name=form.cleaned_data.get('update_first_name'),
+                                           last_name=form.cleaned_data.get('update_last_name'),
+                                           candidate=instance)
         except Exception as e:
             logger.error(e)
         try:

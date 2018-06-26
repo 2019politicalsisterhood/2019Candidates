@@ -21,7 +21,8 @@ class Candidate(models.Model):
     active = models.BooleanField(default=True)
     approval_status = Choices(('Approved'), ('Pending'),)
     approval = StatusField(choices_name='approval_status', db_index=True)
-    unique_identifier = models.CharField(max_length=255, blank=True, null=True)
+    unique_identifier1 = models.CharField(max_length=255, blank=True, null=True)
+    unique_identifier2 = models.CharField(max_length=255, blank=True, null=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     full = models.CharField(max_length=1024, blank=True, null=True, help_text="Only use if different than\
@@ -96,7 +97,6 @@ class Candidate(models.Model):
     party = StatusField(choices_name='PARTY', db_index=True)
     college = models.ForeignKey('College', on_delete=models.CASCADE, null=True, blank=True)
     phone = models.CharField(max_length=255, blank=True)
-    identifier = models.CharField(max_length=1064, blank=True)
     ethnicity = models.ManyToManyField('Ethnicity', blank=True)
     homepage = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
@@ -141,6 +141,15 @@ class Candidate(models.Model):
         if self.approval == 'Approved':
             return True
         return False
+
+    @property
+    def identifier(self):
+        if self.unique_identifier1 and self.unique_identifier2:
+            return "{} & {}".format(self.unique_identifier1, self.unique_identifier2)
+        if self.unique_identifier1:
+            return self.unique_identifier1
+        if self.unique_identifier2:
+           return self.unique_identifier2
 
 
     @property
@@ -211,6 +220,9 @@ class CandidateUpdate(models.Model):
     @property
     def name(self):
         return "{} {}".format(self.first_name, self.last_name)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name_plural = "Candidate Update"
