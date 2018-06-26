@@ -101,6 +101,7 @@ class Candidate(models.Model):
     phone = models.CharField(max_length=255, blank=True)
     ethnicity = models.ManyToManyField('Ethnicity', blank=True)
     homepage = models.BooleanField(default=False)
+    referral = models.CharField(max_length=1024, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=1024)
 
@@ -152,6 +153,7 @@ class Candidate(models.Model):
             return self.unique_identifier1
         if self.unique_identifier2:
            return self.unique_identifier2
+        return None
 
 
     @property
@@ -183,6 +185,14 @@ class Candidate(models.Model):
         })
 
     def save(self, *args, **kwargs):
+        slug_me = "{}-{}".format(self.first_name, self.last_name)
+        self.full = "{} {}".format(self.first_name, self.last_name)
+        slug = slugify(slug_me)
+        i = 1
+        while Candidate.objects.filter(slug=slug).exists():
+            slug = "{}{}".format(slug,i)
+            i += 1
+        self.slug = slug
         result = geocoder.google(self.full_address)
         if result:
             self.campaign_lat = result.lat
@@ -208,12 +218,26 @@ class Ethnicity(models.Model):
         verbose_name_plural = "Ethnicities"
 
 
+class CandidateReferral(models.Model):
+    name = models.CharField(max_length=1025)
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def url(self):
+        name = slugify(self.name)
+        return "https://www.politicalsisterhood.org/create/?ref={}".format(name)
+
+    class Meta:
+        verbose_name_plural = "Candidate Referral Source"
+
 class CandidateUpdate(models.Model):
     email = models.CharField(max_length=1025)
     first_name = models.CharField(max_length=1025)
     last_name = models.CharField(max_length=1025)
     updated = models.DateTimeField(null=True, blank=True)
-    candidate = models.ForeignKey('Candidate', on_delete=models.SET_NULL, null=True)
+    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE, null=True)
 
     def save(self, *args, **kwargs):
         self.updated = datetime.now()
@@ -241,7 +265,7 @@ class CandidateInvite(models.Model):
     def save(self, *args, **kwargs):
         self.md5_email = hashlib.md5(self.email.encode()).hexdigest()
         site_url = Site.objects.get_current().domain
-        url = "https://{}/candidates/create/{}".format(site_url, self.md5_email)
+        url = "https://{}/candidates/update/{}".format(site_url, self.md5_email)
         if not self.emailed:
                 send_templated_mail(
                     template_name='invite',

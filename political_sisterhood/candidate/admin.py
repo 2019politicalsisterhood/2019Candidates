@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Candidate, College,\
-                    Ethnicity, CandidateInvite, CandidateUpdate
+                    Ethnicity, CandidateInvite,\
+                    CandidateUpdate, CandidateReferral
 from political_sisterhood.issue.models import CandidateIssue
 from political_sisterhood.races.models import RaceEntry
 # Register your models here.
@@ -14,7 +15,6 @@ class RaceEntryInline(admin.TabularInline):
 class IssueInline(admin.TabularInline):
     model = CandidateIssue
     extra = 0
-
 
 
 class CandidateAdmin(admin.ModelAdmin):
@@ -33,8 +33,14 @@ class CandidateAdmin(admin.ModelAdmin):
     actions = [make_inactive]
 
 
+class ReferralSource(admin.ModelAdmin):
+    fields = ['name', 'url']
+    readonly_fields = ['url',]
+
+
 admin.site.register(Candidate, CandidateAdmin)
 admin.site.register(College)
 admin.site.register(Ethnicity)
 admin.site.register(CandidateInvite)
 admin.site.register(CandidateUpdate)
+admin.site.register(CandidateReferral, ReferralSource)

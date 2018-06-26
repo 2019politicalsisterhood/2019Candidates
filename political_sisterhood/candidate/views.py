@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.views.generic import DetailView, CreateView, TemplateView, UpdateView, ListView, RedirectView
+from django.views.generic import DetailView, CreateView,\
+                                 TemplateView, UpdateView,\
+                                 ListView, RedirectView
 from django.core.mail import send_mail
 from django.contrib import messages
 from .models import Candidate, CandidateInvite, College, CandidateUpdate
@@ -16,6 +18,21 @@ from haystack.query import SearchQuerySet, EmptySearchQuerySet, SQ
 from haystack.inputs import AutoQuery
 logger = logging.getLogger(__name__)
 # Create your views here.
+
+
+def sendingEmail(candidate):
+    candidate = Candidate.objects.get(id=candidate)
+    try:
+        subject = '[CANDIDATE UPDATE] Candidate Updated: {}'.format(candidate.full_name)
+        body = 'NAME: %s\n\n' % (candidate.full_name)
+        from_email = 'info@politicalsisterhood.com'
+        recipients = [
+            'chris@politicalsisterhood.com',
+            'susan@politicalsisterhood.com'
+        ]
+        send_mail(subject, body, from_email, recipients)
+    except Exception as e:
+        logger.error(e)
 
 
 class AllCandidates(BaseFacetedSearchView):
@@ -136,10 +153,10 @@ class StateListView(ListView):
         state = Candidate.objects.filter(state=self.kwargs['state'])
         return state
 
-class CreateCandidate(UpdateView):
+class UpdateCandidate(UpdateView):
     # specify a custom ModelForm
     form_class = CandidateForm
-    template_name = "candidate/create.html"
+    template_name = "candidate/update.html"
 
     def get_object(self, queryset=None):
         # get the existing object or created a new one
@@ -155,7 +172,6 @@ class CreateCandidate(UpdateView):
         data = super().get_context_data(**kwargs)
         data['contact'] = CandidateInvite.objects.get(md5_email=self.kwargs['hash'])
         return data
-
 
     def form_valid(self, form):
         instance = form.save(commit=True)
@@ -181,15 +197,54 @@ class CreateCandidate(UpdateView):
                                            candidate=instance)
         except Exception as e:
             logger.error(e)
+
         try:
-            subject = '[CANDIDATE UPDATE] Candidate Updated on {}'.format(instance.full_name)
-            body = 'NAME: %s\n\n' % (instance.full_name)
-            from_email = 'info@politicalsisterhood.com'
-            recipients = [
-                'chris@politicalsisterhood.com',
-                'susan@politicalsisterhood.com'
-            ]
-            send_mail(subject, body, from_email, recipients)
+            sendingEmail(instance.id)
+        except Exception as e:
+            logger.error(e)
+
+        return redirect(Candidate.objects.get(id=instance.id).get_absolute_url() + "?approved=pending")
+
+
+class CreateCandidate(CreateView):
+    form_class = CandidateForm
+    template_name = "candidate/create.html"
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['referral'] = self.request.GET.get('ref')
+        return data
+
+    def form_valid(self, form):
+        ref = self.request.GET.get('ref')
+        instance = form.save(commit=True)
+        try:
+            issue1, create = CandidateIssue.objects.get_or_create(candidate=instance,
+                                                                  issue=form.cleaned_data.get('issue1'),
+                                                                  desc=form.cleaned_data.get('issue1_detail'))
+            issue2, created = CandidateIssue.objects.get_or_create(candidate=instance,
+                                                                   issue=form.cleaned_data.get('issue2'),
+                                                                   desc=form.cleaned_data.get('issue2_detail'))
+            issue3, created = CandidateIssue.objects.get_or_create(candidate=instance,
+                                                                   issue=form.cleaned_data.get('issue3'),
+                                                                   desc=form.cleaned_data.get('issue3_detail'))
+            college, create = College.objects.get_or_create(name=form.cleaned_data['college_free'])
+            Candidate.objects.filter(id=instance.id).update(issue1=issue1.issue_num,
+                                                            issue2=issue2.issue_num,
+                                                            issue3=issue3.issue_num,
+                                                            college=college,
+                                                            approval="Pending",
+                                                            referral=ref)
+            CandidateUpdate.objects.create(email=form.cleaned_data.get('update_email'),
+                                           first_name=form.cleaned_data.get('update_first_name'),
+                                           last_name=form.cleaned_data.get('update_last_name'),
+                                           candidate=instance)
+        except Exception as e:
+            logger.error(e)
+
+        try:
+            sendingEmail(instance.id)
+
         except Exception as e:
             logger.error(e)
 

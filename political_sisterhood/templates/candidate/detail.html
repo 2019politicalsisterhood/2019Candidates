@@ -113,7 +113,9 @@
     <div class="heading-block center">
       <h2 class="normal-case">{{object.name}}</h2>
       <span>{% if object.current_office %}{{object.current_office}}, {% endif %}{{object.get_state_display}}</span>
-      <h4>{{object.identifier}}</h4>
+      {% if object.identifier %}
+        <h4>{{object.identifier}}</h4>
+      {% endif %}
     </div>
     <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-6 center bottommargin">

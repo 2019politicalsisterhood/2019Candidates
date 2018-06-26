@@ -15,20 +15,25 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
       <li class="breadcrumb-item"><a href="{% url 'candidate:all' %}">Candidate Reports</a></li>
+      {% block breadcrumbs %}
       <li class="breadcrumb-item active" aria-current="page">Create a New Candidate</li>
+      {% endblock %}
     </ol>
   </div>
 </section>
 <section class="themebg"></section>
 <section id="content" style="margin-bottom: 0px;">
   <div class="container clear-bottommargin clearfix topmargin-sm bottommargin-sm">
-      <p>
-        <strong>{{contact.name}},</strong><br>
-        Data from this form will be included in the complete list of women candidates for the 2018 U.S. federal congressional elections.  The website is live and will continue to be updated.  Please use the unique identifier question as a way to bring people to you - this will be on the site, and we will target groups that are related to the identifier - ie dog lover - could go to rescue groups, animal rights, etc.</p>
+        {% block hello %}
+        {% endblock %}
         {{form.error}}
       <form class="form-horizontal" method="post" action="">
         {% csrf_token %}
+        {% block hidden_fields %}
+        <input type="hidden" value="{{referral}}" name="ref" id="ref">
+        {% endblock %}
         {% crispy form %}
+
         <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
         {{form.media}}
       </form>
