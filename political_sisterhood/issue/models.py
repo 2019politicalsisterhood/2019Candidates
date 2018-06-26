@@ -30,5 +30,9 @@ class CandidateIssue(models.Model):
     def name(self):
         return self.issue.name
 
+    @property
+    def issue_num(self):
+        return self.issue.id
+
     def __str__(self):
         return "{} - {}".format(self.candidate, self.issue)

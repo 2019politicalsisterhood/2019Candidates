@@ -19,6 +19,8 @@ logger = logging.getLogger(__name__)
 
 class Candidate(models.Model):
     active = models.BooleanField(default=True)
+    approval_status = Choices(('Approved'), ('Pending'),)
+    approval = StatusField(choices_name='approval_status', db_index=True)
     unique_identifier = models.CharField(max_length=255, blank=True, null=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -135,6 +137,13 @@ class Candidate(models.Model):
         return full_addres
 
     @property
+    def approved(self):
+        if self.approval == 'Approved':
+            return True
+        return False
+
+
+    @property
     def follow(self):
         if self.facebook or self.twitter or self.linkedin or self.website:
             return True
@@ -186,6 +195,25 @@ class Ethnicity(models.Model):
 
     class Meta:
         verbose_name_plural = "Ethnicities"
+
+
+class CandidateUpdate(models.Model):
+    email = models.CharField(max_length=1025)
+    first_name = models.CharField(max_length=1025)
+    last_name = models.CharField(max_length=1025)
+    updated = models.DateTimeField(null=True, blank=True)
+    candidate = models.ForeignKey('Candidate', on_delete=models.SET_NULL, null=True)
+
+    def save(self, *args, **kwargs):
+        self.updated = datetime.now()
+        super(CandidateUpdate, self).save(*args, **kwargs)
+
+    @property
+    def name(self):
+        return "{} {}".format(self.first_name, self.last_name)
+
+    class Meta:
+        verbose_name_plural = "Candidate Update"
 
 class CandidateInvite(models.Model):
     email = models.CharField(max_length=1025)

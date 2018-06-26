@@ -96,6 +96,14 @@ class CandidateForm(forms.ModelForm):
                                     label="Feel free to describe \
                                            your feelings on this issue")
 
+    update_email = forms.CharField(required=False,
+                                   label="Updatee Email Address")
+    update_first_name = forms.CharField(required=False,
+                                        label="Updatee First Name")
+    update_last_name = forms.CharField(required=False,
+                                       label="Updatee Last Name")
+    update_relation = forms.CharField(required=False,
+                                      label="Updatee Relation to Candidate")
 
     def clean(self):
         cleaned_data = super(CandidateForm, self).clean()
@@ -111,7 +119,8 @@ class CandidateForm(forms.ModelForm):
 
     class Meta:
         model = Candidate
-        fields = ['first_name', 'last_name', 'image', 'email', 'unique_identifier', 'state',
+        fields = ['first_name', 'last_name', 'image', 'email',
+                  'unique_identifier', 'state',
                   'party', 'bio', 'email', 'facebook', 'twitter', 'linkedin',
                   'website', 'campaign_street', 'campaign_street2',
                   'campaign_city', 'campaign_zip',
@@ -162,6 +171,13 @@ class CandidateForm(forms.ModelForm):
                 'facebook',
                 'twitter',
                 'linkedin',
+            ),
+            Fieldset(
+                'Updatee Information',
+                'update_email',
+                'update_first_name',
+                'update_last_name',
+                'update_relation',
             ),
             ButtonHolder(
                 Submit('submit', 'Submit', css_class='button button-3d button-large button-brand nomargin')

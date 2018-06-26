@@ -111,6 +111,16 @@ class CandidateView(DetailView):
             logger.info(self.request.session['visited'] )
         return super().dispatch(*args, **kwargs)
 
+    def get_object(self):
+        slug = self.kwargs['slug']
+        candidate = Candidate.objects.get(slug=slug)
+        approved = self.request.GET.get('approved')
+        if approved == 'pending':
+            return candidate
+        if candidate.approved:
+            return candidate
+        raise Http404()
+
 
 class StateListView(ListView):
     model = Candidate
@@ -151,20 +161,20 @@ class CreateCandidate(UpdateView):
         instance = form.save(commit=True)
         try:
             CandidateInvite.objects.filter(md5_email=self.kwargs['hash']).update(candidate=instance)
-            CandidateIssue.objects.get_or_create(candidate=instance,
-                                                 issue=form.cleaned_data.get('issue1'),
-                                                 desc=form.cleaned_data.get('issue1_detail'))
-            CandidateIssue.objects.get_or_create(candidate=instance,
-                                                 issue=form.cleaned_data.get('issue2'),
-                                                 desc=form.cleaned_data.get('issue2_detail'))
-            CandidateIssue.objects.get_or_create(candidate=instance,
-                                                 issue=form.cleaned_data.get('issue3'),
-                                                 desc=form.cleaned_data.get('issue3_detail'))
+            issue1, create = CandidateIssue.objects.get_or_create(candidate=instance,
+                                                                  issue=form.cleaned_data.get('issue1'),
+                                                                  desc=form.cleaned_data.get('issue1_detail'))
+            issue2, created = CandidateIssue.objects.get_or_create(candidate=instance,
+                                                                   issue=form.cleaned_data.get('issue2'),
+                                                                   desc=form.cleaned_data.get('issue2_detail'))
+            issue3, created = CandidateIssue.objects.get_or_create(candidate=instance,
+                                                                   issue=form.cleaned_data.get('issue3'),
+                                                                   desc=form.cleaned_data.get('issue3_detail'))
             college, create = College.objects.get_or_create(name=form.cleaned_data['college_free'])
-            Candidate.objects.filter(id=instance.id).update(issue1=form.cleaned_data.get('issue1').id,
-                                                            issue2=form.cleaned_data.get('issue2').id,
-                                                            issue3=form.cleaned_data.get('issue3').id,
-                                                            college=college)
+            Candidate.objects.filter(id=instance.id).update(issue1=issue1.issue_num,
+                                                            issue2=issue2.issue_num,
+                                                            issue3=issue3.issue_num,
+                                                            college=college, approval="Pending")
         except Exception as e:
             logger.error(e)
         try:
@@ -179,7 +189,7 @@ class CreateCandidate(UpdateView):
         except Exception as e:
             logger.error(e)
 
-        return super(CreateCandidate, self).form_valid(form)
+        return redirect(Candidate.objects.get(id=instance.id).get_absolute_url() + "?approved=pending")
 
 
 class CandidatePricing(TemplateView):
@@ -197,7 +207,6 @@ def CandidateIssueReport(request):
     issue = request.POST.get('issue', '')
     candidate = request.POST.get('candidate', '')
     return_slug = request.POST.get('return', '')
-
 
     subject = '[CANDIDATE ISSUE] Issue on {}'.format(candidate)
     body = 'NAME: %s\n\nEMAIL: %s\n\nISSUE: %s\n\nMESSAGE: %s' % (name, email, issue, other)
