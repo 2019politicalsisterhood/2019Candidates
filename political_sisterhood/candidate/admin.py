@@ -16,14 +16,21 @@ class IssueInline(admin.TabularInline):
     extra = 0
 
 
+
 class CandidateAdmin(admin.ModelAdmin):
+    def make_inactive(modeladmin, request, queryset):
+        queryset.update(active=False)
+    make_inactive.short_description = "Mark selected candidates inactive"
+
     prepopulated_fields = {'slug': ('first_name', 'last_name')}
     search_fields = ('full', 'first_name', 'last_name', )
     list_filter = ['state', 'party', 'active']
+    list_display = ['full', 'active']
     inlines = [
         IssueInline,
         RaceEntryInline
     ]
+    actions = [make_inactive]
 
 
 admin.site.register(Candidate, CandidateAdmin)
