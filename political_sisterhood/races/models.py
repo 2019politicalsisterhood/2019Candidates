@@ -61,12 +61,13 @@ class State(models.Model):
     class Meta:
         ordering = ['state']
 
+
 class Race(models.Model):
     state = models.ForeignKey(State, on_delete=models.CASCADE, related_name="states")
     district = models.CharField(max_length=255, blank=True)
     other = models.CharField(max_length=255, blank=True,
                              help_text="If there is another descriptor for the race")
-    RACE = Choices('Senate', 'House', 'Governor', 'State House', 'State Senate')
+    RACE = Choices('Senate', 'House', 'Governor', 'State House', 'State Senate', 'State Assembly')
     race_type = StatusField(choices_name='RACE')
     filing_date = models.DateField(blank=True, null=True)
     primary_date = models.DateField(blank=True, null=True)
@@ -92,6 +93,7 @@ class Race(models.Model):
         if self.races:
             return False
         return True
+
 
 class RaceEntry(models.Model):
     candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='candidates')

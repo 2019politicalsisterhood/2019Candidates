@@ -232,6 +232,7 @@ class CandidateReferral(models.Model):
     class Meta:
         verbose_name_plural = "Candidate Referral Source"
 
+
 class CandidateUpdate(models.Model):
     email = models.CharField(max_length=1025)
     first_name = models.CharField(max_length=1025)
@@ -252,6 +253,7 @@ class CandidateUpdate(models.Model):
 
     class Meta:
         verbose_name_plural = "Candidate Update"
+
 
 class CandidateInvite(models.Model):
     email = models.CharField(max_length=1025)
