@@ -82,6 +82,8 @@ class Race(models.Model):
             return "{} - {}".format(self.other, self.state)
         elif self.race_type == "Governor":
             return "Governor - {}".format(self.state)
+        elif self.race_type == 'Senate':
+            return "Senate {}".format(self.state)
         else:
             return "{}".format(self.state)
 
@@ -89,10 +91,18 @@ class Race(models.Model):
         return self.title
 
     @property
+    def int_district(self):
+        return int(self.district)
+    
+
+    @property
     def open(self):
         if self.races:
             return False
         return True
+
+    class Meta:
+        ordering = ['pk']
 
 
 class RaceEntry(models.Model):

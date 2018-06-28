@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block seo_title %}
+Add People to Race - Political Sisterhood
+{% endblock %}
+{% block extra_css %}
+<link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section id="content">
+    <div class="container toppadding-sm bottompadding-sm">
+        <div class="row">
+            <div class="col-sm-12 toppadding-sm bottompadding-sm"> 
+            <select class="select-candidate" name="candidate" id="race" style="width: 100%">
+            {% for can in candidates %}
+              <option value="{{can.id}}">{{can.name}}</option>
+            {% endfor %}
+            </select>
+            </div>
+            <div class="col-sm-12">
+                <table id="races"> 
+                    <thead> 
+                        <tr>
+                            <th>State</th>
+                            <th>Type</th>
+                            <th>Name</th>
+                            <th>Add Candidate Race</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        {% for race in races %}
+                        <tr>
+                            <td>{{race.state}}</td>
+                            <td>{{race.race_type}}</td>
+                            <td>{{race.title}}</td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block extra_js %}
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#races').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );
+$(document).ready(function() {
+    $('.select-candidate').select2();
+});
+</script>
+{% endblock %}

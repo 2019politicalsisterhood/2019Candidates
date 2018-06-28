@@ -21,8 +21,8 @@ class Candidate(models.Model):
     active = models.BooleanField(default=True)
     approval_status = Choices(('Approved'), ('Pending'),)
     approval = StatusField(choices_name='approval_status', db_index=True)
-    unique_identifier1 = models.CharField(max_length=255, blank=True, null=True)
-    unique_identifier2 = models.CharField(max_length=255, blank=True, null=True)
+    unique_identifier1 = models.CharField(max_length=25, blank=True, null=True)
+    unique_identifier2 = models.CharField(max_length=25, blank=True, null=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     full = models.CharField(max_length=1024, blank=True, null=True, help_text="Only use if different than\
@@ -84,13 +84,13 @@ class Candidate(models.Model):
 
     # Issues
     issue1 = models.CharField(max_length=1064, blank=True, null=True)
-    issue1_detail = models.TextField(max_length=1064,
+    issue1_detail = models.TextField(max_length=280,
                                      blank=True)
     issue2 = models.CharField(max_length=1064, blank=True, null=True)
-    issue2_detail = models.TextField(max_length=1064,
+    issue2_detail = models.TextField(max_length=280,
                                      blank=True)
     issue3 = models.CharField(max_length=1064, blank=True, null=True)
-    issue3_detail = models.TextField(max_length=1064,
+    issue3_detail = models.TextField(max_length=280,
                                      blank=True)
 
     # Candidate Info

@@ -4,12 +4,15 @@ from .models import Candidate, College,\
                     CandidateUpdate, CandidateReferral
 from political_sisterhood.issue.models import CandidateIssue
 from political_sisterhood.races.models import RaceEntry
+from dynamic_raw_id.admin import DynamicRawIDMixin
+
 # Register your models here.
 
 
-class RaceEntryInline(admin.TabularInline):
+class RaceEntryInline(DynamicRawIDMixin, admin.TabularInline):
     model = RaceEntry
     extra = 0
+    dynamic_raw_id_fields = ('race',)
 
 
 class IssueInline(admin.TabularInline):

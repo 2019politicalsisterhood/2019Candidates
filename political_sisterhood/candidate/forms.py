@@ -36,19 +36,23 @@ STATES = Choices(('', ''),
 class CandidateForm(forms.ModelForm):
     first_name = forms.CharField(max_length=255, label='Candidate First Name')
     last_name = forms.CharField(max_length=255, label='Candidate Last Name')
-    unique_identifier1 = forms.CharField(max_length=255,
-                                        help_text="Max length is 255 characters",
+    unique_identifier1 = forms.CharField(max_length=25,
+                                        help_text="Max length is 25 characters",
                                         label='First word to describe you (Mom/Doctor/Veteran/\
                                                dogs/cats/yoga/widow,\
                                                etc.)', required=False)
-    unique_identifier2 = forms.CharField(max_length=255,
-                                        help_text="Max length is 255 characters",
+    unique_identifier2 = forms.CharField(max_length=25,
+                                        help_text="Max length is 25 characters",
                                         label='Second word to describe you\
                                                - (Mom/Doctor/Veteran/\
                                                dogs/cats/yoga/widow,\
                                                etc.)', required=False)
-    bio = forms.CharField(widget=CKEditorWidget(),
-                          label='Candidate Bio', required=False)
+    bio = forms.CharField(widget=CKEditorWidget(attrs={'maxlength':4000}),
+                          label='Candidate Bio',
+                          max_length=4000,
+                          help_text="Max length is 4000 characters",
+                          required=False)
+
     filing_number = forms.CharField(label="Candidate Filing Number (if applicable)",
                                     required=False)
     email = forms.EmailField(max_length=254)
@@ -86,7 +90,9 @@ class CandidateForm(forms.ModelForm):
                 label="1st Most Important Issue"
               )
     issue1_detail = forms.CharField(required=False,
+                                    max_length=280,
                                     widget=forms.Textarea,
+                                    help_text="Max length is 280 characters",
                                     label="Feel free to describe \
                                            your feelings on this issue")
     issue2 = forms.ModelChoiceField(
@@ -95,7 +101,9 @@ class CandidateForm(forms.ModelForm):
                 label="2nd Most Important Issue"
               )
     issue2_detail = forms.CharField(required=False,
+                                    max_length=280,
                                     widget=forms.Textarea,
+                                    help_text="Max length is 280 characters",
                                     label="Feel free to describe \
                                            your feelings on this issue")
 
@@ -105,14 +113,16 @@ class CandidateForm(forms.ModelForm):
                 label="3rd Most Important Issue"
               )
     issue3_detail = forms.CharField(required=False,
+                                    max_length=280,
                                     widget=forms.Textarea,
+                                    help_text="Max length is 280 characters",
                                     label="Feel free to describe \
                                            your feelings on this issue")
 
-    update_email = forms.CharField(label="Updatee Email Address")
-    update_first_name = forms.CharField(label="Updatee First Name")
-    update_last_name = forms.CharField(label="Updatee Last Name")
-    update_relation = forms.CharField(label="Updatee Relation to Candidate")
+    update_email = forms.CharField(label="Direct Contact Email Address")
+    update_first_name = forms.CharField(label="Direct Contact First Name")
+    update_last_name = forms.CharField(label="Direct Contact Last Name")
+    update_relation = forms.CharField(label="Direct Contact Relation to Candidate")
 
     def clean(self):
         cleaned_data = super(CandidateForm, self).clean()
@@ -188,7 +198,7 @@ class CandidateForm(forms.ModelForm):
                 'linkedin',
             ),
             Fieldset(
-                'Updatee Information',
+                'Direct Contact Information',
                 'update_email',
                 'update_first_name',
                 'update_last_name',

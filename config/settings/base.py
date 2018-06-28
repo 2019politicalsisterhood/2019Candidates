@@ -57,6 +57,7 @@ DJANGO_APPS = [
     'dal_select2',
     # Admin
     'django.contrib.admin',
+
 ]
 THIRD_PARTY_APPS = [
     'crispy_forms',  # Form layouts
@@ -74,6 +75,7 @@ THIRD_PARTY_APPS = [
     'betterforms',
     'django_extensions',
     'djstripe',
+    'dynamic_raw_id',
 ]
 
 
