@@ -125,7 +125,6 @@ class CandidateView(DetailView):
             else:
                 visited.append(candidate)
             self.request.session['visited'] = visited
-            logger.info(self.request.session['visited'] )
         return super().dispatch(*args, **kwargs)
 
     def get_object(self):

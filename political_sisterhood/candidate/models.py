@@ -190,7 +190,7 @@ class Candidate(models.Model):
         slug = slugify(slug_me)
         i = 1
         while Candidate.objects.filter(slug=slug).exists():
-            slug = "{}{}".format(slug,i)
+            slug = "{}{}".format(slugify(slug_me),i)
             i += 1
         self.slug = slug
         result = geocoder.google(self.full_address)
