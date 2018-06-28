@@ -15,6 +15,7 @@ class StateAdmin(admin.ModelAdmin):
 
 class RaceAdmin(admin.ModelAdmin):
     list_filter = ['state', 'race_type']
+    list_display = ['__str__', 'state']
     inlines = (RaceEntryInline,)
 
 admin.site.register(State, StateAdmin)
