@@ -10,6 +10,7 @@ from templated_email import send_templated_mail
 from datetime import datetime
 from django.template.defaultfilters import slugify
 from django.contrib.sites.models import Site
+from .constants import IDENTIFIER
 import geocoder
 import logging
 
@@ -18,11 +19,14 @@ logger = logging.getLogger(__name__)
 
 
 class Candidate(models.Model):
+    IDENT = IDENTIFIER
     active = models.BooleanField(default=True)
     approval_status = Choices(('Approved'), ('Pending'),)
     approval = StatusField(choices_name='approval_status', db_index=True)
-    unique_identifier1 = models.CharField(max_length=25, blank=True, null=True)
-    unique_identifier2 = models.CharField(max_length=25, blank=True, null=True)
+    unique_identifier1 = StatusField(choices_name='IDENT',
+                                     blank=True, null=True, default=None)
+    unique_identifier2 = StatusField(choices_name='IDENT',
+                                     blank=True, null=True, default=None)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     full = models.CharField(max_length=1024, blank=True, null=True, help_text="Only use if different than\

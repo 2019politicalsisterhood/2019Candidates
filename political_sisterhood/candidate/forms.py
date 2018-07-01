@@ -7,11 +7,12 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset,\
                                 ButtonHolder, Submit
 from dal import autocomplete
+from .constants import IDENTIFIER
 from model_utils import Choices
 import logging
 logger = logging.getLogger(__name__)
 
-
+IDENT = IDENTIFIER
 STATES = Choices(('', ''),
                  ('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'),
                  ('AR', 'Arkansas'), ('CA', 'California'),
@@ -33,20 +34,19 @@ STATES = Choices(('', ''),
                  ('VT', 'Vermont'), ('VA', 'Virginia'), ('WA', 'Washington'),
                  ('WV', 'West Virginia'), ('WI', 'Wisconsin'), ('WY', 'Wyoming'))
 
+
 class CandidateForm(forms.ModelForm):
     first_name = forms.CharField(max_length=255, label='Candidate First Name')
     last_name = forms.CharField(max_length=255, label='Candidate Last Name')
-    unique_identifier1 = forms.CharField(max_length=25,
-                                        help_text="Max length is 25 characters",
-                                        label='First word to describe you (Mom/Doctor/Veteran/\
-                                               dogs/cats/yoga/widow,\
-                                               etc.)', required=False)
-    unique_identifier2 = forms.CharField(max_length=25,
-                                        help_text="Max length is 25 characters",
-                                        label='Second word to describe you\
-                                               - (Mom/Doctor/Veteran/\
-                                               dogs/cats/yoga/widow,\
-                                               etc.)', required=False)
+    unique_identifier1 = forms.ChoiceField(choices=IDENT,
+                                           label='First word to describe you (Mom/Doctor/Veteran/\
+                                                  dogs/cats/yoga/widow,\
+                                                  etc.)', required=False)
+    unique_identifier2 = forms.ChoiceField(choices=IDENT,
+                                           label='Second word to describe you\
+                                                 - (Mom/Doctor/Veteran/\
+                                                 dogs/cats/yoga/widow,\
+                                                 etc.)', required=False)
     bio = forms.CharField(widget=CKEditorWidget(attrs={'maxlength':4000}),
                           label='Candidate Bio',
                           max_length=4000,
@@ -153,6 +153,7 @@ class CandidateForm(forms.ModelForm):
         self.fields['issue1_detail'].widget.attrs['rows'] = 2
         self.fields['issue2_detail'].widget.attrs['rows'] = 2
         self.fields['issue3_detail'].widget.attrs['rows'] = 2
+        self.initial['unique_identifier1'] = None
         self.helper.layout = Layout(
             Fieldset(
                 'Candidate Info',

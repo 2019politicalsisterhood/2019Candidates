@@ -27,7 +27,10 @@ urlpatterns = [
         CreateCandidate.as_view(),
         name='create'
     ),
-
+    url(r'^update/(?P<hash>[\w.@+-]+)/',
+        UpdateCandidate.as_view(),
+        name='update'
+    ),
     url(r'(?P<state>[\w.@+-]+)/(?P<slug>[\w.@+-]+)/',
         CandidateView.as_view(),
         name='detail'
@@ -35,10 +38,6 @@ urlpatterns = [
     url(r'(?P<state>[\w.@+-]+)/',
         StateListView.as_view(),
         name='state'
-    ),
-    url(r'^update/(?P<hash>[\w.@+-]+)/',
-        UpdateCandidate.as_view(),
-        name='update'
     ),
 
 ]

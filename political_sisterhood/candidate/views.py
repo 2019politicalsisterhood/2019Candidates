@@ -4,6 +4,7 @@ from django.views.generic import DetailView, CreateView,\
                                  TemplateView, UpdateView,\
                                  ListView, RedirectView
 from django.core.mail import send_mail
+from templated_email import send_templated_mail
 from django.contrib import messages
 from .models import Candidate, CandidateInvite, College, CandidateUpdate
 from political_sisterhood.issue.models import CandidateIssue
@@ -31,6 +32,17 @@ def sendingEmail(candidate):
             'susan@politicalsisterhood.com'
         ]
         send_mail(subject, body, from_email, recipients)
+
+        send_templated_mail(
+            template_name='updated',
+            from_email="Political Sisterhood <info@politicalsisterhood.org>",
+            recipient_list=['chris@politicalsisterhood.com',
+                            'susan@politicalsisterhood.com'],
+            context={
+                'name': candidate.full_name,
+                'url': candidate.get_absolute_url()
+            }
+        )
     except Exception as e:
         logger.error(e)
 
