@@ -192,14 +192,15 @@ class Candidate(models.Model):
         })
 
     def save(self, *args, **kwargs):
-        slug_me = "{}-{}".format(self.first_name, self.last_name)
-        self.full = "{} {}".format(self.first_name, self.last_name)
-        slug = slugify(slug_me)
-        i = 1
-        while Candidate.objects.filter(slug=slug).exists():
-            slug = "{}{}".format(slugify(slug_me),i)
-            i += 1
-        self.slug = slug
+        if not self.slug:
+            slug_me = "{}-{}".format(self.first_name, self.last_name)
+            self.full = "{} {}".format(self.first_name, self.last_name)
+            slug = slugify(slug_me)
+            i = 1
+            while Candidate.objects.filter(slug=slug).exists():
+                slug = "{}{}".format(slugify(slug_me),i)
+                i += 1
+            self.slug = slug
         result = geocoder.google(self.full_address)
         if result:
             self.campaign_lat = result.lat
