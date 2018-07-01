@@ -54,3 +54,9 @@ IDENTIFIER = Choices((None, '---'),
                     'Working Mother',
                     'Writer',
                     'Yoga follower')
+
+OPT_OPTIONS = Choices((None, '---'),
+                      ('Yes', 'Yes'),
+                      ('No', 'No'),
+                      ('No Response', 'Choose not to respond')
+                      )

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Candidate, College
+from .models import Candidate, College, Ethnicity
 from political_sisterhood.issue.models import Issue,\
                                               CandidateIssue
 from ckeditor.widgets import CKEditorWidget
@@ -7,12 +7,15 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset,\
                                 ButtonHolder, Submit
 from dal import autocomplete
-from .constants import IDENTIFIER
+from .constants import IDENTIFIER, OPT_OPTIONS
 from model_utils import Choices
+from django.forms.widgets import CheckboxSelectMultiple
 import logging
 logger = logging.getLogger(__name__)
 
 IDENT = IDENTIFIER
+OPT = OPT_OPTIONS
+
 STATES = Choices(('', ''),
                  ('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'),
                  ('AR', 'Arkansas'), ('CA', 'California'),
@@ -66,7 +69,14 @@ class CandidateForm(forms.ModelForm):
                                               'Not Listed',
                                               'Non-Partisian',
                                               'Independent'))
-
+    marginalized = forms.ChoiceField(choices=OPT_OPTIONS,
+                                     label="Do you identify as marginalized?",
+                                     initial='', widget=forms.Select(),
+                                     required=False)
+    lgbtq = forms.ChoiceField(choices=OPT_OPTIONS,
+                              label="Do you identify as LGBTQ?",
+                              initial='', widget=forms.Select(),
+                              required=False)
     facebook = forms.CharField(max_length=1064,
                                label="Campaign Facebook Page",
                                required=False)
@@ -139,7 +149,7 @@ class CandidateForm(forms.ModelForm):
     class Meta:
         model = Candidate
         fields = ['first_name', 'last_name', 'image', 'email',
-                  'filing_number',
+                  'filing_number', 'ethnicity', 'marginalized', 'lgbtq',
                   'unique_identifier1', 'unique_identifier2', 'state',
                   'party', 'bio', 'email', 'facebook', 'twitter', 'linkedin',
                   'website', 'campaign_street', 'campaign_street2',
@@ -155,6 +165,8 @@ class CandidateForm(forms.ModelForm):
         self.fields['issue3_detail'].widget.attrs['rows'] = 2
         self.initial['unique_identifier1'] = '---'
         self.initial['unique_identifier2'] = '---'
+        self.fields["ethnicity"].widget = CheckboxSelectMultiple()
+        self.fields["ethnicity"].queryset = Ethnicity.objects.all()
         self.helper.layout = Layout(
             Fieldset(
                 'Candidate Info',
@@ -165,6 +177,12 @@ class CandidateForm(forms.ModelForm):
                 'filing_number',
                 'image',
                 'college_free'
+            ),
+            Fieldset(
+                'Demographic Questions',
+                'ethnicity',
+                'marginalized',
+                'lgbtq',
             ),
             Fieldset(
                 'How can the viewer connect with you? (Short Two Word Descriptors)',

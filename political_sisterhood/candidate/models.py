@@ -10,7 +10,7 @@ from templated_email import send_templated_mail
 from datetime import datetime
 from django.template.defaultfilters import slugify
 from django.contrib.sites.models import Site
-from .constants import IDENTIFIER
+from .constants import IDENTIFIER, OPT_OPTIONS
 import geocoder
 import logging
 
@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 
 class Candidate(models.Model):
     IDENT = IDENTIFIER
+    OPT_OPTIONS = OPT_OPTIONS
     active = models.BooleanField(default=True)
     approval_status = Choices(('Approved'), ('Pending'),)
     approval = StatusField(choices_name='approval_status', db_index=True)
@@ -104,6 +105,8 @@ class Candidate(models.Model):
     college = models.ForeignKey('College', on_delete=models.CASCADE, null=True, blank=True)
     phone = models.CharField(max_length=255, blank=True)
     ethnicity = models.ManyToManyField('Ethnicity', blank=True)
+    marginalized = StatusField(choices_name='OPT_OPTIONS', blank=True, null=True)
+    lgbtq = StatusField(choices_name='OPT_OPTIONS', blank=True, null=True)
     homepage = models.BooleanField(default=False)
     referral = models.CharField(max_length=1024, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)
