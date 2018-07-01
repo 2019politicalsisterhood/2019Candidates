@@ -24,15 +24,6 @@ logger = logging.getLogger(__name__)
 def sendingEmail(candidate):
     candidate = Candidate.objects.get(id=candidate)
     try:
-        subject = '[CANDIDATE UPDATE] Candidate Updated: {}'.format(candidate.full_name)
-        body = 'NAME: %s\n\n' % (candidate.full_name)
-        from_email = 'info@politicalsisterhood.com'
-        recipients = [
-            'chris@politicalsisterhood.com',
-            'susan@politicalsisterhood.com'
-        ]
-        send_mail(subject, body, from_email, recipients)
-
         send_templated_mail(
             template_name='updated',
             from_email="Political Sisterhood <info@politicalsisterhood.org>",
@@ -211,6 +202,7 @@ class UpdateCandidate(UpdateView):
 
         try:
             sendingEmail(instance.id)
+            logger.info('trigger')
         except Exception as e:
             logger.error(e)
 

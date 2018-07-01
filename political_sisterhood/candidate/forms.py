@@ -153,7 +153,8 @@ class CandidateForm(forms.ModelForm):
         self.fields['issue1_detail'].widget.attrs['rows'] = 2
         self.fields['issue2_detail'].widget.attrs['rows'] = 2
         self.fields['issue3_detail'].widget.attrs['rows'] = 2
-        self.initial['unique_identifier1'] = None
+        self.initial['unique_identifier1'] = '---'
+        self.initial['unique_identifier2'] = '---'
         self.helper.layout = Layout(
             Fieldset(
                 'Candidate Info',
