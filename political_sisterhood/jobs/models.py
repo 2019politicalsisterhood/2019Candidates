@@ -8,30 +8,14 @@ from ckeditor.fields import RichTextField
 from model_utils import Choices
 from datetime import datetime
 from django.template.defaultfilters import slugify
+from political_sisterhood.candidate.constants import STATES
 
 # Create your models here.
 class Job(models.Model):
+    STATES = STATES
     title = models.CharField(max_length=1024, verbose_name="Job Title")
     location = models.CharField(max_length=1024, verbose_name="Job Location", help_text="Example: 'Boston',\
                                                                                          'Chicago', 'Wheaton'")
-    STATES = Choices(('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'), ('AR', 'Arkansas'), ('CA', 'California'),
-                     ('CO', 'Colorado'), ('CT', 'Connecticut'),
-                     ('DE', 'Delaware'), ('DC', 'District of Columbia'),
-                     ('FL', 'Florida'), ('GA', 'Georgia'),
-                     ('HI', 'Hawaii'),
-                     ('ID', 'Idaho'), ('IL', 'Illinois'),
-                     ('IN', 'Indiana'), ('IA', 'Iowa'), ('KS', 'Kansas'), ('KY', 'Kentucky'),
-                     ('LA', 'Louisiana'), ('ME', 'Maine'), ('MD', 'Maryland'),
-                     ('MA', 'Massachusetts'), ('MI', 'Michigan'), ('MN', 'Minnesota'),
-                     ('MS', 'Mississippi'), ('MO', 'Missouri'), ('MT', 'Montana'),
-                     ('NE', 'Nebraska'), ('NV', 'Nevada'), ('NH', 'New Hampshire'),
-                     ('NJ', 'New Jersey'), ('NM', 'New Mexico'), ('NY', 'New York'),
-                     ('NC', 'North Carolina'), ('ND', 'North Dakota'), ('OH', 'Ohio'),
-                     ('OK', 'Oklahoma'), ('OR', 'Oregon'), ('PA', 'Pennsylvania'),
-                     ('RI', 'Rhode Island'), ('SC', 'South Carolina'), ('SD', 'South Dakota'),
-                     ('TN', 'Tennessee'), ('TX', 'Texas'), ('UT', 'Utah'),
-                     ('VT', 'Vermont'), ('VA', 'Virginia'), ('WA', 'Washington'),
-                     ('WV', 'West Virginia'), ('WI', 'Wisconsin'), ('WY', 'Wyoming'))
     state = StatusField(choices_name='STATES', db_index=True)
     CHOICES = Choices('Full Time', 'Part Time', 'Freelance', 'Temporary')
     job_type = StatusField(choices_name='CHOICES')

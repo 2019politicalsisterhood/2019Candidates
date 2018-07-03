@@ -10,7 +10,7 @@ from templated_email import send_templated_mail
 from datetime import datetime
 from django.template.defaultfilters import slugify
 from django.contrib.sites.models import Site
-from .constants import IDENTIFIER, OPT_OPTIONS
+from .constants import IDENTIFIER, OPT_OPTIONS, STATES, PARTY
 import geocoder
 import logging
 
@@ -21,6 +21,8 @@ logger = logging.getLogger(__name__)
 class Candidate(models.Model):
     IDENT = IDENTIFIER
     OPT_OPTIONS = OPT_OPTIONS
+    STATES = STATES
+    PARTY = PARTY
     active = models.BooleanField(default=True)
     approval_status = Choices(('Approved'), ('Pending'),)
     approval = StatusField(choices_name='approval_status', db_index=True)
@@ -38,35 +40,7 @@ class Candidate(models.Model):
                                          blank=True, null=True)
     filing_number = models.CharField(max_length=1024,
                                      blank=True, null=True)
-    STATES = Choices(('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'),
-                     ('AR', 'Arkansas'), ('CA', 'California'),
-                     ('CO', 'Colorado'), ('CT', 'Connecticut'),
-                     ('DE', 'Delaware'), ('DC', 'District of Columbia'),
-                     ('FL', 'Florida'), ('GA', 'Georgia'),
-                     ('HI', 'Hawaii'),
-                     ('ID', 'Idaho'), ('IL', 'Illinois'),
-                     ('IN', 'Indiana'), ('IA', 'Iowa'), ('KS', 'Kansas'),
-                     ('KY', 'Kentucky'),
-                     ('LA', 'Louisiana'), ('ME', 'Maine'), ('MD', 'Maryland'),
-                     ('MA', 'Massachusetts'), ('MI', 'Michigan'),
-                     ('MN', 'Minnesota'),
-                     ('MS', 'Mississippi'), ('MO', 'Missouri'),
-                     ('MT', 'Montana'),
-                     ('NE', 'Nebraska'), ('NV', 'Nevada'),
-                     ('NH', 'New Hampshire'),
-                     ('NJ', 'New Jersey'), ('NM', 'New Mexico'),
-                     ('NY', 'New York'),
-                     ('NC', 'North Carolina'), ('ND', 'North Dakota'),
-                     ('OH', 'Ohio'),
-                     ('OK', 'Oklahoma'), ('OR', 'Oregon'),
-                     ('PA', 'Pennsylvania'),
-                     ('RI', 'Rhode Island'), ('SC', 'South Carolina'),
-                     ('SD', 'South Dakota'),
-                     ('TN', 'Tennessee'), ('TX', 'Texas'), ('UT', 'Utah'),
-                     ('VT', 'Vermont'), ('VA', 'Virginia'),
-                     ('WA', 'Washington'),
-                     ('WV', 'West Virginia'), ('WI', 'Wisconsin'),
-                     ('WY', 'Wyoming'))
+
     state = StatusField(choices_name='STATES', db_index=True)
     bio = RichTextField(blank=True)
 
@@ -99,8 +73,6 @@ class Candidate(models.Model):
                                      blank=True)
 
     # Candidate Info
-    PARTY = Choices('Democrat', 'Republican', 'Independent', 'Green',
-                    'Not Listed', 'Non-Partisian')
     party = StatusField(choices_name='PARTY', db_index=True)
     college = models.ForeignKey('College', on_delete=models.CASCADE, null=True, blank=True)
     phone = models.CharField(max_length=255, blank=True)
@@ -159,9 +131,8 @@ class Candidate(models.Model):
         if self.unique_identifier1:
             return self.unique_identifier1
         if self.unique_identifier2:
-           return self.unique_identifier2
+            return self.unique_identifier2
         return None
-
 
     @property
     def follow(self):
@@ -201,6 +172,8 @@ class Candidate(models.Model):
                 slug = "{}{}".format(slugify(slug_me),i)
                 i += 1
             self.slug = slug
+        if not self.full:
+            self.full = self.full_name
         result = geocoder.google(self.full_address)
         if result:
             self.campaign_lat = result.lat
@@ -208,6 +181,7 @@ class Candidate(models.Model):
         else:
             logger.error("Issue with GeoCoding: {}".format(self.id))
         super(Candidate, self).save(*args, **kwargs)
+
 
 class College(models.Model):
     name = models.CharField(max_length=1064, blank=True)
