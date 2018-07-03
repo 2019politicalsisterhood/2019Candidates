@@ -174,12 +174,13 @@ class Candidate(models.Model):
             self.slug = slug
         if not self.full:
             self.full = self.full_name
-        result = geocoder.google(self.full_address)
-        if result:
-            self.campaign_lat = result.lat
-            self.campaign_long = result.lng
-        else:
-            logger.error("Issue with GeoCoding: {}".format(self.id))
+        if self.campaign_street:
+            result = geocoder.google(self.full_address)
+            if result:
+                self.campaign_lat = result.lat
+                self.campaign_long = result.lng
+            else:
+                logger.error("Issue with GeoCoding: {}".format(self.id))
         super(Candidate, self).save(*args, **kwargs)
 
 
