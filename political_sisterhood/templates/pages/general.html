@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %} {% block seo_title %}{{object.title}} - Political Sisterhood {% endblock %} {% block content %}
+<section id="page-title" class="page-title-mini page-title-nobg">
+  <div class="container clearfix">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{object.title}}</li>
+    </ol>
+  </div>
+</section>
+<section class="themebg"></section>
+<section id="content">
+  <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-sm">
+    <div class="heading-block">
+      {{object.content}}
+    </div>
+  </div>
+</section>
+{% endblock %}

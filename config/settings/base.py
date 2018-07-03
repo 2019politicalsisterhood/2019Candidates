@@ -90,6 +90,7 @@ LOCAL_APPS = [
     'political_sisterhood.races',
     'political_sisterhood.jobs',
     'political_sisterhood.resources',
+    'political_sisterhood.pages',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -309,6 +310,7 @@ if CELERY_BROKER_URL == 'django://':
     CELERY_RESULT_BACKEND = 'redis://'
 else:
     CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+
 ########## END CELERY
 # django-compressor
 # ------------------------------------------------------------------------------
