@@ -162,6 +162,11 @@ class Candidate(models.Model):
             'slug': self.slug
         })
 
+    def edit_url(self):
+        return reverse('admin:%s_%s_change' % (self._meta.app_label,
+                                               self._meta.model_name),
+                       args=[self.id])
+
     def save(self, *args, **kwargs):
         if not self.slug:
             slug_me = "{}-{}".format(self.first_name, self.last_name)

@@ -1,0 +1,12 @@
+{% block subject %}Issue with Candidate Issues{% endblock %}
+{% block html %}
+These candidates have a number in one of there issues, and that is causing a problem.
+
+Fix these, or else you'll have a bad time.
+
+<ul>
+{% for candidate in candidates %}
+<li><a href="https://www.politicalsisterhood.org{{candidate.edit_url}}">{{candidate.name}}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

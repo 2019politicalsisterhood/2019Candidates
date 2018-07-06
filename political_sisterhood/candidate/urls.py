@@ -1,8 +1,8 @@
 from django.conf.urls import include, url
 from .views import CandidateView, StateListView, AllCandidates,\
-                   UpdateCandidate, CandidatePricing,\
+                   UpdateCandidateInvite, CandidatePricing,\
                    CandidateIssueReport, CandidatePaywall,\
-                   CreateCandidate
+                   CreateCandidate, UpdateCandidate
 
 app_name = 'candidate'
 
@@ -27,8 +27,12 @@ urlpatterns = [
         CreateCandidate.as_view(),
         name='create'
     ),
-    url(r'^update/(?P<hash>[\w.@+-]+)/',
+    url(r'^u/(?P<slug>[\w.@+-]+)/',
         UpdateCandidate.as_view(),
+        name='update_candidate'
+    ),
+    url(r'^update/(?P<hash>[\w.@+-]+)/',
+        UpdateCandidateInvite.as_view(),
         name='update'
     ),
     url(r'(?P<state>[\w.@+-]+)/(?P<slug>[\w.@+-]+)/',

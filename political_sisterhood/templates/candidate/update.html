@@ -4,7 +4,9 @@
 {% endblock %}
 {% block hello %}
     <p>
+        {% if contact %}
         <strong>{{contact.name}},</strong><br>
+        {% endif %}
         Data from this form will be included in the complete list of women candidates for the 2018 U.S. federal congressional elections.  The website is live and will continue to be updated.  Please use the unique identifier question as a way to bring people to you - this will be on the site, and we will target groups that are related to the identifier - ie dog lover - could go to rescue groups, animal rights, etc.
     </p>
 {% endblock %}
