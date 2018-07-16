@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from django.views.generic.base import RedirectView
 from allauth.account import views
+from political_sisterhood.pages.views import PageDetailView
 from political_sisterhood.issue.views import IssueAutocomplete
 from political_sisterhood.search.views import MySearchView
 from .views import HomePage, Mailchimp
@@ -35,7 +36,7 @@ urlpatterns = [
 
     # Your stuff: custom urls includes go here
     url(r'^payments/', include('djstripe.urls', namespace="djstripe")),
-
+    url(r'^(?P<slug>[\w.@+-]+)/$', PageDetailView.as_view()),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
