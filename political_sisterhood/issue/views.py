@@ -12,14 +12,16 @@ class IssueAutocomplete(autocomplete.Select2QuerySetView):
     create_field = "name"
 
     def post(self, request):
-        """Create an object given a text after checking permissions."""
         text = request.POST.get('text', None)
 
         if text is None:
             return http.HttpResponseBadRequest()
 
         parent = Issue.objects.get(name="Other")
-        result, create = Issue.objects.get_or_create(name=text, parent=parent)
+        try:
+            result, create = Issue.objects.get_or_create(name=text, parent=parent)
+        except Exception as e:
+            logger.error(e)
 
         return http.JsonResponse({
             'id': result.pk,
