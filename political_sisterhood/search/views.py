@@ -70,6 +70,10 @@ class MySearchView(BaseFacetedSearchView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(MySearchView, self).get_context_data(*args, **kwargs)
+        context['state'] = self.request.GET.getlist('state', '')
+        context['party'] = self.request.GET.getlist('party', '')
+        context['college'] = self.request.GET.getlist('college', '')
+        context['issues'] = self.request.GET.getlist('issues', '')
         context['query'] = self.request.GET.get('q','')
 
         return context

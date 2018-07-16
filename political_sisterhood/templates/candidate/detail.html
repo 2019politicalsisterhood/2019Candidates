@@ -171,13 +171,7 @@
             <h4>Candidate's <span>Info</span></h4>
           </div>
             <strong>Facebook</strong> <span class="theme-color">&mdash;</span> {% if object.facebook %}<a href="{{object.facebook}}" target="_blank">{% endif %}{{object.facebook|default:"Not Found&nbsp;&nbsp;<sup data-toggle='tooltip' data-placement='top' data-original-title='Our researchers could not find any info' style='color: #c39; border-bottom: 1px dotted #c39;'>?</sup>"}}</a><br>
-          {% if object.facebook_follower %}
-            <strong>Facebook Followers</strong> <span class="theme-color">&mdash;</span> {{object.facebook_follower}}<br>
-          {% endif %}
             <strong>Twitter</strong> <span class="theme-color">&mdash;</span> {% if object.twitter %}<a href="{{object.twitter}}" target="_blank">{% endif %}{{object.twitter|default:"Not Found&nbsp;&nbsp;<sup data-toggle='tooltip' data-placement='top' data-original-title='Our researchers could not find any info' style='color: #c39; border-bottom: 1px dotted #c39;'>?</sup>"}}</a><br>
-          {% if object.twitter_follower %}
-            <strong>Twitter Followers</strong> <span class="theme-color">&mdash;</span> {{object.twitter_follower}}<br>
-          {% endif %}
             <strong>Website</strong> <span class="theme-color">&mdash;</span> <a {% if object.website %}href="http://{{object.website}}"{% endif %} target="_blank">{{object.website|default:"Not Found&nbsp;&nbsp;<sup data-toggle='tooltip' data-placement='top' data-original-title='Our researchers could not find any info' style='color: #c39; border-bottom: 1px dotted #c39;'>?</sup>"}}</a><br>
             <strong>College</strong> <span class="theme-color">&mdash;</span> {{object.college|default:"Not Found&nbsp;&nbsp;<sup data-toggle='tooltip' data-placement='top' data-original-title='Our researchers could not find any info' style='color: #c39; border-bottom: 1px dotted #c39;'>?</sup>"}}<br>
           {% if object.phone %}

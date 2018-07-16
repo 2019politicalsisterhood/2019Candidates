@@ -26,9 +26,9 @@
 
                 {% if page_obj.has_previous or page_obj.has_next %}
                     <div class="col-sm-12">
-                        {% if page_obj.has_previous %}<a href="?q={{ query }}&amp;page={{ page_obj.previous_page_number }}">{% endif %}&laquo; Previous{% if page_obj.has_previous %}</a>{% endif %}
+                        {% if page_obj.has_previous %}<a href="/search?q={{ query }}&amp;page={{ page_obj.previous_page_number }}{% if state %}{% for st in state %}&state={{st}}{% endfor %}{% endif %}{% if party %}{% for st in party %}&party={{st}}{% endfor %}{% endif %}{% if college %}{% for st in college %}&college={{st}}{% endfor %}{% endif %}{% if issues %}{% for st in issues %}&issues={{st}}{% endfor %}{% endif %}">{% endif %}&laquo; Previous{% if page_obj.has_previous %}</a>{% endif %}
                         |
-                        {% if page_obj.has_next %}<a href="?q={{ query }}&amp;page={{ page_obj.next_page_number }}">{% endif %}Next &raquo;{% if page_obj.has_next %}</a>{% endif %}
+                        {% if page_obj.has_next %}<a href="/search?q={{ query }}&amp;page={{ page_obj.next_page_number }}{% if state %}{% for st in state %}&state={{st}}{% endfor %}{% endif %}{% if party %}{% for st in party %}&party={{st}}{% endfor %}{% endif %}{% if college %}{% for st in college %}&college={{st}}{% endfor %}{% endif %}{% if issues %}{% for st in issues %}&issues={{st}}{% endfor %}{% endif %}">{% endif %}Next &raquo;{% if page_obj.has_next %}</a>{% endif %}
                     </div>
                 {% endif %}
             </div>
