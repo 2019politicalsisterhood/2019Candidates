@@ -2,12 +2,15 @@ from dal import autocomplete
 from django.utils.translation import ugettext as _
 from django import http
 from .models import Issue
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
 
 import logging
 
 logger = logging.getLogger(__name__)
 
-
+@method_decorator(csrf_exempt, name='post')
 class IssueAutocomplete(autocomplete.Select2QuerySetView):
     create_field = "name"
 
