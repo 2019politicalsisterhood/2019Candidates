@@ -10,7 +10,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-@method_decorator(csrf_exempt, name='post')
+@method_decorator(csrf_exempt, name='dispatch')
 class IssueAutocomplete(autocomplete.Select2QuerySetView):
     create_field = "name"
 
