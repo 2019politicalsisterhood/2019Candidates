@@ -11,13 +11,14 @@ def run():
                                          Q(issue2__regex='[a-zA-Z ]'),
                                          Q(issue3__regex='[a-zA-Z ]'))
     try:
-        send_templated_mail(
-            template_name='issueWithIssues',
-            from_email="Political Sisterhood <info@politicalsisterhood.org>",
-            recipient_list=['chris@politicalsisterhood.com'],
-            context={
-                'candidates': candidate,
-            }
-        )
+        if candidate:
+            send_templated_mail(
+                template_name='issueWithIssues',
+                from_email="Political Sisterhood <info@politicalsisterhood.org>",
+                recipient_list=['chris@politicalsisterhood.com'],
+                context={
+                    'candidates': candidate,
+                }
+            )
     except Exception as e:
         logger.error(e)
