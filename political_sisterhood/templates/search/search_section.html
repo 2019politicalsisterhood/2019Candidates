@@ -15,7 +15,7 @@
                             </div>
                             <div class="portfolio-desc">
                               <h3><a href="{{result.object.get_absolute_url}}">{{result.object.first_name}} {{result.object.last_name}}</a></h3>
-                              <a href="{% url 'candidate:state' result.object.state|lower %}">{{result.object.state}}</a>{% if result.object.office and result.object.state %}<span class="middot">·</span>{% endif %}<a href="#">{{result.object.office}}</a>
+                              <p>{% if result.object.race %}{{result.object.race}} - {% endif %}{{result.object.state}}</p>
                             </div>
                           </article>
                 {% empty %}

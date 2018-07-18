@@ -100,6 +100,12 @@ class Candidate(models.Model):
         return self.name
 
     @property
+    def race(self):
+        if self.candidates:
+            for race in self.candidates.all():
+                return race.race
+
+    @property
     def address(self):
         return "{} {}".format(self.campaign_street, self.campaign_street2)
 
