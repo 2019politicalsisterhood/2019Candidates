@@ -237,10 +237,13 @@ class UpdateCandidateInvite(UpdateView):
                                                             issue2=issue2.issue_num,
                                                             issue3=issue3.issue_num,
                                                             college=college, approval="Pending")
-            CandidateUpdate.objects.create(email=form.cleaned_data.get('update_email'),
-                                           first_name=form.cleaned_data.get('update_first_name'),
-                                           last_name=form.cleaned_data.get('update_last_name'),
-                                           candidate=instance)
+            try:
+                CandidateUpdate.objects.create(email=form.cleaned_data.get('update_email'),
+                                               first_name=form.cleaned_data.get('update_first_name'),
+                                               last_name=form.cleaned_data.get('update_last_name'),
+                                               candidate=instance)
+            except Exception as e:
+                logger.error(e)
         except Exception as e:
             logger.error(e)
 
@@ -259,13 +262,13 @@ class CreateCandidate(CreateView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        data['referral'] = self.request.GET.get('ref')
+        data['referral'] = self.request.GET.get('ref', '')
         return data
 
     def form_valid(self, form):
-        ref = self.request.GET.get('ref')
         instance = form.save(commit=True)
         try:
+            ref = self.request.GET.get('ref', '')
             issue1, create = CandidateIssue.objects.get_or_create(candidate=instance,
                                                                   issue=form.cleaned_data.get('issue1'),
                                                                   desc=form.cleaned_data.get('issue1_detail'))
@@ -282,10 +285,13 @@ class CreateCandidate(CreateView):
                                                             college=college,
                                                             approval="Pending",
                                                             referral=ref)
-            CandidateUpdate.objects.create(email=form.cleaned_data.get('update_email'),
-                                           first_name=form.cleaned_data.get('update_first_name'),
-                                           last_name=form.cleaned_data.get('update_last_name'),
-                                           candidate=instance)
+            try:
+                CandidateUpdate.objects.create(email=form.cleaned_data.get('update_email'),
+                                               first_name=form.cleaned_data.get('update_first_name'),
+                                               last_name=form.cleaned_data.get('update_last_name'),
+                                               candidate=instance)
+            except Exception as e:
+                logger.warning(e)
         except Exception as e:
             logger.error(e)
 
