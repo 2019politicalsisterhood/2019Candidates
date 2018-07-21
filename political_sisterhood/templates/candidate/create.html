@@ -27,7 +27,7 @@
         {% block hello %}
         {% endblock %}
         {{form.error}}
-      <form class="form-horizontal" method="post" action="">
+        <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
         {% csrf_token %}
         {% block hidden_fields %}
         <input type="hidden" value="{{referral}}" name="ref" id="ref">

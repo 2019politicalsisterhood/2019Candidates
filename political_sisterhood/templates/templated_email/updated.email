@@ -2,5 +2,5 @@
 {% block html %}
 <h1>Important!!!!</h1>
 {{name}} has updated information on the site.<br><br>
-Go and check it out <a href="https://www.politicalsisterhood.org/{{url}}">here!</a>
+Go and check it out <a href="https://www.politicalsisterhood.org{{url}}">here!</a>
 {% endblock %}

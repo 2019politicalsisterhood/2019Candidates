@@ -129,7 +129,7 @@ class CandidateForm(forms.ModelForm):
                                     label="Feel free to describe \
                                            your feelings on this issue")
 
-    update_email = forms.CharField(label="Direct Contact Email Address")
+    update_email = forms.EmailField(label="Direct Contact Email Address")
     update_first_name = forms.CharField(label="Direct Contact First Name")
     update_last_name = forms.CharField(label="Direct Contact Last Name")
     update_relation = forms.CharField(label="Direct Contact Relation to Candidate")
