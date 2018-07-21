@@ -60,7 +60,7 @@ class Race(models.Model):
     @property
     def title(self):
         if self.district:
-            return "District {}".format(self.district)
+            return "District {} - {}".format(self.district, self.state)
         elif self.other:
             return "{} - {}".format(self.other, self.state)
         elif self.race_type == "Governor":
@@ -92,3 +92,11 @@ class RaceEntry(models.Model):
     candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='candidates')
     race = models.ForeignKey(Race, on_delete=models.CASCADE, related_name="races")
     current = models.BooleanField(default=False)
+
+    @property
+    def race_type(self):
+        return self.race.race_type
+    @property
+    def title(self):
+        return self.race.title
+

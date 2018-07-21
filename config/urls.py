@@ -9,13 +9,13 @@ from allauth.account import views
 from political_sisterhood.pages.views import PageDetailView
 from political_sisterhood.issue.views import IssueAutocomplete
 from political_sisterhood.search.views import MySearchView
-from .views import HomePage, Mailchimp
+from .views import HomePage, Mailchimp, ContactUs
 
 urlpatterns = [
     url(r'^$', HomePage.as_view(), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
     url(r'^news/$', TemplateView.as_view(template_name='pages/news.html'), name='news'),
-    url(r'^contact-us/$', TemplateView.as_view(template_name='pages/contact.html'), name='contact'),
+    url(r'^contact-us/$', ContactUs.as_view(), name='contact'),
     url(r'^issue-ac/', IssueAutocomplete.as_view(), name="issue-autocomplete"),
     # UTILITY VIEWS
     url(r'mailchimp-signup/$', Mailchimp, name='mailchimp'),

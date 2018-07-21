@@ -34,7 +34,15 @@ $('#id_issues').select2({
     placeholder: 'Select an issue',
     width: '100%',
 });
-$('#id_issues, #id_state, #id_college, #id_party, #id_q').change(function(){
+$('#id_race').select2({
+    placeholder: 'Select a race',
+    width: '100%',
+});
+$('#id_race_type').select2({
+    placeholder: 'Select a race type',
+    width: '100%',
+});
+$('#id_issues, #id_state, #id_college, #id_party, #id_race, id_race_type, #id_q').change(function(){
     $('#search_form').submit();
 });
 </script>

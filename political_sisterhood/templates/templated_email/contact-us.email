@@ -1,0 +1,10 @@
+{% block subject %}Contact Us{% endblock %}
+{% block html %}
+<p>
+<strong>Email</strong>: {{email}}  <br><br>
+<strong>Name</strong>: {{name}} <br><br>
+<strong>Phone</strong>: {{phone}} <br><br>
+<strong>Issue</strong>: {{issue}} <br><br>
+<strong>Message</strong>: {{message}}  <br><br>
+</p>
+{% endblock %}

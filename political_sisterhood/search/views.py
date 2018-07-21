@@ -28,6 +28,10 @@ class MySearchView(BaseFacetedSearchView):
         state_or = ""
         issues = self.request.GET.getlist('issues', '')
         issues_or = ""
+        race = self.request.GET.getlist('race', '')
+        race_or = ""
+        race_type = self.request.GET.getlist('race_type', '')
+        race_type_or = ""
         q = self.request.GET.get('q','')
         page = self.request.GET.get('page','')
         search = ''.join(party) + q + page
@@ -49,6 +53,14 @@ class MySearchView(BaseFacetedSearchView):
             for facet in issues:
                 issues_or += 'issues: "%s"' % (facet)
             queryset = queryset.narrow(issues_or)
+        if race:
+            for facet in race:
+                race_or += 'race: "%s"' % (facet)
+            queryset = queryset.narrow(race_or)
+        if race_type:
+            for facet in race_type:
+                race_type_or += 'race_type: "%s"' % (facet)
+            queryset = queryset.narrow(race_type_or)
         if q:
             queryset = queryset.filter(SQ(text=AutoQuery(q))|SQ(title=AutoQuery(q)))
 
@@ -74,6 +86,8 @@ class MySearchView(BaseFacetedSearchView):
         context['party'] = self.request.GET.getlist('party', '')
         context['college'] = self.request.GET.getlist('college', '')
         context['issues'] = self.request.GET.getlist('issues', '')
-        context['query'] = self.request.GET.get('q','')
+        context['race'] = self.request.GET.getlist('race', '')
+        context['race_type'] = self.request.GET.getlist('race_type', '')
+        context['query'] = self.request.GET.get('q', '')
 
         return context

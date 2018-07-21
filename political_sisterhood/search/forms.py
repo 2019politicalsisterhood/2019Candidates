@@ -12,6 +12,7 @@ from haystack.utils.app_loading import haystack_get_model
 from model_utils import Choices
 from political_sisterhood.issue.models import Issue
 from political_sisterhood.candidate.models import College
+from political_sisterhood.races.models import RaceEntry
 
 STATES = Choices(('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'), ('AR', 'Arkansas'), ('CA', 'California'),
                  ('CO', 'Colorado'), ('CT', 'Connecticut'),
@@ -39,6 +40,17 @@ def ISSUES():
     return sorted(choices, key=lambda x: x[1])
 
 
+def RACE():
+    choices = [(race.title, race.title)
+               for race in RaceEntry.objects.select_related('race').all()]
+    return sorted(choices, key=lambda x: x[1])
+
+
+def RACE_TYPE():
+    return Choices('Senate', 'House', 'Governor',
+                   'State House', 'State Senate', 'State Assembly')
+
+
 def COLLEGE():
     choices = [(college.name, college.name)
                for college in College.objects.all()]
@@ -49,13 +61,16 @@ class SearchForm(forms.Form):
     q = forms.CharField(required=False, label=_('Search'),
                         widget=forms.TextInput(attrs={'type': 'search',
                                                       'placeholder': 'Search'}))
-    party = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=Choices('Democrat', 'Republican',
-                                                                                   'Independent',
-                                                                                   'Green', 'Not Listed',
-                                                                                   'Non-Partisian'))
+    party = forms.MultipleChoiceField(widget=forms.SelectMultiple,
+                                      choices=Choices('Democrat', 'Republican',
+                                                      'Independent',
+                                                      'Green', 'Not Listed',
+                                                       'Non-Partisian'))
     college = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=COLLEGE)
     state = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=STATES)
     issues = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=ISSUES)
+    race_type = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=RACE_TYPE)
+    race = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=RACE)
 
     def __init__(self, *args, **kwargs):
         self.searchqueryset = kwargs.pop('searchqueryset', None)
@@ -64,6 +79,8 @@ class SearchForm(forms.Form):
         self.college = kwargs.pop('college', None)
         self.state = kwargs.pop('state', None)
         self.issues = kwargs.pop('issues', None)
+        self.race = kwargs.pop('race', None)
+        self.race_type = kwargs.pop('race_type', None)
 
         if self.searchqueryset is None:
             self.searchqueryset = ""
@@ -73,3 +90,5 @@ class SearchForm(forms.Form):
         self.fields['college'].required = False
         self.fields['state'].required = False
         self.fields['issues'].required = False
+        self.fields['race_type'].required = False
+        self.fields['race'].required = False

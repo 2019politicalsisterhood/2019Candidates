@@ -1,7 +1,9 @@
 from django.views.generic import TemplateView
 from political_sisterhood.candidate.models import Candidate
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect
 from django.contrib import messages
+from templated_email import send_templated_mail
 import os
 import json
 import logging
@@ -17,6 +19,37 @@ class HomePage(TemplateView):
         context = super().get_context_data(**kwargs)
         context['candidate'] = Candidate.objects.filter(homepage=True)
         return context
+
+
+class ContactUs(TemplateView):
+    template_name='pages/contact.html'
+
+    def post(self, request, *args, **kwargs):
+        email = request.POST.get('email')
+        name = request.POST.get('name', '')
+        phone = request.POST.get('phone', '')
+        issue = request.POST.get('issue', '')
+        message = request.POST.get('message', '')
+        bot = request.POST.get('botcheck', '')
+        if not bot:
+            send_templated_mail(
+                template_name='contact-us',
+                from_email="Political Sisterhood <info@politicalsisterhood.org>",
+                recipient_list=['chris@politicalsisterhood.com',
+                                'susan@politicalsisterhood.com'],
+                context={
+                    'email': email,
+                    'name': name,
+                    'phone': phone,
+                    'issue': issue,
+                    'message': message
+                }
+            )
+        else:
+            logger.error("BOT!")
+        messages.success(request, "Thanks for your message. We will respond in 24-48 hours.")
+        return redirect('/')
+
 
 def Mailchimp(request):
     if request.method == 'POST':

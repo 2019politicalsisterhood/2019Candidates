@@ -103,7 +103,7 @@ class Candidate(models.Model):
     def race(self):
         if self.candidates:
             for race in self.candidates.all():
-                return race.race
+                return race
 
     @property
     def address(self):

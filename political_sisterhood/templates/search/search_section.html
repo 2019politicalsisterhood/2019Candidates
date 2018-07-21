@@ -15,7 +15,8 @@
                             </div>
                             <div class="portfolio-desc">
                               <h3><a href="{{result.object.get_absolute_url}}">{{result.object.first_name}} {{result.object.last_name}}</a></h3>
-                              <p>{% if result.object.race %}{{result.object.race}} - {% endif %}{{result.object.state}}</p>
+                              <p>{% if result.object.race %}{{result.object.race.race_type}}<br/>{% endif %}{% if result.object.race %}{{result.object.race.title}}{% else %}{{result.object.get_state_display}}{% endif %}
+                              </p>
                             </div>
                           </article>
                 {% empty %}
@@ -26,9 +27,9 @@
 
                 {% if page_obj.has_previous or page_obj.has_next %}
                     <div class="col-sm-12">
-                        {% if page_obj.has_previous %}<a href="/search?q={{ query }}&amp;page={{ page_obj.previous_page_number }}{% if state %}{% for st in state %}&state={{st}}{% endfor %}{% endif %}{% if party %}{% for st in party %}&party={{st}}{% endfor %}{% endif %}{% if college %}{% for st in college %}&college={{st}}{% endfor %}{% endif %}{% if issues %}{% for st in issues %}&issues={{st}}{% endfor %}{% endif %}">{% endif %}&laquo; Previous{% if page_obj.has_previous %}</a>{% endif %}
+                        {% if page_obj.has_previous %}<a href="/search?q={{ query }}&amp;page={{ page_obj.previous_page_number }}{% if state %}{% for st in state %}&state={{st}}{% endfor %}{% endif %}{% if party %}{% for st in party %}&party={{st}}{% endfor %}{% endif %}{% if college %}{% for st in college %}&college={{st}}{% endfor %}{% endif %}{% if issues %}{% for st in issues %}&issues={{st}}{% endfor %}{% endif %}{% for st in race %}&race={{st}}{% endfor %}{% for st in race_type %}&race_type={{st}}{% endfor %}">{% endif %}&laquo; Previous{% if page_obj.has_previous %}</a>{% endif %}
                         |
-                        {% if page_obj.has_next %}<a href="/search?q={{ query }}&amp;page={{ page_obj.next_page_number }}{% if state %}{% for st in state %}&state={{st}}{% endfor %}{% endif %}{% if party %}{% for st in party %}&party={{st}}{% endfor %}{% endif %}{% if college %}{% for st in college %}&college={{st}}{% endfor %}{% endif %}{% if issues %}{% for st in issues %}&issues={{st}}{% endfor %}{% endif %}">{% endif %}Next &raquo;{% if page_obj.has_next %}</a>{% endif %}
+                        {% if page_obj.has_next %}<a href="/search?q={{ query }}&amp;page={{ page_obj.next_page_number }}{% if state %}{% for st in state %}&state={{st}}{% endfor %}{% endif %}{% if party %}{% for st in party %}&party={{st}}{% endfor %}{% endif %}{% if college %}{% for st in college %}&college={{st}}{% endfor %}{% endif %}{% if issues %}{% for st in issues %}&issues={{st}}{% endfor %}{% endif %}{% for st in race %}&race={{st}}{% endfor %}{% for st in race_type %}&race_type={{st}}{% endfor %}">{% endif %}Next &raquo;{% if page_obj.has_next %}</a>{% endif %}
                     </div>
                 {% endif %}
             </div>
@@ -69,6 +70,18 @@
                         <h4>State</h4>
                       </div>
                       {{form.state}}
+                </div>
+                <div class="bottompadding-sm">
+                      <div class="fancy-title title-border">
+                        <h4>Race Type</h4>
+                      </div>
+                      {{form.race_type}}
+                </div>
+                <div class="bottompadding-sm">
+                      <div class="fancy-title title-border">
+                        <h4>Race</h4>
+                      </div>
+                      {{form.race}}
                 </div>
                 <button type="submit" class="button button-3d button-large">Search</button>
             </div>

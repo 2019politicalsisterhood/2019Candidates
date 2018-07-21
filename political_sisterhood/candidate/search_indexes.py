@@ -9,6 +9,8 @@ class CandidateIndex(indexes.SearchIndex, indexes.Indexable):
     college = indexes.FacetCharField(indexed=True)
     state = indexes.FacetCharField(indexed=True)
     issues = indexes.FacetMultiValueField(indexed=True)
+    race = indexes.FacetCharField(indexed=True)
+    race_type = indexes.FacetCharField(indexed=True)
     random = indexes.CharField()
 
     def get_model(self):
@@ -17,11 +19,19 @@ class CandidateIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_issues(self, obj):
         return [(issue.issue.parent_name) for issue in obj.issues.all()] or None
 
-    def prepare_party(self,obj):
+    def prepare_party(self, obj):
         return obj.party
 
-    def prepare_state(self,obj):
+    def prepare_state(self, obj):
         return obj.state
+
+    def prepare_race(self, obj):
+        if obj.race:
+            return obj.race.title
+
+    def prepare_race_type(self, obj):
+        if obj.race:
+            return obj.race.race_type
 
     def prepare_random(self, obj):
         return random.randint(0,99999999)
