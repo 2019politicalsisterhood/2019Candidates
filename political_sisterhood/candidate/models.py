@@ -91,7 +91,8 @@ class Candidate(models.Model):
 
     @property
     def name(self):
-        return "{} {}".format(self.first_name, self.last_name)
+        if self.first_name and self.last_name:
+            return "{} {}".format(self.first_name, self.last_name)
 
     @property
     def full_name(self):

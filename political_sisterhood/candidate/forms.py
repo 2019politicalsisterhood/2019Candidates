@@ -97,11 +97,12 @@ class CandidateForm(forms.ModelForm):
     issue1 = forms.ModelChoiceField(
                 queryset=Issue.objects.all(),
                 widget=autocomplete.ModelSelect2(url='issue-autocomplete'),
-                label="1st Most Important Issue"
+                label="1st Most Important Issue",
               )
     issue1_detail = forms.CharField(required=False,
                                     max_length=280,
                                     widget=forms.Textarea,
+
                                     help_text="Max length is 280 characters",
                                     label="Feel free to describe \
                                            your feelings on this issue")

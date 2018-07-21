@@ -9,9 +9,11 @@
                 {% for result in page_obj.object_list %}
                          <article class="col-sm-6 col-md-4 col-lg-3 pf-media pf-icons">
                             <div class="portfolio-image">
+                                {% if result.object.image_url %}
                                 <a href="{{result.object.get_absolute_url}}">
                                     <img src="{{result.object.image_url}}" alt="{{result.object.name}} Headshot">
                                 </a>
+                               {% endif %}
                             </div>
                             <div class="portfolio-desc">
                               <h3><a href="{{result.object.get_absolute_url}}">{{result.object.first_name}} {{result.object.last_name}}</a></h3>

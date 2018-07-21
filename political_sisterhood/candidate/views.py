@@ -195,7 +195,7 @@ class UpdateCandidate(UpdateView):
             logger.info('trigger')
         except Exception as e:
             logger.error(e)
-
+        messages.success(self.request, "your changes have been submitted and your file will be updated upon review and approval of the changes.")
         return redirect(Candidate.objects.get(id=instance.id).get_absolute_url() + "?approved=pending")
 
 
