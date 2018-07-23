@@ -94,6 +94,14 @@ class RaceEntry(models.Model):
     current = models.BooleanField(default=False)
 
     @property
+    def deep(self):
+        if self.race.race_type == 'State House' or\
+           self.race.race_type == 'State Senate' or\
+           self.race.race_type == 'State Assembly':
+            return True
+        return False
+
+    @property
     def race_type(self):
         return self.race.race_type
     @property

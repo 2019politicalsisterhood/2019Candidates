@@ -42,7 +42,7 @@ def ISSUES():
 
 def RACE():
     choices = [(race.title, race.title)
-               for race in RaceEntry.objects.select_related('race').all()]
+               for race in RaceEntry.objects.select_related('race').distinct() if not race.deep]
     return sorted(choices, key=lambda x: x[1])
 
 
