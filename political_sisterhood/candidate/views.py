@@ -134,11 +134,7 @@ class CandidateView(DetailView):
         slug = self.kwargs['slug']
         candidate = Candidate.objects.get(slug=slug)
         approved = self.request.GET.get('approved')
-        if approved == 'pending':
-            return candidate
-        if candidate.approved:
-            return candidate
-        raise Http404()
+        return candidate
 
 
 class StateListView(ListView):

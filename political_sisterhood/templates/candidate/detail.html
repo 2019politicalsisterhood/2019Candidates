@@ -98,7 +98,7 @@
 </div>
 {% endblock %}
 {% block content %}
-
+{% if object.approved %}
 <section id="page-title" class="page-title-mini page-title-nobg">
   <div class="container clearfix">
     <ol class="breadcrumb">
@@ -271,6 +271,16 @@
         </p>
         <a href="https://www.google.com/maps/dir/''/{{object.address}},+{{object.campaign_city}},+{{object.state}}+{{object.campaign_zip}}/" class="button button-3d button-large">Get Directions</a>
       </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% else %}
+<section id="content" style="margin: 250px 0;">
+  <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-sm">
+    <div class="heading-block center">
+      <h2 class="normal-case">{{object.name}} is pending approval</h2>
+      <p>We are currently working on approving this candidates data. Please allow 24-48 hours for new data to be approved.</p>
     </div>
   </div>
 </section>
