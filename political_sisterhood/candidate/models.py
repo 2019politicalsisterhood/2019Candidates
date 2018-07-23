@@ -26,6 +26,7 @@ class Candidate(models.Model):
     active = models.BooleanField(default=True)
     approval_status = Choices(('Approved'), ('Pending'),)
     approval = StatusField(choices_name='approval_status', db_index=True)
+    man = models.BooleanField(default=False)
     unique_identifier1 = StatusField(choices_name='IDENT',
                                      blank=True, null=True, default=None)
     unique_identifier2 = StatusField(choices_name='IDENT',
