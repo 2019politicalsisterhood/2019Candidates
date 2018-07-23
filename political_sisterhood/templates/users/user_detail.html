@@ -14,7 +14,6 @@
 
             <div class="col-sm-9">
 
-              <img {% if object.avater %} {% else %}src="{% static '/images/icons/avatar.jpg' %}"{% endif %} class="alignleft img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar" style="max-width: 84px;">
 
               <div class="heading-block noborder">
                 <h3>{{ object.name|default_if_none:"" }}</h3>
@@ -26,9 +25,8 @@
               <div class="row clearfix">
 
                 <div class="col-md-12">
-
+                  {% comment %}
                   <div class="tabs tabs-alt clearfix ui-tabs ui-widget ui-widget-content ui-corner-all" id="tabs-profile">
-
                     <ul class="tab-nav clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
                       <li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="tab-payments" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true"><a href="#tab-payments" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1"><i class="icon-dollar"></i>Payments</a></li>
                       <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tab-candidates" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab-candidates" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2"><i class="icon-user2"></i>Candidates</a></li>
@@ -181,6 +179,7 @@
                     </div>
 
                   </div>
+                  {% endcomment %}
 
                 </div>
 
