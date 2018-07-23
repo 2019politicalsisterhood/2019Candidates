@@ -43,7 +43,7 @@ class Candidate(models.Model):
                                      blank=True, null=True)
 
     state = StatusField(choices_name='STATES', db_index=True)
-    bio = RichTextField(blank=True)
+    bio = RichTextField(blank=True, max_length=4000)
 
     # Campaign Office Info
     phone = models.CharField(max_length=255, blank=True, verbose_name="Campaign Phone")
