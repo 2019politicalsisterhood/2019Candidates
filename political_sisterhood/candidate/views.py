@@ -57,6 +57,8 @@ class AllCandidates(BaseFacetedSearchView):
         state_or = ""
         issues = self.request.GET.getlist('issues', '')
         issues_or = ""
+        race_type = self.request.GET.getlist('race_type', '')
+        race_type_or = ""
         q = self.request.GET.get('q','')
         page = self.request.GET.get('page','')
         search = ''.join(party) + q + page
@@ -78,6 +80,10 @@ class AllCandidates(BaseFacetedSearchView):
             for facet in issues:
                 issues_or += 'issues: "%s"' % (facet)
             queryset = queryset.narrow(issues_or)
+        if race_type:
+            for facet in race_type:
+                race_type_or += 'race_type: "%s"' % (facet)
+            queryset = queryset.narrow(race_type_or)
         if q:
             queryset = queryset.filter(SQ(text=AutoQuery(q))|SQ(title=AutoQuery(q)))
         return queryset
@@ -97,13 +103,14 @@ class AllCandidates(BaseFacetedSearchView):
         return self.render_to_response(context)
 
     def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        data['query'] = self.request.GET.get('q','')
-        data['party'] = self.request.GET.getlist('party', '')
-        data['college'] = self.request.GET.getlist('college', '')
-        data['state'] = self.request.GET.getlist('state', '')
-        data['issues'] = self.request.GET.getlist('issues', '')
-        return data
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('q','')
+        context['party'] = self.request.GET.getlist('party', '')
+        context['college'] = self.request.GET.getlist('college', '')
+        context['state'] = self.request.GET.getlist('state', '')
+        context['issues'] = self.request.GET.getlist('issues', '')
+        context['race_type'] = self.request.GET.getlist('race_type', '')
+        return context
 
 
 class CandidateView(DetailView):
