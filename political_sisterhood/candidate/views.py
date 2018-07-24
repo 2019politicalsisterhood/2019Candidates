@@ -17,6 +17,7 @@ from .forms import CandidateForm
 from political_sisterhood.search.forms import SearchForm
 from haystack.query import SearchQuerySet, EmptySearchQuerySet, SQ
 from haystack.inputs import AutoQuery
+import urllib.parse as urlparse
 logger = logging.getLogger(__name__)
 # Create your views here.
 
@@ -140,8 +141,16 @@ class CandidateView(DetailView):
     def get_object(self):
         slug = self.kwargs['slug']
         candidate = Candidate.objects.get(slug=slug)
-        approved = self.request.GET.get('approved')
         return candidate
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['approved'] = False
+        if self.request.GET.get('approved') == 'pending':
+            context['approved'] = True
+        elif self.get_object().approved:
+            context['approved'] = True
+        return context
 
 
 class StateListView(ListView):
@@ -189,13 +198,13 @@ class UpdateCandidate(UpdateView):
             CandidateUpdate.objects.create(email=form.cleaned_data.get('update_email'),
                                            first_name=form.cleaned_data.get('update_first_name'),
                                            last_name=form.cleaned_data.get('update_last_name'),
+                                           note=form.cleaned_data.get('update_note', ''),
                                            candidate=instance)
         except Exception as e:
             logger.error(e)
 
         try:
             sendingEmail(instance.id)
-            logger.info('trigger')
         except Exception as e:
             logger.error(e)
         messages.success(self.request, "your changes have been submitted and your file will be updated upon review and approval of the changes.")
@@ -244,6 +253,7 @@ class UpdateCandidateInvite(UpdateView):
                 CandidateUpdate.objects.create(email=form.cleaned_data.get('update_email'),
                                                first_name=form.cleaned_data.get('update_first_name'),
                                                last_name=form.cleaned_data.get('update_last_name'),
+                                                note=form.cleaned_data.get('update_note', ''),
                                                candidate=instance)
             except Exception as e:
                 logger.error(e)
@@ -292,6 +302,7 @@ class CreateCandidate(CreateView):
                 CandidateUpdate.objects.create(email=form.cleaned_data.get('update_email'),
                                                first_name=form.cleaned_data.get('update_first_name'),
                                                last_name=form.cleaned_data.get('update_last_name'),
+                                                note=form.cleaned_data.get('update_note', ''),
                                                candidate=instance)
             except Exception as e:
                 logger.warning(e)

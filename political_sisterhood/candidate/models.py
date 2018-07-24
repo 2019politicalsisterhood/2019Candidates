@@ -47,6 +47,7 @@ class Candidate(models.Model):
 
     # Campaign Office Info
     phone = models.CharField(max_length=255, blank=True, verbose_name="Campaign Phone")
+    campaign_name = models.CharField(max_length=1024, blank=True, verbose_name="Campaign HQ Name")
     campaign_street = models.CharField(max_length=255, blank=True, verbose_name="Campaign HQ Street")
     campaign_street2 = models.CharField(max_length=255, blank=True, verbose_name="Campaign HQ Street 2 (if applicable)")
     campaign_city = models.CharField(max_length=255, blank=True, verbose_name="Campaign HQ City")
@@ -212,6 +213,7 @@ class Ethnicity(models.Model):
 
     class Meta:
         verbose_name_plural = "Ethnicities"
+        ordering = ['name']
 
 
 class CandidateReferral(models.Model):
@@ -233,6 +235,7 @@ class CandidateUpdate(models.Model):
     email = models.CharField(max_length=1025)
     first_name = models.CharField(max_length=1025)
     last_name = models.CharField(max_length=1025)
+    note = models.TextField(blank=True)
     updated = models.DateTimeField(null=True, blank=True)
     candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE, null=True)
 
