@@ -61,7 +61,7 @@ OPT_OPTIONS = Choices((None, '---'),
                       ('No Response', 'Choose not to respond')
                       )
 
-STATES = Choices(('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'),
+STATES = Choices((None, '---'),('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'),
                      ('AR', 'Arkansas'), ('CA', 'California'),
                      ('CO', 'Colorado'), ('CT', 'Connecticut'),
                      ('DE', 'Delaware'), ('DC', 'District of Columbia'),
