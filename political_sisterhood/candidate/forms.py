@@ -63,6 +63,8 @@ class CandidateForm(forms.ModelForm):
                             required=False)
 
     state = forms.ChoiceField(choices=STATES)
+    race_name = forms.CharField(label="What race are you running in?",
+                                max_length=1024)
     party = forms.ChoiceField(choices=Choices('', 'Democrat',
                                               'Republican',
                                               'Green',
@@ -155,6 +157,7 @@ class CandidateForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'image', 'email',
                   'filing_number', 'ethnicity', 'marginalized', 'lgbtq',
                   'unique_identifier1', 'unique_identifier2', 'state',
+                  'race_name',
                   'party', 'bio', 'email', 'facebook', 'twitter', 'linkedin',
                   'website', 'campaign_name', 'campaign_street', 'campaign_street2',
                   'campaign_city', 'campaign_zip',
@@ -197,6 +200,7 @@ class CandidateForm(forms.ModelForm):
                 'Race Info',
                 'state',
                 'party',
+                'race_name'
             ),
             Fieldset(
                 'Please indicate the top 3 focal points in your campaign from the drop down list options',

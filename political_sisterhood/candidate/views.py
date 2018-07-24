@@ -248,12 +248,13 @@ class UpdateCandidateInvite(UpdateView):
             Candidate.objects.filter(id=instance.id).update(issue1=issue1.issue_num,
                                                             issue2=issue2.issue_num,
                                                             issue3=issue3.issue_num,
+                                                            race_name=form.cleaned_data.get('race_name'),
                                                             college=college, approval="Pending")
             try:
                 CandidateUpdate.objects.create(email=form.cleaned_data.get('update_email'),
                                                first_name=form.cleaned_data.get('update_first_name'),
                                                last_name=form.cleaned_data.get('update_last_name'),
-                                                note=form.cleaned_data.get('update_note', ''),
+                                               note=form.cleaned_data.get('update_note', ''),
                                                candidate=instance)
             except Exception as e:
                 logger.error(e)
@@ -297,12 +298,13 @@ class CreateCandidate(CreateView):
                                                             issue3=issue3.issue_num,
                                                             college=college,
                                                             approval="Pending",
+                                                            race_name=form.cleaned_data.get('race_name'),
                                                             referral=ref)
             try:
                 CandidateUpdate.objects.create(email=form.cleaned_data.get('update_email'),
                                                first_name=form.cleaned_data.get('update_first_name'),
                                                last_name=form.cleaned_data.get('update_last_name'),
-                                                note=form.cleaned_data.get('update_note', ''),
+                                               note=form.cleaned_data.get('update_note', ''),
                                                candidate=instance)
             except Exception as e:
                 logger.warning(e)
