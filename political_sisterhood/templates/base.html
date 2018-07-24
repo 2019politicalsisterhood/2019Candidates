@@ -74,8 +74,8 @@
               <li><a href="{% url 'candidate:all' %}"><div>Candidate Reports</div></a></li>
               <li><a style="cursor: unset;pointer-events: none;"><div>Resources</div></a>
                 <ul>
-                  <li><a href="#"><div>Consultants</div></a></li>
-                  <li><a href="#"><div>Training Organization</div></a></li>
+                  <li><a href="{% url 'coming-soon' %}"><div>Consultants</div></a></li>
+                  <li><a href="{% url 'coming-soon' %}"><div>Training Organization</div></a></li>
                 </ul>
               </li>
               <li><a href="{% url 'jobs:all' %}"><div>Jobs</div></a></li>
@@ -107,7 +107,7 @@
         {% block fullwidth %}
         {% endblock %}
             <div class="content-wrap notoppadding">
-          <a href="#" class="button button-full center tright footer-stick">
+          <a href="{% url 'coming-soon' %}" class="button button-full center tright footer-stick">
           <div class="container clearfix">
             Political Sisterhood needs your help! <strong>Find Out How</strong> <i class="icon-caret-right" style="top:4px;"></i>
           </div>

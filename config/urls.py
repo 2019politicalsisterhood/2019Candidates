@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
     url(r'^news/$', TemplateView.as_view(template_name='pages/news.html'), name='news'),
     url(r'^contact-us/$', ContactUs.as_view(), name='contact'),
+    url(r'^coming-soon/$', TemplateView.as_view(template_name='pages/soon.html'), name='coming-soon'),
     url(r'^issue-ac/', IssueAutocomplete.as_view(), name="issue-autocomplete"),
     # UTILITY VIEWS
     url(r'mailchimp-signup/$', Mailchimp, name='mailchimp'),
