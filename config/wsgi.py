@@ -18,6 +18,7 @@ import sys
 
 from django.core.wsgi import get_wsgi_application
 
+
 # This allows easy placement of apps within the interior
 # political_sisterhood directory.
 app_path = os.path.abspath(os.path.join(
