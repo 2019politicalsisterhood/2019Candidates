@@ -13,6 +13,7 @@ class CandidateIndex(indexes.SearchIndex, indexes.Indexable):
     race = indexes.FacetCharField(indexed=True)
     race_type = indexes.FacetCharField(indexed=True)
     women = indexes.BooleanField(indexed=True)
+    active = indexes.BooleanField(indexed=True)
     random = indexes.CharField()
 
     def get_model(self):
@@ -30,6 +31,9 @@ class CandidateIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_race(self, obj):
         if obj.race:
             return obj.race.title
+
+    def prepare_active(self, obj):
+        return obj.active
 
     def prepare_women(self, obj):
         if obj.man:

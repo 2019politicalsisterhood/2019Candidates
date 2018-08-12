@@ -66,7 +66,7 @@ class MySearchView(BaseFacetedSearchView):
             queryset = queryset.narrow(race_type_or)
         if q:
             queryset = queryset.filter(SQ(text=AutoQuery(q))|SQ(title=AutoQuery(q)))
-
+        queryset = queryset.filter(active=True)
         return queryset
 
     def form_valid(self, form):
