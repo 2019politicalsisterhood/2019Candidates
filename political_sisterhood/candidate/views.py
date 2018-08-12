@@ -340,7 +340,8 @@ def CandidateIssueReport(request):
     body = 'NAME: %s\n\nEMAIL: %s\n\nISSUE: %s\n\nMESSAGE: %s' % (name, email, issue, other)
     from_email = 'info@politicalsisterhood.com'
     recipients = [
-        'chris@politicalsisterhood.com'
+        'chris@politicalsisterhood.com',
+        'susan@politicalsisterhood.com',
         ]
     send_mail(subject, body, from_email, recipients)
     messages.success(request, 'We appreciate your feedback!')
