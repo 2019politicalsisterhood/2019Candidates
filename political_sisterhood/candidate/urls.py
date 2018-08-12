@@ -27,10 +27,6 @@ urlpatterns = [
         CreateCandidate.as_view(),
         name='create'
     ),
-    url(r'^u/(?P<slug>[\w.@+-]+)/',
-        UpdateCandidate.as_view(),
-        name='update_candidate'
-    ),
     url(r'^update/(?P<hash>[\w.@+-]+)/',
         UpdateCandidateInvite.as_view(),
         name='update'
