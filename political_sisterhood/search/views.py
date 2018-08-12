@@ -32,6 +32,7 @@ class MySearchView(BaseFacetedSearchView):
         race_or = ""
         race_type = self.request.GET.getlist('race_type', '')
         race_type_or = ""
+        women = self.request.GET.get('women', '')
         q = self.request.GET.get('q','')
         page = self.request.GET.get('page','')
         search = ''.join(party) + q + page
@@ -57,6 +58,8 @@ class MySearchView(BaseFacetedSearchView):
             for facet in race:
                 race_or += 'race: "%s"' % (facet)
             queryset = queryset.narrow(race_or)
+        if women:
+            queryset = queryset.filter(women=True)
         if race_type:
             for facet in race_type:
                 race_type_or += 'race_type: "%s"' % (facet)
@@ -88,6 +91,7 @@ class MySearchView(BaseFacetedSearchView):
         context['issues'] = self.request.GET.getlist('issues', '')
         context['race'] = self.request.GET.getlist('race', '')
         context['race_type'] = self.request.GET.getlist('race_type', '')
+        context['women'] = self.request.GET.get('women', '')
         context['query'] = self.request.GET.get('q', '')
 
         return context

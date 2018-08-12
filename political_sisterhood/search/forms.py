@@ -70,6 +70,7 @@ class SearchForm(forms.Form):
     state = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=STATES)
     issues = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=ISSUES)
     race_type = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=RACE_TYPE)
+    women = forms.BooleanField(required=False)
     race = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices=RACE)
 
     def __init__(self, *args, **kwargs):
@@ -81,6 +82,7 @@ class SearchForm(forms.Form):
         self.issues = kwargs.pop('issues', None)
         self.race = kwargs.pop('race', None)
         self.race_type = kwargs.pop('race_type', None)
+        self.men = kwargs.pop('women', None)
 
         if self.searchqueryset is None:
             self.searchqueryset = ""
@@ -91,4 +93,5 @@ class SearchForm(forms.Form):
         self.fields['state'].required = False
         self.fields['issues'].required = False
         self.fields['race_type'].required = False
+        self.fields['women'].required = False
         self.fields['race'].required = False
