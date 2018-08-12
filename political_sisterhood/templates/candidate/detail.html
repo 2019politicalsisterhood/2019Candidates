@@ -61,7 +61,6 @@
 <div class="modal-body">
 <p>Thanks for noting that there is something wrong with {{object.name}}'s page.</p>
 <p>Please fill out the form below so that we can make the appropriate updates.</p>
-<p>If you want to update the candidates page, <a href="{% url 'candidate:update_candidate' object.slug %}">do so here</a>.</p>
 <form method="post" method="post" action="{% url 'candidate:issue' %}">
   {% csrf_token %}
 <div class="form-group">
