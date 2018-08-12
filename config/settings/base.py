@@ -74,7 +74,6 @@ THIRD_PARTY_APPS = [
     'haystack',
     'betterforms',
     'django_extensions',
-    'djstripe',
     'dynamic_raw_id',
 ]
 
