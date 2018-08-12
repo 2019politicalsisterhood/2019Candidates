@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^jobs/', include('political_sisterhood.jobs.urls', namespace='jobs')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^admin/dynamic_raw_id/', include('dynamic_raw_id.urls')),
-     url(r'^search/?$', MySearchView.as_view(), name='search'),
+    url(r'^search/?$', MySearchView.as_view(), name='search'),
 
     # Your stuff: custom urls includes go here
     url(r'^payments/', include('djstripe.urls', namespace="djstripe")),
