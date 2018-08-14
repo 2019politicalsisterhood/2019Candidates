@@ -6,6 +6,7 @@ import random
 
 class CandidateIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
+    first_name = indexes.CharField(indexed=True)
     party = indexes.FacetCharField(indexed=True)
     college = indexes.FacetCharField(indexed=True)
     state = indexes.FacetCharField(indexed=True)
@@ -18,6 +19,9 @@ class CandidateIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_model(self):
         return Candidate
+
+    def prepare_first_name(self, obj):
+        return obj.first_name
 
     def prepare_issues(self, obj):
         return [(issue.issue.parent_name) for issue in obj.issues.all()] or None
