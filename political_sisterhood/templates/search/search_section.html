@@ -30,7 +30,30 @@
                 {% if page_obj.has_previous or page_obj.has_next %}
                     <div class="col-sm-12">
                         {% if page_obj.has_previous %}<a href="/search?q={{ query }}&amp;page={{ page_obj.previous_page_number }}{% if state %}{% for st in state %}&state={{st}}{% endfor %}{% endif %}{% if party %}{% for st in party %}&party={{st}}{% endfor %}{% endif %}{% if college %}{% for st in college %}&college={{st}}{% endfor %}{% endif %}{% if issues %}{% for st in issues %}&issues={{st}}{% endfor %}{% endif %}{% for st in race %}&race={{st}}{% endfor %}{% for st in race_type %}&race_type={{st}}{% endfor %}">{% endif %}&laquo; Previous{% if page_obj.has_previous %}</a>{% endif %}
-                        |
+                         <!-- PAGES PART -->
+            {% for num in page_obj.paginator.page_range %}
+                <!-- Active page -->
+                {% if num == page_obj.number %}
+                        <span>{{ num }}</span>
+                {% else %}
+                        <!-- For the 1st page we do not use ?page=1 -->
+                        {% if num == 1 %}
+                            <a href="#">{{ num }}</a>
+
+                        {% else %}
+                            <!-- Show current page and +-3 pages -->
+                            {% if num|add:"-3" <= page_obj.number and page_obj.number <= num|add:"3" %}
+                                <a href="/search?q={{ query }}&amp;page={{ num }}{% if state %}{% for st in state %}&state={{st}}{% endfor %}{% endif %}{% if party %}{% for st in party %}&party={{st}}{% endfor %}{% endif %}{% if college %}{% for st in college %}&college={{st}}{% endfor %}{% endif %}{% if issues %}{% for st in issues %}&issues={{st}}{% endfor %}{% endif %}{% for st in race %}&race={{st}}{% endfor %}{% for st in race_type %}&race_type={{st}}{% endfor %}">{{ num }}</a>
+
+                            <!-- Shows every 10th page and the last page -->
+                            {% elif num|divisibleby:"10" or num == page_obj.paginator.num_pages %}
+                                <a href="/search?q={{ query }}&amp;page={{ num }}{% if state %}{% for st in state %}&state={{st}}{% endfor %}{% endif %}{% if party %}{% for st in party %}&party={{st}}{% endfor %}{% endif %}{% if college %}{% for st in college %}&college={{st}}{% endfor %}{% endif %}{% if issues %}{% for st in issues %}&issues={{st}}{% endfor %}{% endif %}{% for st in race %}&race={{st}}{% endfor %}{% for st in race_type %}&race_type={{st}}{% endfor %}">{{ num }}</a>
+                            {% endif %}
+
+                        {% endif %}
+                {% endif %}
+
+            {% endfor %}
                         {% if page_obj.has_next %}<a href="/search?q={{ query }}&amp;page={{ page_obj.next_page_number }}{% if state %}{% for st in state %}&state={{st}}{% endfor %}{% endif %}{% if party %}{% for st in party %}&party={{st}}{% endfor %}{% endif %}{% if college %}{% for st in college %}&college={{st}}{% endfor %}{% endif %}{% if issues %}{% for st in issues %}&issues={{st}}{% endfor %}{% endif %}{% for st in race %}&race={{st}}{% endfor %}{% for st in race_type %}&race_type={{st}}{% endfor %}">{% endif %}Next &raquo;{% if page_obj.has_next %}</a>{% endif %}
                     </div>
                 {% endif %}

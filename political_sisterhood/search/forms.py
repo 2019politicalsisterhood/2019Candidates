@@ -47,7 +47,7 @@ def RACE():
 
 
 def RACE_TYPE():
-    return Choices('Senate', 'House', 'Governor',
+    return Choices('US Senate', 'US House', 'Governor',
                    'State House', 'State Senate', 'State Assembly')
 
 
