@@ -17,7 +17,7 @@
                             </div>
                             <div class="portfolio-desc">
                               <h3><a href="{{result.object.get_absolute_url}}">{{result.object.first_name}} {{result.object.last_name}}</a></h3>
-                              <p>{% if result.object.race %}{{result.object.race.race_type}}<br/>{% endif %}{% if result.object.race %}{{result.object.race.title}}{% else %}{{result.object.get_state_display}}{% endif %}
+                              <p>{{result.object.get_state_display}}{% if result.object.race %}<br/>{{result.object.race.race_type}}{% endif %}{% endif %}
                               </p>
                             </div>
                           </article>
