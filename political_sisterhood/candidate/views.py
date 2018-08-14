@@ -48,7 +48,7 @@ class AllCandidates(BaseFacetedSearchView):
 
     # All CHANGES NEED TO BE DONE IN SEARCH/VIEWS AND CANDIDATE/VIEWS
     def get_queryset(self):
-        queryset = SearchQuerySet().order_by('random')
+        queryset = SearchQuerySet().order_by('first_name')
         # further filter queryset based on some set of criteria
         party = self.request.GET.getlist('party', '')
         party_or = ""
@@ -87,6 +87,8 @@ class AllCandidates(BaseFacetedSearchView):
             queryset = queryset.narrow(race_type_or)
         if q:
             queryset = queryset.filter(SQ(text=AutoQuery(q))|SQ(title=AutoQuery(q)))
+
+        queryset = queryset.filter(active=True)
         return queryset
 
     def form_valid(self, form):
