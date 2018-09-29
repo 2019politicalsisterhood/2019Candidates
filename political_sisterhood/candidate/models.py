@@ -300,3 +300,6 @@ class CandidateNotes(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
     candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE)
     note = RichTextField()
+
+    class Meta:
+        verbose_name_plural = "Candidate Notes"

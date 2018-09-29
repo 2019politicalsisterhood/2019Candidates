@@ -33,8 +33,8 @@ class MySearchView(BaseFacetedSearchView):
         race_type = self.request.GET.getlist('race_type', '')
         race_type_or = ""
         women = self.request.GET.get('women', '')
-        q = self.request.GET.get('q','')
-        page = self.request.GET.get('page','')
+        q = self.request.GET.get('q', '')
+        page = self.request.GET.get('page', '')
         search = ''.join(party) + q + page
         if search == "":
             search = "null"
@@ -58,14 +58,14 @@ class MySearchView(BaseFacetedSearchView):
             for facet in race:
                 race_or += 'race: "%s"' % (facet)
             queryset = queryset.narrow(race_or)
-        if women:
-            queryset = queryset.filter(women=True)
         if race_type:
             for facet in race_type:
                 race_type_or += 'race_type: "%s"' % (facet)
             queryset = queryset.narrow(race_type_or)
         if q:
             queryset = queryset.filter(SQ(text=AutoQuery(q))|SQ(title=AutoQuery(q)))
+        if women:
+            queryset = queryset.filter(women=True)
         return queryset
 
     def form_valid(self, form):
