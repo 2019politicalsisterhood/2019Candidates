@@ -7,7 +7,9 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 class Issue(MPTTModel):
     name = models.CharField(max_length=1024, unique=True)
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True, on_delete=models.CASCADE)
+    parent = TreeForeignKey('self', null=True, blank=True,
+                            related_name='children', db_index=True,
+                            on_delete=models.CASCADE)
 
     class MPTTMeta:
         order_insertion_by = ['name']
@@ -20,6 +22,7 @@ class Issue(MPTTModel):
 
     def __str__(self):
         return self.name
+
 
 class CandidateIssue(models.Model):
     candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name="issues")

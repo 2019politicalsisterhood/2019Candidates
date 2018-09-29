@@ -22,8 +22,9 @@ logger = logging.getLogger(__name__)
 # Create your views here.
 
 
-def sendingEmail(candidate):
+def sendingEmail(candidate, new_data):
     candidate = Candidate.objects.get(id=candidate)
+    from django.core import serializers
     try:
         send_templated_mail(
             template_name='updated',
@@ -32,7 +33,9 @@ def sendingEmail(candidate):
                             'susan@politicalsisterhood.com'],
             context={
                 'name': candidate.full_name,
-                'url': candidate.get_absolute_url()
+                'url': candidate.get_absolute_url(),
+                'candidate': candidate,
+                'instance': new_data
             }
         )
     except Exception as e:
@@ -168,7 +171,7 @@ class StateListView(ListView):
         return state
 
 
-class UpdateCandidateInvite(RevisionMixin, UpdateView):
+class UpdateCandidateInvite(UpdateView):
     # specify a custom ModelForm
     form_class = CandidateForm
     template_name = "candidate/update.html"
@@ -189,7 +192,12 @@ class UpdateCandidateInvite(RevisionMixin, UpdateView):
         return data
 
     def form_valid(self, form):
-        instance = form.save(commit=True)
+        instance = form.save(commit=False)
+        try:
+            sendingEmail(instance.id, instance)
+        except Exception as e:
+            logger.error(e)
+        instance.save()
         try:
             CandidateInvite.objects.filter(md5_email=self.kwargs['hash']).update(used=True)
             issue1, create = CandidateIssue.objects.get_or_create(candidate=instance,
@@ -215,12 +223,6 @@ class UpdateCandidateInvite(RevisionMixin, UpdateView):
                                                candidate=instance)
             except Exception as e:
                 logger.error(e)
-        except Exception as e:
-            logger.error(e)
-
-        try:
-            sendingEmail(instance.id)
-            logger.info('trigger')
         except Exception as e:
             logger.error(e)
 

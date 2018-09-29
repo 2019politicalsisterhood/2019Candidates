@@ -1,6 +1,190 @@
-{% block subject %}[CANDIDATE UPDATE] Candidate Updated: {{name}}{% endblock %}
+{% load candidate %}
+{% block subject %}[UPDATE] Candidate Updated: {{name}}{% endblock %}
 {% block html %}
+<style>
+table {
+    border-collapse: collapse;
+}
+td, th{
+border:1px solid #333;
+padding: 8px;
+}
+</style>
 <h1>Important!!!!</h1>
 {{name}} has updated information on the site.<br><br>
 Go and check it out <a href="https://www.politicalsisterhood.org{{url}}?approved=pending">here!</a>
+<br /><br />
+Here is an account of all fields:
+<table width="600" style="border:1px solid #333">
+    <thead>
+        <tr>
+            <th>Field Name</th>
+            <th>New Value</th>
+            <th>Previous Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Unqiue Identifier 1</td>
+            <td>{{instance.unique_identifier1}}</td>
+            <td>{{candidate.unique_identifier1}}</td>
+        </tr>
+        <tr>
+            <td>Unique Identifier 2</td>
+            <td>{{instance.unique_identifier2}}</td>
+            <td>{{candidate.unique_identifier2}}</td>
+        </tr>
+        <tr>
+            <td>First Name}</td>
+            <td>{{instance.first_name}}</td>
+            <td>{{candidate.first_name}}</td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td>{{instance.last_name}}</td>
+            <td>{{candidate.last_name}}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{instance.email}}</td>
+            <td>{{candidate.email}}</td>
+        </tr>
+        <tr>
+            <td>Image</td>
+            <td>{{instance.image}}</td>
+            <td>{{candidate.image}}</td>
+        </tr>
+        <tr>
+            <td>Filing Number</td>
+            <td>{{instance.filing_number}}</td>
+            <td>{{candidate.filing_number}}</td>
+        </tr>
+        <tr>
+            <td>State</td>
+            <td>{{instance.state}}</td>
+            <td>{{candidate.state}}</td>
+        </tr>
+        <tr>
+            <td>Race Name</td>
+            <td>{{instance.race_name}}</td>
+            <td>{{candidate.race_name}}</td>
+        </tr>
+        <tr>
+            <td>Bio</td>
+            <td>{{instance.bio}}</td>
+            <td>{{candidate.bio}}</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>{{instance.phone}}</td>
+            <td>{{candidate.phone}}</td>
+        </tr>
+        <tr>
+            <td>Campaign Name</td>
+            <td>{{instance.campaign_name}}</td>
+            <td>{{candidate.campaign_name}}</td>
+        </tr>
+        <tr>
+            <td>Campaign Street</td>
+            <td>{{instance.campaign_street}}</td>
+            <td>{{candidate.campaign_street}}</td>
+        </tr>
+        <tr>
+            <td>Campaign Street 2</td>
+            <td>{{instance.campaign_street2}}</td>
+            <td>{{candidate.campaign_street2}}</td>
+        </tr>
+        <tr>
+            <td>Campaign City</td>
+            <td>{{instance.campaign_city}}</td>
+            <td>{{candidate.campaign_city}}</td>
+        </tr>
+        <tr>
+            <td>Campaign Zip</td>
+            <td>{{instance.campaign_zip}}</td>
+            <td>{{candidate.campaign_zip}}</td>
+        </tr>
+        <tr>
+            <td>Facebook</td>
+            <td>{{instance.facebook}}</td>
+            <td>{{candidate.facebook}}</td>
+        </tr>
+        <tr>
+            <td>Twitter</td>
+            <td>{{instance.twitter}}</td>
+            <td>{{candidate.twitter}}</td>
+        </tr>
+        <tr>
+            <td>LinkedIn</td>
+            <td>{{instance.linkedin}}</td>
+            <td>{{candidate.linkedin}}</td>
+        </tr>
+        <tr>
+            <td>Website</td>
+            <td>{{instance.website}}</td>
+            <td>{{candidate.website}}</td>
+        </tr>
+        <tr>
+            <td>Issue 1</td>
+            <td>{{instance.issue1}}</td>
+            <td>{{candidate.issue1|issue}}</td>
+        </tr>
+        <tr>
+            <td>Issue 1 Detail</td>
+            <td>{{instance.issue1_detail}}</td>
+            <td>{{candidate.issue1_detail}}</td>
+        </tr>
+        <tr>
+            <td>Issue 2</td>
+            <td>{{instance.issue2}}</td>
+            <td>{{candidate.issue2|issue}}</td>
+        </tr>
+        <tr>
+            <td>Issue 2 Detail</td>
+            <td>{{instance.issue2_detail}}</td>
+            <td>{{candidate.issue2_detail}}</td>
+        </tr>
+        <tr>
+            <td>Issue 3</td>
+            <td>{{instance.issue3}}</td>
+            <td>{{candidate.issue3|issue}}</td>
+        </tr>
+        <tr>
+            <td>Issue 3 Detail</td>
+            <td>{{instance.issue3_detail}}</td>
+            <td>{{candidate.issue3_detail}}</td>
+        </tr>
+        <tr>
+            <td>Party</td>
+            <td>{{instance.party}}</td>
+            <td>{{candidate.party}}</td>
+        </tr>
+        <tr>
+            <td>College}</td>
+            <td>{{instance.college}}</td>
+            <td>{{candidate.college}}</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>{{instance.phone}}</td>
+            <td>{{candidate.phone}}</td>
+        </tr>
+        <tr>
+            <td>Ethnicity</td>
+            <td>{{instance.ethnicity}}</td>
+            <td>{{candidate.ethnicity}}</td>
+        </tr>
+        <tr>
+            <td>Marginalized</td>
+            <td>{{instance.marginalized}}</td>
+            <td>{{candidate.marginalized}}</td>
+        </tr>
+        <tr>
+            <td>LGBTQ</td>
+            <td>{{instance.lgbtq}}</td>
+            <td>{{candidate.lgbtq}}</td>
+        </tr>
+    </tbody>
+</table>
+{{data}}
 {% endblock %}
