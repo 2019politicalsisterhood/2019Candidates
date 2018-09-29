@@ -10,6 +10,7 @@ from templated_email import send_templated_mail
 from datetime import datetime
 from django.template.defaultfilters import slugify
 from django.contrib.sites.models import Site
+from django.utils import timezone
 from .constants import IDENTIFIER, OPT_OPTIONS, STATES, PARTY
 import geocoder
 import logging
@@ -294,3 +295,8 @@ class CandidateInvite(models.Model):
     class Meta:
         verbose_name_plural = "Candidate Invites"
 
+
+class CandidateNotes(models.Model):
+    timestamp = models.DateTimeField(default=timezone.now)
+    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE)
+    note = RichTextField()

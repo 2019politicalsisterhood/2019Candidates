@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import Candidate, College,\
                     Ethnicity, CandidateInvite,\
-                    CandidateUpdate, CandidateReferral
+                    CandidateUpdate, CandidateReferral,\
+                    CandidateNotes
 from political_sisterhood.issue.models import CandidateIssue
 from political_sisterhood.races.models import RaceEntry
 from dynamic_raw_id.admin import DynamicRawIDMixin
@@ -20,6 +21,12 @@ class IssueInline(admin.TabularInline):
     extra = 0
 
 
+class NotesInline(admin.TabularInline):
+    model = CandidateNotes
+    readonly_fields = ['timestamp']
+    extra = 0
+
+
 class CandidateAdmin(admin.ModelAdmin):
     def make_inactive(modeladmin, request, queryset):
         queryset.update(active=False)
@@ -31,7 +38,8 @@ class CandidateAdmin(admin.ModelAdmin):
     list_display = ['full', 'active', 'approval']
     inlines = [
         IssueInline,
-        RaceEntryInline
+        RaceEntryInline,
+        NotesInline
     ]
     actions = [make_inactive]
 
