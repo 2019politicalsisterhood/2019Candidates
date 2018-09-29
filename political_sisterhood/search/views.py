@@ -65,7 +65,7 @@ class MySearchView(BaseFacetedSearchView):
         if q:
             queryset = queryset.filter(SQ(text=AutoQuery(q))|SQ(title=AutoQuery(q)))
         if women:
-            queryset = queryset.filter(women=True)
+            queryset = queryset.filter(women=False)
         return queryset
 
     def form_valid(self, form):
