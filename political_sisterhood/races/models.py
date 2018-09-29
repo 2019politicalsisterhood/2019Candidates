@@ -105,6 +105,7 @@ class RaceEntry(models.Model):
     @property
     def race_type(self):
         return self.race.race_type
+
     @property
     def title(self):
         return self.race.title

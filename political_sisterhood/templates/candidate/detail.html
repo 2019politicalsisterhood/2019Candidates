@@ -116,7 +116,7 @@
   <div class="container clear-bottommargin clearfix toppadding-sm bottompadding-sm">
     <div class="heading-block center">
       <h2 class="normal-case">{{object.name}}</h2>
-      <span>{{object.get_state_display}}{% if object.race %}<br/>{{object.race.race_type}}{% endif %}</span>
+      <span>{{object.get_state_display}}{% if object.race %}<br/>{{object.race.race_type}}{% endif %}{% if object.race.race.district %}<br/>District {{object.race.race.district}}{% endif %}</span>
       {% if object.identifier %}
         <h4>{{object.identifier}}</h4>
       {% endif %}
