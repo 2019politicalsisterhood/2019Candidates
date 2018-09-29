@@ -23,19 +23,19 @@ urlpatterns = [
         CandidateIssueReport,
         name='issue'
     ),
-    url(r'^create/',
-        CreateCandidate.as_view(),
-        name='create'
-    ),
-    url(r'^update/(?P<hash>[\w.@+-]+)/',
+    url(r'^update/(?P<hash>[\w.@+-]+)/$',
         UpdateCandidateInvite.as_view(),
         name='update'
     ),
-    url(r'(?P<state>[\w.@+-]+)/(?P<slug>[\w.@+-]+)/',
+    url(r'^create/$',
+        CreateCandidate.as_view(),
+        name='create'
+    ),
+    url(r'(?P<state>[\w.@+-]+)/(?P<slug>[\w.@+-]+)/$',
         CandidateView.as_view(),
         name='detail'
     ),
-    url(r'(?P<state>[\w.@+-]+)/',
+    url(r'(?P<state>[\w.@+-]+)/$',
         StateListView.as_view(),
         name='state'
     ),
