@@ -4,6 +4,7 @@
 {{object.name}} - Political Sisterhood
 {% endblock %}
 {% block extra_css %}
+<script src='https://www.google.com/recaptcha/api.js'></script>
 {% if not request.user.is_authenticated %}
 <link rel="stylesheet" href="{% static 'css/print_u.css' %}" type="text/css" />
 {% endif %}
@@ -64,15 +65,15 @@
 <form method="post" method="post" action="{% url 'candidate:issue' %}">
   {% csrf_token %}
 <div class="form-group">
-<label for="exampleFormControlInput1">Your Name</label>
+<label for="exampleFormControlInput1">Your Name<span style="color: #c39">*</span></label>
 <input type="text" class="form-control required" name="name" placeholder="Your Name" required>
 </div>
 <div class="form-group">
-<label for="exampleFormControlInput1">Your Email address</label>
+<label for="exampleFormControlInput1">Your Email address<span style="color: #c39">*</span></label>
 <input type="email" class="form-control required" name="email" placeholder="name@example.com" required>
 </div>
 <div class="form-group">
-<label for="exampleFormControlSelect1">Issue/Problem Type</label>
+<label for="exampleFormControlSelect1">Issue/Problem Type<span style="color: #c39">*</span></label>
 <select class="form-control required" name="issue" required>
 <option disabled selected value>-- Please Specify --</option>
 <option>Update on Candidate</option>
@@ -86,6 +87,9 @@
 <textarea class="form-control" name="other" rows="3"></textarea>
 <input type="hidden" name="candidate" value="{{object.name}}">
 <input type="hidden" name="return" value="{{object.get_absolute_url}}">
+</div>
+<div class="form-group">
+<div class="g-recaptcha" data-sitekey="6LcXtnIUAAAAAC9pRPKaLKnlcN2U1fC_I9Qs7B0s"></div>
 </div>
 <button type="submit" class="button button-3d button-large button-brand nomargin white-font">Submit Issue</button>
 </form>

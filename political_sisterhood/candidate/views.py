@@ -335,14 +335,18 @@ def CandidateIssueReport(request):
     issue = request.POST.get('issue', '')
     candidate = request.POST.get('candidate', '')
     return_slug = request.POST.get('return', '')
-
-    subject = '[CANDIDATE ISSUE] Issue on {}'.format(candidate)
-    body = 'NAME: %s\n\nEMAIL: %s\n\nISSUE: %s\n\nMESSAGE: %s' % (name, email, issue, other)
-    from_email = 'info@politicalsisterhood.com'
-    recipients = [
-        'chris@politicalsisterhood.com',
-        'susan@politicalsisterhood.com',
-        ]
-    send_mail(subject, body, from_email, recipients)
-    messages.success(request, 'We appreciate your feedback!')
-    return HttpResponseRedirect(return_slug)
+    captcha = request.POST.get('g-recaptcha', '')
+    if captcha:
+        subject = '[CANDIDATE ISSUE] Issue on {}'.format(candidate)
+        body = 'NAME: %s\n\nEMAIL: %s\n\nISSUE: %s\n\nMESSAGE: %s' % (name, email, issue, other)
+        from_email = 'info@politicalsisterhood.com'
+        recipients = [
+            'chris@politicalsisterhood.com',
+            'susan@politicalsisterhood.com',
+            ]
+        send_mail(subject, body, from_email, recipients)
+        messages.success(request, 'We appreciate your feedback!')
+        return HttpResponseRedirect(return_slug)
+    else:
+        messages.warning(request, 'Please fill out captcha')
+        return HttpResponseRedirect(return_slug)
