@@ -2,7 +2,7 @@
   "name": "political_sisterhood",
   "version": "0.1.0",
   "dependencies": {
-    "node-sass": "^4.9.0"
+    "node-sass": "^4.9.3"
   },
   "devDependencies": {
     "autoprefixer-core": "~5.2.1",

@@ -168,50 +168,7 @@ class StateListView(ListView):
         return state
 
 
-class UpdateCandidate(UpdateView):
-    # specify a custom ModelForm
-    form_class = CandidateForm
-    template_name = "candidate/update.html"
-
-    def get_object(self, queryset=None):
-        # get the existing object or created a new one
-        candidate = get_object_or_404(Candidate, slug=self.kwargs['slug'])
-        return candidate
-
-    def form_valid(self, form):
-        instance = form.save(commit=True)
-        try:
-            issue1, create = CandidateIssue.objects.get_or_create(candidate=instance,
-                                                                  issue=form.cleaned_data.get('issue1'),
-                                                                  desc=form.cleaned_data.get('issue1_detail'))
-            issue2, created = CandidateIssue.objects.get_or_create(candidate=instance,
-                                                                   issue=form.cleaned_data.get('issue2'),
-                                                                   desc=form.cleaned_data.get('issue2_detail'))
-            issue3, created = CandidateIssue.objects.get_or_create(candidate=instance,
-                                                                   issue=form.cleaned_data.get('issue3'),
-                                                                   desc=form.cleaned_data.get('issue3_detail'))
-            college, create = College.objects.get_or_create(name=form.cleaned_data['college_free'])
-            Candidate.objects.filter(id=instance.id).update(issue1=issue1.issue_num,
-                                                            issue2=issue2.issue_num,
-                                                            issue3=issue3.issue_num,
-                                                            college=college, approval="Pending")
-            CandidateUpdate.objects.create(email=form.cleaned_data.get('update_email'),
-                                           first_name=form.cleaned_data.get('update_first_name'),
-                                           last_name=form.cleaned_data.get('update_last_name'),
-                                           note=form.cleaned_data.get('update_note', ''),
-                                           candidate=instance)
-        except Exception as e:
-            logger.error(e)
-
-        try:
-            sendingEmail(instance.id)
-        except Exception as e:
-            logger.error(e)
-        messages.success(self.request, "your changes have been submitted and your file will be updated upon review and approval of the changes.")
-        return redirect(Candidate.objects.get(id=instance.id).get_absolute_url() + "?approved=pending")
-
-
-class UpdateCandidateInvite(UpdateView):
+class UpdateCandidateInvite(RevisionMixin, UpdateView):
     # specify a custom ModelForm
     form_class = CandidateForm
     template_name = "candidate/update.html"
@@ -234,7 +191,7 @@ class UpdateCandidateInvite(UpdateView):
     def form_valid(self, form):
         instance = form.save(commit=True)
         try:
-            CandidateInvite.objects.filter(md5_email=self.kwargs['hash']).update(candidate=instance)
+            CandidateInvite.objects.filter(md5_email=self.kwargs['hash']).update(used=True)
             issue1, create = CandidateIssue.objects.get_or_create(candidate=instance,
                                                                   issue=form.cleaned_data.get('issue1'),
                                                                   desc=form.cleaned_data.get('issue1_detail'))

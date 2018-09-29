@@ -2,7 +2,7 @@ from django.conf.urls import include, url
 from .views import CandidateView, StateListView, AllCandidates,\
                    UpdateCandidateInvite, CandidatePricing,\
                    CandidateIssueReport, CandidatePaywall,\
-                   CreateCandidate, UpdateCandidate
+                   CreateCandidate
 
 app_name = 'candidate'
 

@@ -16,8 +16,9 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:900");
 dl, dt, dd, ol, ul, li {
   margin: 0;
-  padding: 0; }
-
+  padding: 0;
+  list-style-position: inside;
+}
 .clear {
   clear: both;
   display: block;
