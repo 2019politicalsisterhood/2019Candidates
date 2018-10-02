@@ -5,7 +5,6 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from django.views.generic.base import RedirectView
-from allauth.account import views
 from political_sisterhood.pages.views import PageDetailView
 from political_sisterhood.issue.views import IssueAutocomplete
 from political_sisterhood.search.views import MySearchView
