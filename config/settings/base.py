@@ -75,6 +75,7 @@ THIRD_PARTY_APPS = [
     'betterforms',
     'django_extensions',
     'dynamic_raw_id',
+    'widget_tweaks',
 ]
 
 

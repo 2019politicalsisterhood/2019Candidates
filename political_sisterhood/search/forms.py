@@ -82,7 +82,6 @@ class SearchForm(forms.Form):
         self.issues = kwargs.pop('issues', None)
         self.race = kwargs.pop('race', None)
         self.race_type = kwargs.pop('race_type', None)
-        self.men = kwargs.pop('women', None)
 
         if self.searchqueryset is None:
             self.searchqueryset = ""

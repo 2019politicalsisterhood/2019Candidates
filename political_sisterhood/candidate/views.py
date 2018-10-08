@@ -101,7 +101,6 @@ class AllCandidates(BaseFacetedSearchView):
             queryset = queryset.filter(women=True)
         return queryset
 
-
     def form_valid(self, form):
         context = self.get_context_data(**{
             self.form_name: form,
@@ -123,6 +122,9 @@ class AllCandidates(BaseFacetedSearchView):
         context['college'] = self.request.GET.getlist('college', '')
         context['state'] = self.request.GET.getlist('state', '')
         context['issues'] = self.request.GET.getlist('issues', '')
+        women = self.request.GET.get('women', '')
+        if women == True or women == 'on':
+            context['women'] = True
         context['race_type'] = self.request.GET.getlist('race_type', '')
         return context
 

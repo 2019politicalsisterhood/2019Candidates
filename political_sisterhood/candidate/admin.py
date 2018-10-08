@@ -34,7 +34,7 @@ class CandidateAdmin(admin.ModelAdmin):
 
     prepopulated_fields = {'slug': ('first_name', 'last_name')}
     search_fields = ('full', 'first_name', 'last_name', )
-    list_filter = ['state', 'party', 'active', 'approval']
+    list_filter = ['state', 'party', 'active', 'approval', 'man']
     list_display = ['full', 'active', 'approval']
     inlines = [
         IssueInline,

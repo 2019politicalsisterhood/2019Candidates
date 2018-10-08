@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 # Now create your own that subclasses the base view
 class MySearchView(BaseFacetedSearchView):
     template_name = 'search/search.html'
-    facet_fields= ['party']
+    facet_fields = ['party']
     form_class = SearchForm
     paginate_by = 12
     paginate_orphans = 2
@@ -90,7 +90,9 @@ class MySearchView(BaseFacetedSearchView):
         context['issues'] = self.request.GET.getlist('issues', '')
         context['race'] = self.request.GET.getlist('race', '')
         context['race_type'] = self.request.GET.getlist('race_type', '')
-        context['women'] = self.request.GET.get('women', '')
+        women = self.request.GET.get('women', '')
+        if women == True or women == 'on':
+            context['women'] = True
         context['query'] = self.request.GET.get('q', '')
 
         return context

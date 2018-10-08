@@ -1,3 +1,4 @@
+{% load widget_tweaks %}
 <section id="content toppadding-sm">
   <div class="content-wrap">
     <div class="container clearfix">
@@ -107,9 +108,13 @@
                 </div>
                 <div class="bottompadding-sm">
                       <div class="fancy-title title-border" style="margin-bottom:10px">
-                        <h4>Exclude Men</h4>
+                        <h4>Women Only</h4>
                       </div>
+                      {% if women %}
+                      {{form.women|attr:"checked"}}
+                      {% else %}
                       {{form.women}}
+                      {% endif %}
                 </div>
                 <button type="submit" class="button button-3d button-large">Search</button>
             </div>
