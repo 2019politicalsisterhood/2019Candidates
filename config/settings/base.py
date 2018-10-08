@@ -78,6 +78,7 @@ THIRD_PARTY_APPS = [
     'widget_tweaks',
     'django_admin_listfilter_dropdown',
     'report_builder',
+    'rest_framework',
 ]
 
 
@@ -449,3 +450,11 @@ ACCOUNT_SIGNUP_FORM_CLASS = 'political_sisterhood.users.forms.SignupForm'
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 USE_TZ = True
 APPEND_SLASH = True
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
