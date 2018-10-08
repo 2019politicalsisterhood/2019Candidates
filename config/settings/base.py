@@ -458,3 +458,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
+REPORT_BUILDER_ASYNC_REPORT = True
+REPORT_BUILDER_EMAIL_NOTIFICATION = True
