@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^issue-ac/', IssueAutocomplete.as_view(), name="issue-autocomplete"),
     # UTILITY VIEWS
     url(r'mailchimp-signup/$', Mailchimp, name='mailchimp'),
+    url(r'^report_builder/', include('report_builder.urls')),
 
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),

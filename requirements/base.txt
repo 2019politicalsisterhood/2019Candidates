@@ -81,3 +81,4 @@ natsort==5.3.2
 google-images-download==2.3.0
 django-widget-tweaks==1.4.3
 django-admin-list-filter-dropdown==1.0.1
+django-report-builder==6.2.2

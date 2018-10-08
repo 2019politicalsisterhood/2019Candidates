@@ -77,6 +77,7 @@ THIRD_PARTY_APPS = [
     'dynamic_raw_id',
     'widget_tweaks',
     'django_admin_listfilter_dropdown',
+    'report_builder',
 ]
 
 
