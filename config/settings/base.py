@@ -76,6 +76,7 @@ THIRD_PARTY_APPS = [
     'django_extensions',
     'dynamic_raw_id',
     'widget_tweaks',
+    'django_admin_listfilter_dropdown',
 ]
 
 

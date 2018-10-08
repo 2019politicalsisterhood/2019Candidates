@@ -6,6 +6,7 @@ from .models import Candidate, College,\
 from political_sisterhood.issue.models import CandidateIssue
 from political_sisterhood.races.models import RaceEntry
 from dynamic_raw_id.admin import DynamicRawIDMixin
+from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
 
 # Register your models here.
 
@@ -34,7 +35,10 @@ class CandidateAdmin(admin.ModelAdmin):
 
     prepopulated_fields = {'slug': ('first_name', 'last_name')}
     search_fields = ('full', 'first_name', 'last_name', )
-    list_filter = ['state', 'party', 'active', 'approval', 'man']
+    list_filter = [('state', DropdownFilter),
+                   ('issues__issue', RelatedDropdownFilter),
+                   'party', 'active',
+                   'approval', 'man']
     list_display = ['full', 'active', 'approval']
     inlines = [
         IssueInline,
@@ -46,7 +50,7 @@ class CandidateAdmin(admin.ModelAdmin):
 
 class ReferralSource(admin.ModelAdmin):
     fields = ['name', 'url']
-    readonly_fields = ['url',]
+    readonly_fields = ['url']
 
 
 admin.site.register(Candidate, CandidateAdmin)
